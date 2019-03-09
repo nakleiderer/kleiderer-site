@@ -48,6 +48,9 @@ export const pageQuery = graphql`
       edges {
         node {
           title
+          author {
+            name
+          }
           slug
           publishDate(formatString: "MMMM Do, YYYY")
           tags

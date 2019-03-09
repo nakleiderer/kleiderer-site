@@ -30,7 +30,7 @@ class BlogPostTemplate extends React.Component {
                 display: 'block',
               }}
             >
-              {post.publishDate}
+              by {post.author.name} on {post.publishDate}
             </p>
             <div
               dangerouslySetInnerHTML={{
@@ -54,6 +54,9 @@ export const pageQuery = graphql`
       }
     }
     contentfulBlogPost(slug: { eq: $slug }) {
+      author {
+        name
+      }
       title
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
