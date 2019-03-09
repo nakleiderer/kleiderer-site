@@ -13,11 +13,15 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
-      <Layout location={this.props.location} >
+      <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={`${post.title} | ${siteTitle}`} />
           <div className={heroStyles.hero}>
-            <Img className={heroStyles.heroImage} alt={post.title} fluid={post.heroImage.fluid} />
+            <Img
+              className={heroStyles.heroImage}
+              alt={post.title}
+              fluid={post.heroImage.fluid}
+            />
           </div>
           <div className="wrapper">
             <h1 className="section-headline">{post.title}</h1>
@@ -54,7 +58,7 @@ export const pageQuery = graphql`
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulFluid_tracedSVG
+          ...GatsbyContentfulFluid
         }
       }
       body {
