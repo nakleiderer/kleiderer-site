@@ -16,6 +16,12 @@ class BlogPostTemplate extends React.Component {
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={`${post.title} | ${siteTitle}`} />
+          <Helmet
+            meta={[
+              { name: 'author', content: post.author.name },
+              { name: 'description', content: post.description.description },
+            ]}
+          />
           <div className={heroStyles.hero}>
             <Img
               className={heroStyles.heroImage}
@@ -46,7 +52,7 @@ class BlogPostTemplate extends React.Component {
 
 export default BlogPostTemplate
 
-export const pageQuery = graphql`
+export const blogPostTemplateQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {
@@ -58,6 +64,10 @@ export const pageQuery = graphql`
         name
       }
       title
+      description {
+        description
+      }
+      tags
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
