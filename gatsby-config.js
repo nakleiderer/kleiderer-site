@@ -1,22 +1,24 @@
-let contentfulConfig
+require('dotenv').config()
 
-try {
-  // Load the Contentful config from the .contentful.json
-  contentfulConfig = require('./.contentful')
-} catch (_) {}
-
-// Overwrite the Contentful config with environment variables if they exist
-contentfulConfig = {
-  spaceId: process.env.CONTENTFUL_SPACE_ID || contentfulConfig.spaceId,
-  accessToken:
-    process.env.CONTENTFUL_DELIVERY_TOKEN || contentfulConfig.accessToken,
+const config = {
+  contentful: {
+    spaceId: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
+  },
+  pocket: {
+    consumerKey: process.env.POCKET_CONSUMER_KEY,
+    accessToken: process.env.POCKET_ACCESS_TOKEN,
+  },
 }
 
-const { spaceId, accessToken } = contentfulConfig
-
-if (!spaceId || !accessToken) {
+if (
+  !config.contentful.spaceId ||
+  !config.contentful.accessToken ||
+  !config.pocket.consumerKey ||
+  !config.pocket.accessToken
+) {
   throw new Error(
-    'Contentful spaceId and the delivery token need to be provided.'
+    "A required environment variable is not set. Consult 'gatsby-config.js' for required variables."
   )
 }
 
@@ -33,7 +35,25 @@ module.exports = {
     'gatsby-plugin-netlify-cache',
     {
       resolve: 'gatsby-source-contentful',
-      options: contentfulConfig,
+      options: config.contentful,
+    },
+    {
+      resolve: `gatsby-source-pocket`,
+      options: {
+        ...config.pocket,
+        weeksOfHistory: 4,
+        apiMaxRecordsToReturn: 3000,
+        getCurrentWeekOnly: `n`,
+        stateFilterString: 'archive',
+        tagFilter: false,
+        tagFilterString: '_untagged_',
+        favouriteFilter: false,
+        favouriteFilterValue: 0,
+        searchFilter: false,
+        searchFilterString: 'These 21 things',
+        domainFilter: false,
+        domainFilterString: 'buzzfeed.com',
+      },
     },
   ],
 }
