@@ -6,7 +6,7 @@ import Hero from '../components/hero'
 import Layout from '../components/layout'
 import PocketArticlePreview from '../components/pocket-article-preview'
 
-class RecentArticles extends React.Component {
+class RecommendedArticles extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allPocketArticle.edges')
@@ -16,11 +16,10 @@ class RecentArticles extends React.Component {
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
           <div className="wrapper">
-            <h2>Recently read articles</h2>
+            <h2>Recommended Articles</h2>
             <p className="section-headline">
-              Here's a list of articles I've read recently. Though I have read
-              these articles, I do not necessarily recommend or agree with their
-              content.
+              A list of articles that have helped me grow personally and
+              professionally.
             </p>
             <ul className="article-list">
               {posts.map(({ node }) => {
@@ -38,10 +37,10 @@ class RecentArticles extends React.Component {
   }
 }
 
-export default RecentArticles
+export default RecommendedArticles
 
 export const pageQuery = graphql`
-  query RecentArticlesQuery {
+  query RecommendedArticlesQuery {
     site {
       siteMetadata {
         title
