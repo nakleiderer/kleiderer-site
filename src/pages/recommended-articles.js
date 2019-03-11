@@ -14,7 +14,7 @@ class RecommendedArticles extends React.Component {
     return (
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
-          <Helmet title={siteTitle} />
+          <Helmet title={`Recommended Articles | ${siteTitle}`} />
           <div className="wrapper">
             <h2>Recommended Articles</h2>
             <p className="section-headline">

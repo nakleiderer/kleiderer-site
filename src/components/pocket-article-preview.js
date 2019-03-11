@@ -10,6 +10,8 @@ export default ({ article }) => (
     <h3 className={styles.previewTitle}>
       <a href={`${article.url}`}>{article.title}</a>
     </h3>
-    <p>{article.excerpt}</p>
+    <p>
+      {article.excerpt} <a href={`${article.url}`}>&#8230;</a>
+    </p>
   </div>
 )
