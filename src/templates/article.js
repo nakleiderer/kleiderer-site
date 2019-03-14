@@ -7,40 +7,40 @@ import Layout from '../components/layout'
 
 import heroStyles from '../components/hero.module.css'
 
-class BlogPostTemplate extends React.Component {
+class ArticleTemplate extends React.Component {
   render() {
-    const post = get(this.props, 'data.contentfulBlogPost')
+    const article = get(this.props, 'data.contentfulArticle')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
-          <Helmet title={`${post.title} | ${siteTitle}`} />
+          <Helmet title={`${article.title} | ${siteTitle}`} />
           <Helmet
             meta={[
-              { name: 'author', content: post.author.name },
-              { name: 'description', content: post.description.description },
+              { name: 'author', content: article.author.name },
+              { name: 'description', content: article.description.description },
             ]}
           />
           <div className={heroStyles.hero}>
             <Img
               className={heroStyles.heroImage}
-              alt={post.title}
-              fluid={post.heroImage.fluid}
+              alt={article.title}
+              fluid={article.heroImage.fluid}
             />
           </div>
           <div className="wrapper">
-            <h1 className="section-headline">{post.title}</h1>
+            <h1 className="section-headline">{article.title}</h1>
             <p
               style={{
                 display: 'block',
               }}
             >
-              by {post.author.name} on {post.publishDate}
+              by {article.author.name} on {article.publishDate}
             </p>
             <div
               dangerouslySetInnerHTML={{
-                __html: post.body.childMarkdownRemark.html,
+                __html: article.body.childMarkdownRemark.html,
               }}
             />
           </div>
@@ -50,16 +50,16 @@ class BlogPostTemplate extends React.Component {
   }
 }
 
-export default BlogPostTemplate
+export default ArticleTemplate
 
-export const blogPostTemplateQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+export const articleTemplateQuery = graphql`
+  query ArticleBySlug($slug: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulBlogPost(slug: { eq: $slug }) {
+    contentfulArticle(slug: { eq: $slug }) {
       author {
         name
       }
@@ -67,7 +67,10 @@ export const blogPostTemplateQuery = graphql`
       description {
         description
       }
-      tags
+      categories {
+        slug
+        name
+      }
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {

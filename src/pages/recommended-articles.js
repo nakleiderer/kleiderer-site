@@ -9,7 +9,7 @@ import PocketArticlePreview from '../components/pocket-article-preview'
 class RecommendedArticles extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allPocketArticle.edges')
+    const articles = get(this, 'props.data.allPocketArticle.edges')
 
     return (
       <Layout location={this.props.location}>
@@ -22,7 +22,7 @@ class RecommendedArticles extends React.Component {
               professionally.
             </p>
             <ul className="article-list">
-              {posts.map(({ node }) => {
+              {articles.map(({ node }) => {
                 return (
                   <li key={node.id}>
                     <PocketArticlePreview article={node} />

@@ -9,7 +9,7 @@ import ArticlePreview from '../components/article-preview'
 class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
+    const articles = get(this, 'props.data.allContentfulArticle.edges')
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
 
     return (
@@ -20,7 +20,7 @@ class RootIndex extends React.Component {
           <div className="wrapper">
             <h2 className="section-headline">Recent articles</h2>
             <ul className="article-list">
-              {posts.map(({ node }) => {
+              {articles.map(({ node }) => {
                 return (
                   <li key={node.slug}>
                     <ArticlePreview article={node} />
@@ -44,26 +44,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
-          title
-          author {
-            name
-          }
-          slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          tags
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          description {
-            childMarkdownRemark {
-              html
-            }
-          }
+          ...ArticlePreview
         }
       }
     }
