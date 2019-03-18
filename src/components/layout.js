@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Navigation from './navigation'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import Footer from './footer'
 
 const styles = theme => ({
   layout: {
@@ -16,57 +16,9 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-  toolbarMain: {
-    borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-  },
-  mainFeaturedPost: {
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing.unit * 4,
-  },
-  mainFeaturedPostContent: {
-    padding: `${theme.spacing.unit * 6}px`,
-    [theme.breakpoints.up('md')]: {
-      paddingRight: 0,
-    },
-  },
-  mainGrid: {
-    marginTop: theme.spacing.unit * 3,
-  },
-  card: {
-    display: 'flex',
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
-  markdown: {
-    padding: `${theme.spacing.unit * 3}px 0`,
-  },
-  sidebarAboutBox: {
-    padding: theme.spacing.unit * 2,
-    backgroundColor: theme.palette.grey[200],
-  },
-  sidebarSection: {
-    marginTop: theme.spacing.unit * 3,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing.unit * 8,
-    padding: `${theme.spacing.unit * 6}px 0`,
-  },
 })
 
-function Template(props) {
-  const { location, children, classes } = props
+function Template({ location, children, classes }) {
   let header
 
   let rootPath = `/`
@@ -85,19 +37,7 @@ function Template(props) {
         <Navigation />
         <main>{children}</main>
       </div>
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-      </footer>
+      <Footer />
     </React.Fragment>
   )
 }

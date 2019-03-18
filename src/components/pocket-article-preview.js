@@ -1,17 +1,75 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
 import Img from 'gatsby-image'
+import CategoryChip from './category-chip'
+import { Link } from 'gatsby'
 
-import styles from './pocket-article-preview.module.css'
+const styles = {
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    height: 140,
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  actions: {
+    paddingLeft: '16px',
+    paddingRight: '16px',
+  },
+}
 
-export default ({ article }) => (
-  <div className={styles.preview}>
-    <img alt="" src={article.image.src} />
-    <h3 className={styles.previewTitle}>
-      <a href={`${article.url}`}>{article.title}</a>
-    </h3>
-    <p>
-      {article.excerpt} <a href={`${article.url}`}>&#8230;</a>
-    </p>
-  </div>
-)
+function PocketArticlePreview({ classes, article }) {
+  return (
+    <Card className={classes.card} elevation={0}>
+      <a className={classes.link} href={article.url}>
+        <CardActionArea>
+          {article.localImage && article.localImage.childImageSharp && (
+            <Img alt="" fluid={article.localImage.childImageSharp.fluid} />
+          )}
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {article.title}
+            </Typography>
+            <Typography gutterBottom variant="caption">
+              from {article.articleDomain}
+            </Typography>
+            <Typography component="p" gutterBottom variant="body1">
+              {article.excerpt}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </a>
+    </Card>
+  )
+}
+
+PocketArticlePreview.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(PocketArticlePreview)
+
+export const pocketArticlePreviewComponentFragment = graphql`
+  fragment PocketArticlePreviewComponent on PocketArticle {
+    id
+    title
+    excerpt
+    url
+    articleDomain
+    localImage {
+      childImageSharp {
+        fluid(maxWidth: 1180) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

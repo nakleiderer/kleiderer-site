@@ -11,8 +11,7 @@ const styles = theme => ({
   },
 })
 
-function OutlinedChips(props) {
-  const { classes, category } = props
+function CategoryChip({ classes, category }) {
   return (
     <Link className={classes.link} to={`/categories/${category.slug}`}>
       <Button size="small" variant="outlined" className={classes.margin}>
@@ -22,8 +21,15 @@ function OutlinedChips(props) {
   )
 }
 
-OutlinedChips.propTypes = {
+CategoryChip.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(OutlinedChips)
+export default withStyles(styles)(CategoryChip)
+
+export const categoryChipComponentFragment = graphql`
+  fragment CategoryChipComponent on ContentfulCategory {
+    slug
+    name
+  }
+`

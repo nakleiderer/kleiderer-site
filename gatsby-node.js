@@ -6,10 +6,19 @@ exports.createPages = ({ graphql, actions }) => {
 
   return new Promise((resolve, reject) => {
     const articleTemplate = path.resolve('./src/templates/article.js')
+    const categoryTemplate = path.resolve('./src/templates/category.js')
     resolve(
       graphql(
         `
           {
+            allContentfulCategory {
+              edges {
+                node {
+                  name
+                  slug
+                }
+              }
+            }
             allContentfulArticle {
               edges {
                 node {
@@ -34,6 +43,15 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               slug: article.node.slug,
             },
+          })
+        })
+
+        const categories = result.data.allContentfulCategory.edges
+        categories.forEach((category, index) => {
+          createPage({
+            path: `/categories/${category.node.slug}/`,
+            component: categoryTemplate,
+            context: { slug: category.node.slug, name: category.node.name },
           })
         })
       })

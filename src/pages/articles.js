@@ -2,9 +2,9 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
-import styles from './articles.module.css'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
+import { Typography } from '@material-ui/core'
 
 class ArticlesIndex extends React.Component {
   render() {
@@ -13,20 +13,15 @@ class ArticlesIndex extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
+        <div>
           <Helmet title={siteTitle} />
-          <div className={styles.hero}>Articles</div>
           <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
-            <ul className="article-list">
+            <Typography variant="h4">Recent articles</Typography>
+            <div>
               {articles.map(({ node: article }) => {
-                return (
-                  <li key={article.slug}>
-                    <ArticlePreview article={article} />
-                  </li>
-                )
+                return <ArticlePreview article={article} key={article.slug} />
               })}
-            </ul>
+            </div>
           </div>
         </div>
       </Layout>

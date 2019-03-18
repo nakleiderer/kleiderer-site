@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import PocketArticlePreview from '../components/pocket-article-preview'
+import { Grid, Typography } from '@material-ui/core'
 
 class RecommendedArticles extends React.Component {
   render() {
@@ -13,23 +14,23 @@ class RecommendedArticles extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <div style={{ background: '#fff' }}>
+        <div>
           <Helmet title={`Recommended Articles | ${siteTitle}`} />
           <div className="wrapper">
-            <h2>Recommended Articles</h2>
-            <p className="section-headline">
+            <Typography variant="h2">Recommended Articles</Typography>
+            <Typography variant="body1">
               A list of articles that have helped me grow personally and
               professionally.
-            </p>
-            <ul className="article-list">
+            </Typography>
+            <Grid container spacing={40}>
               {articles.map(({ node }) => {
                 return (
-                  <li key={node.id}>
-                    <PocketArticlePreview article={node} />
-                  </li>
+                  <Grid item key={node.id} xs={12} md={6}>
+                    <PocketArticlePreview article={node} key={node.id} />
+                  </Grid>
                 )
               })}
-            </ul>
+            </Grid>
           </div>
         </div>
       </Layout>
@@ -46,20 +47,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allPocketArticle(
-      filter: { title: { regex: "/.+/" }, image: { src: { regex: "/.+/" } } }
-      sort: { fields: [time_read], order: DESC }
-      limit: 12
-    ) {
+    allPocketArticle(sort: { fields: [time_read], order: DESC }, limit: 12) {
       edges {
         node {
-          id
-          title
-          excerpt
-          url
-          image {
-            src
-          }
+          ...PocketArticlePreviewComponent
         }
       }
     }

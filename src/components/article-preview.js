@@ -26,10 +26,9 @@ const styles = {
   },
 }
 
-function ArticlePreview(props) {
-  const { classes, article } = props
+function ArticlePreview({ classes, article }) {
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} elevation={0}>
       <Link className={classes.link} to={`/articles/${article.slug}`}>
         <CardActionArea>
           <Img alt="" fluid={article.heroImage.fluid} />
@@ -84,8 +83,7 @@ export const articlePreviewQuery = graphql`
       }
     }
     categories {
-      slug
-      name
+      ...CategoryChipComponent
     }
     publishDate(formatString: "MMMM Do, YYYY")
   }

@@ -7,11 +7,14 @@
     "url": "https://github.com/nakleiderer/kleiderer-site/issues"
   },
   "dependencies": {
+    "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
+    "@contentful/rich-text-react-renderer": "^13.1.0",
     "@material-ui/core": "^3.9.2",
     "dotenv": "^6.2.0",
     "gatsby-image": "^2.0.13",
     "gatsby-plugin-netlify-cache": "^1.2.0-beta.0",
     "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-remote-images": "^1.0.1",
     "gatsby-plugin-sharp": "^2.0.6",
     "gatsby-source-contentful": "^2.0.2",
     "gatsby-source-pocket": "^2.0.0",
