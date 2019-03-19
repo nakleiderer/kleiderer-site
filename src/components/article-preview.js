@@ -40,7 +40,7 @@ function ArticlePreview({ classes, article }) {
               by {article.author.name} on {article.publishDate}
             </Typography>
             <Typography
-              component="p"
+              component="div"
               gutterBottom
               variant="body1"
               dangerouslySetInnerHTML={{
