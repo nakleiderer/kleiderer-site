@@ -1,35 +1,42 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
-import Helmet from 'react-helmet'
-import Layout from '../components/layout'
-import ArticlePreview from '../components/article-preview'
 import { Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { graphql } from 'gatsby'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
+import ArticlePreview from '../components/article-preview'
+import Layout from '../components/layout'
+import withRoot from '../withRoot'
 
-class ArticlesIndex extends React.Component {
-  render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const articles = get(this, 'props.data.allContentfulArticle.edges')
+const styles = theme => {}
 
-    return (
-      <Layout location={this.props.location}>
-        <div>
-          <Helmet title={siteTitle} />
-          <div className="wrapper">
-            <Typography variant="h4">Recent articles</Typography>
-            <div>
-              {articles.map(({ node: article }) => {
-                return <ArticlePreview article={article} key={article.slug} />
-              })}
-            </div>
+function ArticlesIndex(props) {
+  const siteTitle = get(props, 'data.site.siteMetadata.title')
+  const articles = get(props, 'data.allContentfulArticle.edges')
+
+  return (
+    <Layout location={props.location}>
+      <div>
+        <Helmet title={siteTitle} />
+        <div className="wrapper">
+          <Typography variant="h4">Recent articles</Typography>
+          <div>
+            {articles.map(({ node: article }) => {
+              return <ArticlePreview article={article} key={article.slug} />
+            })}
           </div>
         </div>
-      </Layout>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
 
-export default ArticlesIndex
+ArticlesIndex.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withRoot(withStyles(styles)(ArticlesIndex))
 
 export const pageQuery = graphql`
   query ArticlesIndexQuery {

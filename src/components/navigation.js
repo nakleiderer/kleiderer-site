@@ -1,10 +1,9 @@
-import React from 'react'
-import { Link, StaticQuery, graphql } from 'gatsby'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import { graphql, Link, StaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const navigationItems = [
   {
@@ -73,18 +72,20 @@ function Navigation({ classes }) {
           noWrap
           className={classes.toolbarTitle}
         >
-          <StaticQuery
-            query={graphql`
-              query {
-                site {
-                  siteMetadata {
-                    title
+          <Link to="/" className={classes.link}>
+            <StaticQuery
+              query={graphql`
+                query {
+                  site {
+                    siteMetadata {
+                      title
+                    }
                   }
                 }
-              }
-            `}
-            render={data => data.site.siteMetadata.title}
-          />
+              `}
+              render={data => data.site.siteMetadata.title}
+            />
+          </Link>
         </Typography>
       </Toolbar>
       <Toolbar variant="dense" className={classes.toolbarSecondary}>

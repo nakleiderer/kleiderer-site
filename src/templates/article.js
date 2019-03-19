@@ -1,46 +1,53 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
-import get from 'lodash/get'
-import Img from 'gatsby-image'
-import Layout from '../components/layout'
 import { Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
+import Layout from '../components/layout'
 import RichText from '../components/rich-text'
+import withRoot from '../withRoot'
 
-class ArticleTemplate extends React.Component {
-  render() {
-    const article = get(this.props, 'data.contentfulArticle')
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+const styles = theme => {}
 
-    return (
-      <Layout location={this.props.location}>
+function ArticleTemplate(props) {
+  const article = get(props, 'data.contentfulArticle')
+  const siteTitle = get(props, 'data.site.siteMetadata.title')
+
+  return (
+    <Layout location={props.location}>
+      <div>
+        <Helmet title={`${article.title} | ${siteTitle}`} />
+        <Helmet
+          meta={[
+            { name: 'author', content: article.author.name },
+            { name: 'description', content: article.description.description },
+          ]}
+        />
         <div>
-          <Helmet title={`${article.title} | ${siteTitle}`} />
-          <Helmet
-            meta={[
-              { name: 'author', content: article.author.name },
-              { name: 'description', content: article.description.description },
-            ]}
-          />
+          <Img alt={article.title} fluid={article.heroImage.fluid} />
+        </div>
+        <div className="wrapper">
+          <Typography variant="h1">{article.title}</Typography>
+          <Typography variant="subtitle1">
+            by {article.author.name} on {article.publishDate}
+          </Typography>
           <div>
-            <Img alt={article.title} fluid={article.heroImage.fluid} />
-          </div>
-          <div className="wrapper">
-            <Typography variant="h1">{article.title}</Typography>
-            <Typography variant="subtitle1">
-              by {article.author.name} on {article.publishDate}
-            </Typography>
-            <div>
-              <RichText content={article.body.json} />
-            </div>
+            <RichText content={article.body.json} />
           </div>
         </div>
-      </Layout>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
 
-export default ArticleTemplate
+ArticleTemplate.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withRoot(withStyles(styles)(ArticleTemplate))
 
 export const articleTemplateQuery = graphql`
   query ArticleBySlug($slug: String!) {

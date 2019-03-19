@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import { Link } from 'gatsby'
+import { withStyles } from '@material-ui/core/styles'
+import { graphql, Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const styles = theme => ({
   link: {

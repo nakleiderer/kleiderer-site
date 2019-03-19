@@ -62,5 +62,11 @@ module.exports = {
         imagePath: 'image.src',
       },
     },
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        theme: {},
+      },
+    },
   ],
 }

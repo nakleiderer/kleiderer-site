@@ -1,36 +1,43 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
-import get from 'lodash/get'
-import Layout from '../components/layout'
 import { Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { graphql } from 'gatsby'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
+import Layout from '../components/layout'
+import withRoot from '../withRoot'
 
-class ArticleTemplate extends React.Component {
-  render() {
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const articles = get(this.props, 'data.allContentfulArticle.edges')
-    const name = get(this.props, 'data.contentfulCategory.name')
+const styles = theme => {}
 
-    return (
-      <Layout location={this.props.location}>
-        <div>
-          <Helmet title={siteTitle} />
-          <div className="wrapper">
-            <Typography variant="h4">{name} articles</Typography>
-            <div>
-              {articles.map(({ node: article }) => {
-                return <ArticlePreview article={article} key={article.slug} />
-              })}
-            </div>
+function CategoryTemplate(props) {
+  const siteTitle = get(props, 'data.site.siteMetadata.title')
+  const articles = get(props, 'data.allContentfulArticle.edges')
+  const name = get(props, 'data.contentfulCategory.name')
+
+  return (
+    <Layout location={props.location}>
+      <div>
+        <Helmet title={siteTitle} />
+        <div className="wrapper">
+          <Typography variant="h4">{name} articles</Typography>
+          <div>
+            {articles.map(({ node: article }) => {
+              return <ArticlePreview article={article} key={article.slug} />
+            })}
           </div>
         </div>
-      </Layout>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
 
-export default ArticleTemplate
+CategoryTemplate.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withRoot(withStyles(styles)(CategoryTemplate))
 
 export const articleTemplateQuery = graphql`
   query ArticleByCategory($slug: String!) {

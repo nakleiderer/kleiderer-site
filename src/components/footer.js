@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const styles = theme => ({
   footer: {

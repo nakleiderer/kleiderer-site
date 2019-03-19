@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 import Img from 'gatsby-image'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const styles = {}
 
@@ -12,7 +12,7 @@ const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
       <Typography variant="body1" paragraph={true}>
-        {children}
+        {children}ß
       </Typography>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (

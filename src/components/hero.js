@@ -1,7 +1,6 @@
-import React from 'react'
-import Img from 'gatsby-image'
-
 import { Typography } from '@material-ui/core'
+import Img from 'gatsby-image'
+import React from 'react'
 
 export default ({ data }) => (
   <div>

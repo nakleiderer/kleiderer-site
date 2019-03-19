@@ -1,14 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import CategoryChip from './category-chip'
-import { Link } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const styles = {
   card: {
