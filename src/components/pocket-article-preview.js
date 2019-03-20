@@ -1,5 +1,6 @@
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -7,6 +8,7 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import React from 'react'
+import CategoryChip from './category-chip'
 
 const styles = {
   card: {
@@ -45,6 +47,11 @@ function PocketArticlePreview({ classes, article }) {
           </CardContent>
         </CardActionArea>
       </a>
+      <CardActions className={classes.actions}>
+        {article.categories.map(category => (
+          <CategoryChip category={category} key={category.slug} />
+        ))}
+      </CardActions>
     </Card>
   )
 }
