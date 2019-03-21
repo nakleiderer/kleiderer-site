@@ -56,6 +56,7 @@ module.exports = {
       },
     },
     'gatsby-pocket-image',
+    'gatsby-pocket-date',
     'gatsby-pocket-categories',
     {
       resolve: `gatsby-plugin-material-ui`,
