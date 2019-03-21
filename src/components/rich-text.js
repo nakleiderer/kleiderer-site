@@ -12,7 +12,7 @@ const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
       <Typography variant="body1" paragraph={true}>
-        {children}ß
+        {children}
       </Typography>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
@@ -42,7 +42,6 @@ const options = {
       const url = `https:${file.url}`
       const { width, height } = file.details.image
       const aspectRatio = width / height
-      console.log(node, url)
       return url && <Img fluid={{ src: url, aspectRatio }} />
     },
   },

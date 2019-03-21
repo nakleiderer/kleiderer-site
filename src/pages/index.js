@@ -9,25 +9,30 @@ import ArticlePreview from '../components/article-preview'
 import Hero from '../components/hero'
 import Layout from '../components/layout'
 import withRoot from '../withRoot'
+import Content from '../components/content'
 
 const styles = theme => {}
 
 function RootIndex(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const articles = get(props, 'data.allContentfulArticle.edges')
-  const [author] = get(props, 'data.allContentfulPerson.edges')
+  const [authorEdge] = get(props, 'data.allContentfulPerson.edges')
+  const { node: author } = authorEdge
 
   return (
-    <Layout location={props.location}>
+    <Layout
+      location={props.location}
+      title={author.name}
+      subtitle={author.title}
+      description={author.shortBio.shortBio}
+      heroImage={author.heroImage}
+    >
+      <Helmet title={siteTitle} />
+      <Typography variant="h5">Recent articles</Typography>
       <div>
-        <Helmet title={siteTitle} />
-        <Hero data={author.node} />
-        <Typography variant="h4">Recent articles</Typography>
-        <div>
-          {articles.map(({ node }) => {
-            return <ArticlePreview article={node} key={node.slug} />
-          })}
-        </div>
+        {articles.map(({ node }) => {
+          return <ArticlePreview article={node} key={node.slug} />
+        })}
       </div>
     </Layout>
   )

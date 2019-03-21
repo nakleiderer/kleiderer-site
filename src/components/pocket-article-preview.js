@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import CategoryChip from './category-chip'
 
-const styles = {
+const styles = theme => ({
   card: {
     maxWidth: 400,
   },
@@ -24,7 +24,7 @@ const styles = {
     paddingLeft: '16px',
     paddingRight: '16px',
   },
-}
+})
 
 function PocketArticlePreview({ classes, article }) {
   return (

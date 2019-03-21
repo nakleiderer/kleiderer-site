@@ -4,21 +4,20 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Footer from './footer'
 import Navigation from './navigation/Navigation'
+import Content from './content'
+import Hero from './hero'
 
-const styles = theme => ({
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-      width: 1100,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-})
+const styles = theme => ({})
 
-function Template({ location, children, classes }) {
+function Template({
+  location,
+  children,
+  classes,
+  title,
+  subtitle,
+  description,
+  heroImage,
+}) {
   let header
 
   let rootPath = `/`
@@ -35,7 +34,13 @@ function Template({ location, children, classes }) {
       />
       <div>
         <Navigation />
-        <main className={classes.layout}>{children}</main>
+        <Hero
+          title={title}
+          subtitle={subtitle}
+          description={description}
+          heroImage={heroImage}
+        />
+        <Content>{children}</Content>
       </div>
       <Footer />
     </React.Fragment>

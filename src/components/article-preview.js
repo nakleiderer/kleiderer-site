@@ -28,7 +28,7 @@ const styles = {
 
 function ArticlePreview({ classes, article }) {
   return (
-    <Card className={classes.card} elevation={0}>
+    <Card className={classes.card} elevation={1}>
       <Link className={classes.link} to={`/articles/${article.slug}`}>
         <CardActionArea>
           <Img alt="" fluid={article.heroImage.fluid} />

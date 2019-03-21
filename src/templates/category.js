@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -7,9 +6,9 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
-import withRoot from '../withRoot'
 import PocketArticlePreview from '../components/pocket-article-preview'
 import hydratePocketArticleWithCategories from '../utils/hydratePocketArticleWithCategories'
+import withRoot from '../withRoot'
 
 const styles = theme => {}
 
@@ -36,11 +35,14 @@ function CategoryTemplate(props) {
     )
 
   return (
-    <Layout location={props.location}>
+    <Layout
+      location={props.location}
+      title={`${category.name} articles`}
+      description={category.description.description}
+    >
       <div>
         <Helmet title={siteTitle} />
         <div className="wrapper">
-          <Typography variant="h4">{category.name} articles</Typography>
           <div>
             {articles.map(a => {
               return <ArticlePreview article={a} key={a.id} />
@@ -70,6 +72,9 @@ export const articleTemplateQuery = graphql`
     }
     contentfulCategory(slug: { eq: $slug }) {
       ...CategoryChipComponent
+      description {
+        description
+      }
     }
     allContentfulCategory {
       edges {

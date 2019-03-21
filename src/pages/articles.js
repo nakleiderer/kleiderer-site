@@ -8,8 +8,8 @@ import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import PocketArticlePreview from '../components/pocket-article-preview'
-import withRoot from '../withRoot'
 import hydratePocketArticleWithCategories from '../utils/hydratePocketArticleWithCategories'
+import withRoot from '../withRoot'
 
 const styles = theme => {}
 
@@ -26,36 +26,44 @@ function ArticlesIndex(props) {
     .map(hydratePocketArticleWithCategories(allCategories))
 
   return (
-    <Layout location={props.location}>
-      <div>
-        <Helmet title={siteTitle} />
-        <div className="wrapper">
-          <Typography variant="h4">Recent articles</Typography>
-          <Grid container spacing={40}>
-            {articles.map(a => (
-              <Grid item key={a.id} xs={12} md={6}>
-                <ArticlePreview article={a} key={a.slug} />
-              </Grid>
-            ))}
+    <Layout location={props.location} title="Recent articles">
+      <Helmet title={siteTitle} />
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+      >
+        {articles.map(a => (
+          <Grid item key={a.id} xs={12} md={6}>
+            <ArticlePreview article={a} key={a.slug} />
           </Grid>
-        </div>
-        <div className="wrapper">
-          <Typography variant="h2">Recommended Articles</Typography>
-          <Typography variant="body1">
-            A list of articles that have helped me grow personally and
-            professionally.
-          </Typography>
-          <Grid container spacing={40}>
-            {recommendedArticles.map(a => {
-              return (
-                <Grid item key={a.id} xs={12} md={6}>
-                  <PocketArticlePreview article={a} key={a.id} />
-                </Grid>
-              )
-            })}
-          </Grid>
-        </div>
-      </div>
+        ))}
+        {recommendedArticles.map(a => {
+          return (
+            <Grid item key={a.id} xs={12} md={6}>
+              <PocketArticlePreview article={a} key={a.id} />
+            </Grid>
+          )
+        })}
+      </Grid>
+      {
+        // <Typography variant="h2">Recommended Articles</Typography>
+        // <Typography variant="body1">
+        //   A list of articles that have helped me grow personally and
+        //   professionally.
+        // </Typography>
+        // <Grid container spacing={40}>
+        // {recommendedArticles.map(a => {
+        //     return (
+        //       <Grid item key={a.id} xs={12} md={6}>
+        //         <PocketArticlePreview article={a} key={a.id} />
+        //       </Grid>
+        //     )
+        //   })}
+        // </Grid>
+      }
     </Layout>
   )
 }

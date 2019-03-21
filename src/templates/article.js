@@ -1,7 +1,5 @@
-import { Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -17,7 +15,13 @@ function ArticleTemplate(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
 
   return (
-    <Layout location={props.location}>
+    <Layout
+      location={props.location}
+      title={article.title}
+      subtitle={`by ${article.author.name} on ${article.publishDate}`}
+      description={article.description.description}
+      heroImage={article.heroImage}
+    >
       <div>
         <Helmet title={`${article.title} | ${siteTitle}`} />
         <Helmet
@@ -27,16 +31,7 @@ function ArticleTemplate(props) {
           ]}
         />
         <div>
-          <Img alt={article.title} fluid={article.heroImage.fluid} />
-        </div>
-        <div className="wrapper">
-          <Typography variant="h1">{article.title}</Typography>
-          <Typography variant="subtitle1">
-            by {article.author.name} on {article.publishDate}
-          </Typography>
-          <div>
-            <RichText content={article.body.json} />
-          </div>
+          <RichText content={article.body.json} />
         </div>
       </div>
     </Layout>
