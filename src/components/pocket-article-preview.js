@@ -31,16 +31,26 @@ function PocketArticlePreview({ classes, article }) {
     <Card className={classes.card} elevation={0}>
       <a className={classes.link} href={article.url}>
         <CardActionArea>
-          {article.localImage && article.localImage.childImageSharp && (
-            <Img alt="" fluid={article.localImage.childImageSharp.fluid} />
+          {article.heroImage && article.heroImage.childImageSharp && (
+            <Img alt="" fluid={article.heroImage.childImageSharp.fluid} />
           )}
           <CardContent>
             <Typography variant="h5" component="h2">
               {article.title}
             </Typography>
+
             <Typography gutterBottom variant="caption">
-              from {article.articleDomain}
+              from {article.articleDomain}{' '}
+              {article.domainFaviconImage &&
+                article.domainFaviconImage.childImageSharp && (
+                  <Img
+                    className={classes.favicon}
+                    alt={article.articleDomain}
+                    fixed={article.domainFaviconImage.childImageSharp.fixed}
+                  />
+                )}
             </Typography>
+
             <Typography component="p" gutterBottom variant="body1">
               {article.excerpt}
             </Typography>
@@ -49,7 +59,7 @@ function PocketArticlePreview({ classes, article }) {
       </a>
       <CardActions className={classes.actions}>
         {article.categories.map(category => (
-          <CategoryChip category={category} key={category.slug} />
+          <CategoryChip category={category} key={category.id} />
         ))}
       </CardActions>
     </Card>
@@ -69,13 +79,25 @@ export const pocketArticlePreviewComponentFragment = graphql`
     excerpt
     url
     articleDomain
-    localImage {
+    domainFaviconImage {
       childImageSharp {
-        fluid(maxWidth: 1180) {
+        fixed(width: 12, height: 12) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    heroImage {
+      childImageSharp {
+        fluid(maxWidth: 300) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    tags
+    internal {
+      type
+    }
+    categories {
+      ...CategoryChipComponent
+    }
   }
 `

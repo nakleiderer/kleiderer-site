@@ -6,33 +6,20 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
-import PocketArticlePreview from '../components/pocket-article-preview'
-import hydratePocketArticleWithCategories from '../utils/hydratePocketArticleWithCategories'
 import withRoot from '../withRoot'
 
-const styles = theme => {}
+const styles = theme => ({})
 
 function CategoryTemplate(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const category = get(props, 'data.contentfulCategory')
-  const allCategories = get(props, 'data.allContentfulCategory.edges').map(
-    c => c.node
-  )
-
-  const articles = get(props, 'data.allContentfulArticle.edges').map(
+  const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
     a => a.node
   )
-  const pocketArticles = get(props, 'data.allPocketArticle.edges')
-    .map(a => a.node)
-    .map(hydratePocketArticleWithCategories(allCategories))
-    .filter(a =>
-      a.categories
-        .reduce((acc, current) => {
-          acc.push(current.id)
-          return acc
-        }, [])
-        .includes(category.id)
-    )
+  const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
+    a => a.node
+  )
+  const articles = [...contentfulArticles, ...pocketArticles]
 
   return (
     <Layout
@@ -46,9 +33,6 @@ function CategoryTemplate(props) {
           <div>
             {articles.map(a => {
               return <ArticlePreview article={a} key={a.id} />
-            })}
-            {pocketArticles.map(a => {
-              return <PocketArticlePreview article={a} key={a.id} />
             })}
           </div>
         </div>
@@ -76,23 +60,19 @@ export const articleTemplateQuery = graphql`
         description
       }
     }
-    allContentfulCategory {
-      edges {
-        node {
-          ...CategoryChipComponent
-        }
-      }
-    }
     allContentfulArticle(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
     ) {
       edges {
         node {
-          ...ArticlePreview
+          ...ContentfulArticlePreviewComponent
         }
       }
     }
-    allPocketArticle(sort: { fields: [time_read], order: DESC }) {
+    allPocketArticle(
+      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
+      sort: { fields: [time_read], order: DESC }
+    ) {
       edges {
         node {
           ...PocketArticlePreviewComponent

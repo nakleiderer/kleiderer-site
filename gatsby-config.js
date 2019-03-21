@@ -55,13 +55,8 @@ module.exports = {
         domainFilterString: 'buzzfeed.com',
       },
     },
-    {
-      resolve: `gatsby-plugin-remote-images`,
-      options: {
-        nodeType: 'PocketArticle',
-        imagePath: 'image.src',
-      },
-    },
+    'gatsby-pocket-image',
+    'gatsby-pocket-categories',
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {

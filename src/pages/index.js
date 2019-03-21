@@ -6,18 +6,22 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
-import Hero from '../components/hero'
 import Layout from '../components/layout'
 import withRoot from '../withRoot'
-import Content from '../components/content'
 
-const styles = theme => {}
+const styles = theme => ({})
 
 function RootIndex(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const articles = get(props, 'data.allContentfulArticle.edges')
   const [authorEdge] = get(props, 'data.allContentfulPerson.edges')
   const { node: author } = authorEdge
+  const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
+    a => a.node
+  )
+  const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
+    a => a.node
+  )
+  const articles = [...contentfulArticles, ...pocketArticles]
 
   return (
     <Layout
@@ -30,8 +34,8 @@ function RootIndex(props) {
       <Helmet title={siteTitle} />
       <Typography variant="h5">Recent articles</Typography>
       <div>
-        {articles.map(({ node }) => {
-          return <ArticlePreview article={node} key={node.slug} />
+        {articles.map(a => {
+          return <ArticlePreview article={a} key={a.id} />
         })}
       </div>
     </Layout>
@@ -54,7 +58,14 @@ export const pageQuery = graphql`
     allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
-          ...ArticlePreview
+          ...ContentfulArticlePreviewComponent
+        }
+      }
+    }
+    allPocketArticle(sort: { fields: [time_read], order: DESC }) {
+      edges {
+        node {
+          ...PocketArticlePreviewComponent
         }
       }
     }

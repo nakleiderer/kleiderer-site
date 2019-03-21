@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -7,23 +7,19 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
-import PocketArticlePreview from '../components/pocket-article-preview'
-import hydratePocketArticleWithCategories from '../utils/hydratePocketArticleWithCategories'
 import withRoot from '../withRoot'
 
-const styles = theme => {}
+const styles = theme => ({})
 
 function ArticlesIndex(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const articles = get(props, 'data.allContentfulArticle.edges').map(
+  const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
     a => a.node
   )
-  const allCategories = get(props, 'data.allContentfulCategory.edges').map(
-    c => c.node
+  const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
+    a => a.node
   )
-  const recommendedArticles = get(props, 'data.allPocketArticle.edges')
-    .map(a => a.node)
-    .map(hydratePocketArticleWithCategories(allCategories))
+  const articles = [...contentfulArticles, ...pocketArticles]
 
   return (
     <Layout location={props.location} title="Recent articles">
@@ -37,33 +33,10 @@ function ArticlesIndex(props) {
       >
         {articles.map(a => (
           <Grid item key={a.id} xs={12} md={6}>
-            <ArticlePreview article={a} key={a.slug} />
+            <ArticlePreview article={a} key={a.id} />
           </Grid>
         ))}
-        {recommendedArticles.map(a => {
-          return (
-            <Grid item key={a.id} xs={12} md={6}>
-              <PocketArticlePreview article={a} key={a.id} />
-            </Grid>
-          )
-        })}
       </Grid>
-      {
-        // <Typography variant="h2">Recommended Articles</Typography>
-        // <Typography variant="body1">
-        //   A list of articles that have helped me grow personally and
-        //   professionally.
-        // </Typography>
-        // <Grid container spacing={40}>
-        // {recommendedArticles.map(a => {
-        //     return (
-        //       <Grid item key={a.id} xs={12} md={6}>
-        //         <PocketArticlePreview article={a} key={a.id} />
-        //       </Grid>
-        //     )
-        //   })}
-        // </Grid>
-      }
     </Layout>
   )
 }
@@ -81,29 +54,40 @@ export const pageQuery = graphql`
         title
       }
     }
+    allContentfulPerson(
+      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
+    ) {
+      edges {
+        node {
+          name
+          shortBio {
+            shortBio
+          }
+          title
+          heroImage: image {
+            fluid(
+              maxWidth: 1180
+              maxHeight: 480
+              resizingBehavior: PAD
+              background: "rgb:000000"
+            ) {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
     allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {
       edges {
         node {
-          id
-          ...ArticlePreview
+          ...ContentfulArticlePreviewComponent
         }
       }
     }
-    allPocketArticle(sort: { fields: [time_read], order: DESC }, limit: 12) {
+    allPocketArticle(sort: { fields: [time_read], order: DESC }) {
       edges {
         node {
-          id
           ...PocketArticlePreviewComponent
-          tags
-        }
-      }
-    }
-    allContentfulCategory {
-      edges {
-        node {
-          id
-          ...CategoryChipComponent
-          pocketTags
         }
       }
     }
