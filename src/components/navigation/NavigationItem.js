@@ -1,8 +1,7 @@
-import { withStyles } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import NavigationItemTypography from './NavigationItemTypography'
 
 const styles = theme => ({
   link: {
@@ -11,21 +10,27 @@ const styles = theme => ({
   },
 })
 
+const NavigationItemText = ({ item }) => (
+  <Button size="small" color="inherit">
+    {item.title}
+  </Button>
+)
+
 function NavigationItem({ item, classes }) {
   if (!!item.link) {
     return (
       <Link to={item.link} className={classes.link}>
-        <NavigationItemTypography item={item} />
+        <NavigationItemText item={item} />
       </Link>
     )
   } else if (!!item.externalLink) {
     return (
       <a href={item.externalLink} className={classes.link}>
-        <NavigationItemTypography item={item} />
+        <NavigationItemText item={item} />
       </a>
     )
   }
-  return <NavigationItemTypography item={item} />
+  return <NavigationItemText item={item} />
 }
 
 NavigationItem.propTypes = {

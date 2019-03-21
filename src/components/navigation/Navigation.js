@@ -1,19 +1,19 @@
 import {
   AppBar,
+  Avatar,
+  Hidden,
   IconButton,
   Toolbar,
   Typography,
   withStyles,
-  Hidden,
-  Avatar,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { graphql, Link, StaticQuery } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 import navigationItems from './items'
-import NavigationItem from './NavigationItem'
 import NavigationDrawer from './NavigationDrawer'
+import NavigationItem from './NavigationItem'
 
 const styles = theme => ({
   root: {
@@ -68,7 +68,9 @@ class Navigation extends React.Component {
                 <MenuIcon />
               </IconButton>
             </Hidden>
-            <Avatar className={classes.avatar}>NK</Avatar>
+            <Link to="/" className={classes.link}>
+              <Avatar className={classes.avatar}>NK</Avatar>
+            </Link>
             <Typography
               variant="h6"
               color="inherit"

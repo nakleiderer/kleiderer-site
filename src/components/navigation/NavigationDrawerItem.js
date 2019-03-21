@@ -1,8 +1,7 @@
-import { withStyles } from '@material-ui/core'
+import { ListItem, ListItemText, withStyles } from '@material-ui/core'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import NavigationDrawerItemTypography from './NavigationItemTypography'
 
 const styles = theme => ({
   link: {
@@ -11,21 +10,27 @@ const styles = theme => ({
   },
 })
 
+const NavigationDrawerItemText = ({ item }) => (
+  <ListItem button>
+    <ListItemText primary={item.title} />
+  </ListItem>
+)
+
 function NavigationDrawerItem({ item, classes }) {
   if (!!item.link) {
     return (
       <Link to={item.link} className={classes.link}>
-        <NavigationDrawerItemTypography item={item} />
+        <NavigationDrawerItemText item={item} />
       </Link>
     )
   } else if (!!item.externalLink) {
     return (
       <a href={item.externalLink} className={classes.link}>
-        <NavigationDrawerItemTypography item={item} />
+        <NavigationDrawerItemText item={item} />
       </a>
     )
   }
-  return <NavigationDrawerItemTypography item={item} />
+  return <NavigationDrawerItemText item={item} />
 }
 
 NavigationDrawerItem.propTypes = {
