@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Footer from './footer'
-import Navigation from './navigation'
+import Navigation from './navigation/Navigation'
 
 const styles = theme => ({
   layout: {
@@ -33,9 +33,9 @@ function Template({ location, children, classes }) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
       />
-      <div className={classes.layout}>
+      <div>
         <Navigation />
-        <main>{children}</main>
+        <main className={classes.layout}>{children}</main>
       </div>
       <Footer />
     </React.Fragment>
