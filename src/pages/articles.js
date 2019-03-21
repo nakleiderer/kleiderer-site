@@ -9,6 +9,7 @@ import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import PocketArticlePreview from '../components/pocket-article-preview'
 import withRoot from '../withRoot'
+import hydratePocketArticleWithCategories from '../utils/hydratePocketArticleWithCategories'
 
 const styles = theme => {}
 
@@ -22,16 +23,7 @@ function ArticlesIndex(props) {
   )
   const recommendedArticles = get(props, 'data.allPocketArticle.edges')
     .map(a => a.node)
-    .map(a => {
-      const tagsOnArticle = a.tags || []
-      const categories = allCategories.filter(c => {
-        const tagsInCategory = c.pocketTags || []
-        return tagsOnArticle.reduce((acc, tagOnArticle) => {
-          return tagsInCategory.includes(tagOnArticle) || acc
-        }, false)
-      })
-      return { ...a, categories }
-    })
+    .map(hydratePocketArticleWithCategories(allCategories))
 
   return (
     <Layout location={props.location}>
