@@ -29,7 +29,9 @@ export default withStyles(styles)(CategoryChip)
 
 export const categoryChipComponentFragment = graphql`
   fragment CategoryChipComponent on ContentfulCategory {
+    id
     slug
     name
+    pocketTags
   }
 `

@@ -52,7 +52,7 @@ function ArticlePreview({ classes, article }) {
       </Link>
       <CardActions className={classes.actions}>
         {article.categories.map(category => (
-          <CategoryChip category={category} key={category.slug} />
+          <CategoryChip category={category} key={category.id} />
         ))}
       </CardActions>
     </Card>
@@ -67,6 +67,7 @@ export default withStyles(styles)(ArticlePreview)
 
 export const articlePreviewQuery = graphql`
   fragment ArticlePreview on ContentfulArticle {
+    id
     author {
       name
     }

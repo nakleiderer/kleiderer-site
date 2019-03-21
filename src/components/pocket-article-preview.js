@@ -76,5 +76,6 @@ export const pocketArticlePreviewComponentFragment = graphql`
         }
       }
     }
+    tags
   }
 `
