@@ -34,7 +34,9 @@ function RootIndex(props) {
       heroImage={author.heroImage}
     >
       <Helmet title={siteTitle} />
-      <Typography variant="h5">Recent articles</Typography>
+      <Typography variant="h5" gutterBottom>
+        Recent articles
+      </Typography>
       <Grid
         container
         direction="row"
