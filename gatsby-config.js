@@ -24,7 +24,7 @@ if (
 
 module.exports = {
   siteMetadata: {
-    title: 'Kleiderer',
+    title: 'Nicolas Kleiderer',
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
@@ -53,6 +53,15 @@ module.exports = {
         searchFilterString: 'These 21 things',
         domainFilter: false,
         domainFilterString: 'buzzfeed.com',
+      },
+    },
+    'gatsby-pocket-image',
+    'gatsby-pocket-date',
+    'gatsby-pocket-categories',
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        theme: {},
       },
     },
   ],

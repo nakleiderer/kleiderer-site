@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -11,10 +11,8 @@ import withRoot from '../withRoot'
 
 const styles = theme => ({})
 
-function RootIndex(props) {
+function ArticlesIndex(props) {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const [authorEdge] = get(props, 'data.allContentfulPerson.edges')
-  const { node: author } = authorEdge
   const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
     a => a.node
   )
@@ -26,17 +24,8 @@ function RootIndex(props) {
   )
 
   return (
-    <Layout
-      location={props.location}
-      title={author.name}
-      subtitle={author.title}
-      description={author.shortBio.shortBio}
-      heroImage={author.heroImage}
-    >
+    <Layout location={props.location} title="Recent articles">
       <Helmet title={siteTitle} />
-      <Typography variant="h5" gutterBottom>
-        Recent articles
-      </Typography>
       <Grid
         container
         direction="row"
@@ -54,31 +43,17 @@ function RootIndex(props) {
   )
 }
 
-RootIndex.propTypes = {
+ArticlesIndex.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withRoot(withStyles(styles)(RootIndex))
+export default withRoot(withStyles(styles)(ArticlesIndex))
 
 export const pageQuery = graphql`
-  query HomeQuery {
+  query ArticlesIndexQuery {
     site {
       siteMetadata {
         title
-      }
-    }
-    allContentfulArticle {
-      edges {
-        node {
-          ...ContentfulArticlePreviewComponent
-        }
-      }
-    }
-    allPocketArticle {
-      edges {
-        node {
-          ...PocketArticlePreviewComponent
-        }
       }
     }
     allContentfulPerson(
@@ -101,6 +76,20 @@ export const pageQuery = graphql`
               ...GatsbyContentfulFluid
             }
           }
+        }
+      }
+    }
+    allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {
+      edges {
+        node {
+          ...ContentfulArticlePreviewComponent
+        }
+      }
+    }
+    allPocketArticle(sort: { fields: [time_read], order: DESC }) {
+      edges {
+        node {
+          ...PocketArticlePreviewComponent
         }
       }
     }
