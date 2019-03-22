@@ -4,10 +4,27 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Footer from './footer'
 import Navigation from './navigation/Navigation'
-import Content from './content'
 import Hero from './hero'
 
-const styles = theme => ({})
+const styles = theme => ({
+  layout: {
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  main: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+})
 
 function Template({
   location,
@@ -32,15 +49,15 @@ function Template({
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
       />
-      <div>
-        <Navigation />
+      <Navigation />
+      <div className={classes.layout}>
         <Hero
           title={title}
           subtitle={subtitle}
           description={description}
           heroImage={heroImage}
         />
-        <Content>{children}</Content>
+        <main className={classes.main}>{children}</main>
       </div>
       <Footer />
     </React.Fragment>

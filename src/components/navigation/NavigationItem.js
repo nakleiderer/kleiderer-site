@@ -3,34 +3,32 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const styles = theme => ({
-  link: {
-    color: 'inherit',
-    textDecoration: 'none',
-  },
-})
-
-const NavigationItemText = ({ item }) => (
-  <Button size="small" color="inherit">
-    {item.title}
-  </Button>
-)
+const styles = theme => ({})
 
 function NavigationItem({ item, classes }) {
   if (!!item.link) {
     return (
-      <Link to={item.link} className={classes.link}>
-        <NavigationItemText item={item} />
-      </Link>
+      <Button size="small" color="inherit" component={Link} to={item.link}>
+        {item.title}
+      </Button>
     )
   } else if (!!item.externalLink) {
     return (
-      <a href={item.externalLink} className={classes.link}>
-        <NavigationItemText item={item} />
-      </a>
+      <Button
+        size="small"
+        color="inherit"
+        component="a"
+        href={item.externalLink}
+      >
+        {item.title}
+      </Button>
     )
   }
-  return <NavigationItemText item={item} />
+  return (
+    <Button size="small" color="inherit">
+      {item.title}
+    </Button>
+  )
 }
 
 NavigationItem.propTypes = {

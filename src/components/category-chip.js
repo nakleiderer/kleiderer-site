@@ -5,19 +5,21 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const styles = theme => ({
-  link: {
-    margin: theme.spacing.unit,
-    textDecoration: 'none',
+  button: {
+    color: theme.palette.text.secondary,
   },
 })
 
 function CategoryChip({ classes, category }) {
   return (
-    <Link className={classes.link} to={`/categories/${category.slug}`}>
-      <Button size="small" variant="outlined" className={classes.margin}>
-        {category.name}
-      </Button>
-    </Link>
+    <Button
+      size="small"
+      className={classes.button}
+      component={Link}
+      to={`/categories/${category.slug}`}
+    >
+      {category.name}
+    </Button>
   )
 }
 
