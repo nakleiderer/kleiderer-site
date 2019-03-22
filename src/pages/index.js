@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -21,7 +21,9 @@ function RootIndex(props) {
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
     a => a.node
   )
-  const articles = [...contentfulArticles, ...pocketArticles]
+  const articles = [...contentfulArticles, ...pocketArticles].sort((a, b) =>
+    a.sortableDate > b.sortableDate ? 1 : -1
+  )
 
   return (
     <Layout
@@ -33,11 +35,19 @@ function RootIndex(props) {
     >
       <Helmet title={siteTitle} />
       <Typography variant="h5">Recent articles</Typography>
-      <div>
-        {articles.map(a => {
-          return <ArticlePreview article={a} key={a.id} />
-        })}
-      </div>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+      >
+        {articles.map(a => (
+          <Grid item key={a.id} xs={12} md={6}>
+            <ArticlePreview article={a} key={a.id} />
+          </Grid>
+        ))}
+      </Grid>
     </Layout>
   )
 }
@@ -55,14 +65,14 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulArticle {
       edges {
         node {
           ...ContentfulArticlePreviewComponent
         }
       }
     }
-    allPocketArticle(sort: { fields: [time_read], order: DESC }) {
+    allPocketArticle {
       edges {
         node {
           ...PocketArticlePreviewComponent

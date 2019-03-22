@@ -40,15 +40,9 @@ function PocketArticlePreview({ classes, article }) {
             </Typography>
 
             <Typography gutterBottom variant="caption">
-              from {article.articleDomain}{' '}
-              {article.domainFaviconImage &&
-                article.domainFaviconImage.childImageSharp && (
-                  <Img
-                    className={classes.favicon}
-                    alt={article.articleDomain}
-                    fixed={article.domainFaviconImage.childImageSharp.fixed}
-                  />
-                )}
+              {`from ${article.articleDomain}, read on ${
+                article.humanReadablePublishDate
+              }`}
             </Typography>
 
             <Typography component="p" gutterBottom variant="body1">
@@ -79,13 +73,8 @@ export const pocketArticlePreviewComponentFragment = graphql`
     excerpt
     url
     articleDomain
-    domainFaviconImage {
-      childImageSharp {
-        fixed(width: 12, height: 12) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
+    sortableDate: timeRead
+    humanReadablePublishDate: timeRead(formatString: "MMMM Do, YYYY")
     heroImage {
       childImageSharp {
         fluid(maxWidth: 300) {

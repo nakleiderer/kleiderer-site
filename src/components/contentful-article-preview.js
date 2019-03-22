@@ -37,7 +37,7 @@ function ContentfulArticlePreview({ classes, article }) {
               {article.title}
             </Typography>
             <Typography gutterBottom variant="caption">
-              by {article.author.name} on {article.publishDate}
+              {`by ${article.author.name} on ${article.publishDate}`}
             </Typography>
             <Typography
               component="div"
@@ -89,6 +89,7 @@ export const articlePreviewQuery = graphql`
     categories {
       ...CategoryChipComponent
     }
-    publishDate(formatString: "MMMM Do, YYYY")
+    sortableDate: publishDate
+    humanReadablePublishDate: publishDate(formatString: "MMMM Do, YYYY")
   }
 `

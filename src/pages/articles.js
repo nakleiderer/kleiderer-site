@@ -19,7 +19,9 @@ function ArticlesIndex(props) {
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
     a => a.node
   )
-  const articles = [...contentfulArticles, ...pocketArticles]
+  const articles = [...contentfulArticles, ...pocketArticles].sort((a, b) =>
+    a.sortableDate > b.sortableDate ? 1 : -1
+  )
 
   return (
     <Layout location={props.location} title="Recent articles">
