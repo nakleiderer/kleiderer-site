@@ -32,15 +32,8 @@ const styles = theme => ({
   actions: {
     display: 'flex',
   },
-  expand: {
-    transform: 'rotate(0deg)',
+  category: {
     marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
   },
   avatar: {},
 })
@@ -55,8 +48,8 @@ function ArticlePreview({ article, classes }) {
     : false
   const title = article.title
   const subheader = isContenfulArticle
-    ? `by ${article.author.name} on ${article.humanReadablePublishDate}`
-    : `from ${article.articleDomain}, read  ${article.humanReadablePublishDate}`
+    ? `by ${article.author.name}, published ${article.humanReadablePublishDate}`
+    : `from ${article.articleDomain}, read ${article.humanReadablePublishDate}`
   const description = isContenfulArticle
     ? article.description.description
     : article.excerpt
@@ -96,7 +89,7 @@ function ArticlePreview({ article, classes }) {
           Read
         </Button>
         {article.categories.map(c => (
-          <CategoryChip category={c} key={c.id} />
+          <CategoryChip category={c} key={c.id} className={classes.category} />
         ))}
       </CardActions>
     </Card>
@@ -140,7 +133,7 @@ export const articlePreviewComponentFragment = graphql`
       ...CategoryChipComponent
     }
     sortableDate: publishDate
-    humanReadablePublishDate: publishDate(formatString: "MMMM Do, YYYY")
+    humanReadablePublishDate: publishDate(fromNow: true)
   }
 
   fragment PocketArticlePreviewComponent on PocketArticle {

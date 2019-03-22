@@ -1,14 +1,14 @@
 const navigationItems = [
-  {
-    title: 'Testimonials',
-  },
+  // {
+  //   title: 'Testimonials',
+  // },
   {
     title: 'Articles',
     link: '/articles',
   },
-  {
-    title: 'Recommended Software',
-  },
+  // {
+  //   title: 'Recommended Software',
+  // },
 ]
 
 export default navigationItems
