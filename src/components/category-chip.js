@@ -5,16 +5,22 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const styles = theme => ({
+  firstButton: {
+    color: theme.palette.text.secondary,
+    marginLeft: 'auto',
+  },
   button: {
     color: theme.palette.text.secondary,
   },
 })
 
-function CategoryChip({ classes, category }) {
+function CategoryChip({ classes, category, index }) {
+  const className = index === 0 ? classes.firstButton : classes.button
+
   return (
     <Button
       size="small"
-      className={classes.button}
+      className={className}
       component={Link}
       to={`/categories/${category.slug}`}
     >

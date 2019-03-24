@@ -7,10 +7,17 @@ import Helmet from 'react-helmet'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import withRoot from '../withRoot'
+import BookPreview from '../components/book-preview'
+import { Grid, Typography } from '@material-ui/core'
 
-const styles = theme => ({})
+const styles = theme => ({
+  section: {
+    marginTop: theme.spacing.unit * 6,
+  },
+})
 
 function CategoryTemplate(props) {
+  const { classes } = props
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const category = get(props, 'data.contentfulCategory')
   const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
@@ -19,25 +26,47 @@ function CategoryTemplate(props) {
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
     a => a.node
   )
-  const articles = [...contentfulArticles, ...pocketArticles].sort((a, b) =>
-    a.sortableDate > b.sortableDate ? 1 : -1
-  )
+  const articles = [...contentfulArticles, ...pocketArticles]
+    .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
+    .reverse()
+  const books = get(props, 'data.allContentfulBook.edges').map(b => b.node)
 
   return (
     <Layout
       location={props.location}
-      title={`${category.name} articles`}
+      title={`${category.name} content`}
       description={category.description.description}
     >
       <div>
         <Helmet title={siteTitle} />
-        <div className="wrapper">
+        {!!books.length && (
           <div>
-            {articles.map(a => {
-              return <ArticlePreview article={a} key={a.id} />
-            })}
+            <Typography variant="h5" gutterBottom>
+              {category.name} books
+            </Typography>
+            <Grid container direction="row" justify="flex-start" spacing={24}>
+              {books.map(a => (
+                <Grid item key={a.id} xs={12} md={6}>
+                  <BookPreview book={a} key={a.id} />
+                </Grid>
+              ))}
+            </Grid>
           </div>
-        </div>
+        )}
+        {!!articles.length && (
+          <div className={classes.section}>
+            <Typography variant="h5" gutterBottom>
+              {category.name} articles
+            </Typography>
+            <Grid container direction="row" justify="flex-start" spacing={24}>
+              {articles.map(a => (
+                <Grid item key={a.id} xs={12} md={6}>
+                  <ArticlePreview article={a} key={a.id} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
       </div>
     </Layout>
   )
@@ -77,6 +106,15 @@ export const articleTemplateQuery = graphql`
       edges {
         node {
           ...PocketArticlePreviewComponent
+        }
+      }
+    }
+    allContentfulBook(
+      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
+    ) {
+      edges {
+        node {
+          ...ContentfulBookPreviewComponent
         }
       }
     }

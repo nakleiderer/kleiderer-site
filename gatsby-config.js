@@ -9,13 +9,17 @@ const config = {
     consumerKey: process.env.POCKET_CONSUMER_KEY,
     accessToken: process.env.POCKET_ACCESS_TOKEN,
   },
+  googleBooks: {
+    key: process.env.GOOGLE_BOOKS_KEY,
+  },
 }
 
 if (
   !config.contentful.spaceId ||
   !config.contentful.accessToken ||
   !config.pocket.consumerKey ||
-  !config.pocket.accessToken
+  !config.pocket.accessToken ||
+  !config.googleBooks.key
 ) {
   throw new Error(
     "A required environment variable is not set. Consult 'gatsby-config.js' for required variables."
@@ -37,6 +41,7 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: config.contentful,
     },
+    { resolve: 'gatsby-contentful-book', options: config.googleBooks },
     {
       resolve: `gatsby-source-pocket`,
       options: {

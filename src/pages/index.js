@@ -21,9 +21,10 @@ function RootIndex(props) {
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
     a => a.node
   )
-  const articles = [...contentfulArticles, ...pocketArticles].sort((a, b) =>
-    a.sortableDate > b.sortableDate ? 1 : -1
-  )
+  const articles = [...contentfulArticles, ...pocketArticles]
+    .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
+    .reverse()
+  const books = get(props, 'data.allContentfulBook.edges').map(b => b.node)
 
   return (
     <Layout
@@ -37,13 +38,7 @@ function RootIndex(props) {
       <Typography variant="h5" gutterBottom>
         Recent articles
       </Typography>
-      <Grid
-        container
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        spacing={24}
-      >
+      <Grid container direction="row" justify="flex-start" spacing={24}>
         {articles.map(a => (
           <Grid item key={a.id} xs={12} md={6}>
             <ArticlePreview article={a} key={a.id} />
@@ -65,6 +60,13 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    allContentfulBook {
+      edges {
+        node {
+          ...ContentfulBookPreviewComponent
+        }
       }
     }
     allContentfulArticle {

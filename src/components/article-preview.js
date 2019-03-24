@@ -1,25 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import classnames from 'classnames'
+import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardMedia from '@material-ui/core/CardMedia'
-import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import red from '@material-ui/core/colors/red'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import CategoryChip from './category-chip'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
+import PropTypes from 'prop-types'
+import React from 'react'
+import CategoryChip from './category-chip'
 
 const styles = theme => ({
   card: {
@@ -31,9 +22,6 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
-  },
-  category: {
-    marginLeft: 'auto',
   },
   avatar: {},
 })
@@ -88,8 +76,8 @@ function ArticlePreview({ article, classes }) {
         >
           Read
         </Button>
-        {article.categories.map(c => (
-          <CategoryChip category={c} key={c.id} className={classes.category} />
+        {article.categories.map((c, i) => (
+          <CategoryChip category={c} key={c.id} index={i} />
         ))}
       </CardActions>
     </Card>
