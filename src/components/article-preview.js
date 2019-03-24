@@ -28,7 +28,7 @@ const styles = theme => ({
 
 function ArticlePreview({ article, classes }) {
   const isContenfulArticle = article.internal.type === 'ContentfulArticle'
-  const elevation = isContenfulArticle ? 1 : 0
+  const elevation = isContenfulArticle ? 1 : 1
   const avatar = isContenfulArticle
     ? article.author.image
     : article.domainFaviconImage && article.domainFaviconImage.childImageSharp
