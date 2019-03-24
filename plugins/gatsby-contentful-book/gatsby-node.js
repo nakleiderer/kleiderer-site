@@ -1,5 +1,5 @@
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-const Gisbn = require('Gisbn')
+const Gisbn = require('gisbn')
 
 const addRemoteImageToNode = async ({
   url,
