@@ -42,7 +42,7 @@ function CategoryTemplate(props) {
       description={category.description.description}
     >
       <div>
-        <Helmet title={siteTitle} />
+        <Helmet title={`${category.name} | ${siteTitle}`} />
         {!!softwares.length && (
           <div className={classes.section}>
             <Typography variant="h5" gutterBottom>
