@@ -29,7 +29,7 @@ function Hero({ classes, title, subtitle, description, heroImage }) {
             <div className={classes.heroContent}>
               <Typography
                 component="h1"
-                variant="h2"
+                variant="h3"
                 align="center"
                 color="textPrimary"
                 gutterBottom={!subtitle}

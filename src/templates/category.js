@@ -9,6 +9,7 @@ import Layout from '../components/layout'
 import withRoot from '../withRoot'
 import BookPreview from '../components/book-preview'
 import { Grid, Typography } from '@material-ui/core'
+import SoftwarePreview from '../components/software-preview'
 
 const styles = theme => ({
   section: {
@@ -30,6 +31,9 @@ function CategoryTemplate(props) {
     .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
     .reverse()
   const books = get(props, 'data.allContentfulBook.edges').map(b => b.node)
+  const softwares = get(props, 'data.allContentfulSoftware.edges').map(
+    s => s.node
+  )
 
   return (
     <Layout
@@ -39,8 +43,22 @@ function CategoryTemplate(props) {
     >
       <div>
         <Helmet title={siteTitle} />
+        {!!softwares.length && (
+          <div className={classes.section}>
+            <Typography variant="h5" gutterBottom>
+              {category.name} software
+            </Typography>
+            <Grid container direction="row" justify="flex-start" spacing={24}>
+              {softwares.map(a => (
+                <Grid item key={a.id} xs={12} md={6}>
+                  <SoftwarePreview software={a} key={a.id} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
         {!!books.length && (
-          <div>
+          <div className={classes.section}>
             <Typography variant="h5" gutterBottom>
               {category.name} books
             </Typography>
@@ -115,6 +133,15 @@ export const articleTemplateQuery = graphql`
       edges {
         node {
           ...ContentfulBookPreviewComponent
+        }
+      }
+    }
+    allContentfulSoftware(
+      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
+    ) {
+      edges {
+        node {
+          ...ContentfulSoftwarePreviewComponent
         }
       }
     }

@@ -14,7 +14,7 @@ import CategoryChip from './category-chip'
 
 const styles = theme => ({
   card: {
-    height: 193,
+    height: 128,
     maxWidth: 500,
   },
   cardDetails: {
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   cardMedia: {
     width: 128,
-    height: 193,
+    height: 128,
   },
   actions: {
     display: 'flex',
@@ -50,38 +50,25 @@ const styles = theme => ({
   },
 })
 
-function BookPreview({ classes, book }) {
-  const cover =
-    !!book.cover && !!book.cover.childImageSharp
-      ? book.cover.childImageSharp
-      : false
-  const authors = (book.authors || []).join(', ')
-  const categories = book.categories || []
+function SoftwarePreview({ classes, software }) {
+  const logo = !!software.logo ? software.logo : false
+  const categories = software.categories || []
+
   return (
     <Card className={classes.card}>
       <div className={classes.cardDetails}>
-        {cover && <Img className={classes.cardMedia} alt="" {...cover} />}
+        {logo && <Img className={classes.cardMedia} alt="" {...logo} />}
         <CardContent className={classes.cardContent}>
           <div className={classes.grow}>
-            <Typography component="span" variant="h6">
-              {book.title}
+            <Typography component="span" variant="body1">
+              {software.name}
             </Typography>
-            {!!authors && (
-              <Typography
-                component="span"
-                variant="body1"
-                color="textSecondary"
-                gutterBottom
-              >
-                by {authors}
-              </Typography>
-            )}
             <Typography
               component="p"
-              variant="body2"
+              variant="caption"
               className={classes.description}
             >
-              {book.description}
+              {software.description.description}
             </Typography>
           </div>
           <CardActions className={classes.actions}>
@@ -90,10 +77,10 @@ function BookPreview({ classes, book }) {
               variant="outlined"
               color="primary"
               component="a"
-              href={book.amazonAffiliateUrl}
+              href={software.affiliateUrl}
               target="_blank"
             >
-              Buy
+              Try
             </Button>
             {categories.map((c, i) => (
               <CategoryChip category={c} key={c.id} index={i} />
@@ -105,27 +92,26 @@ function BookPreview({ classes, book }) {
   )
 }
 
-BookPreview.propTypes = {
+SoftwarePreview.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(BookPreview)
+export default withStyles(styles)(SoftwarePreview)
 
-export const bookPreviewComponentFragment = graphql`
-  fragment ContentfulBookPreviewComponent on ContentfulBook {
+export const softwarePreviewComponentFragment = graphql`
+  fragment ContentfulSoftwarePreviewComponent on ContentfulSoftware {
     id
-    title
-    authors
-    description
-    amazonAffiliateUrl
+    name
+    description {
+      description
+    }
+    affiliateUrl
     categories {
       ...CategoryChipComponent
     }
-    cover {
-      childImageSharp {
-        fluid(maxWidth: 128) {
-          ...GatsbyImageSharpFluid
-        }
+    logo {
+      fixed(width: 128, height: 128) {
+        ...GatsbyContentfulFixed
       }
     }
   }
