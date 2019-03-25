@@ -1,12 +1,12 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from '@material-ui/core'
+import Hidden from '@material-ui/core/Hidden'
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
 import { withStyles } from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
+import Typography from '@material-ui/core/Typography'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -14,93 +14,60 @@ import CategoryChip from './category-chip'
 
 const styles = theme => ({
   card: {
-    height: 193,
-    maxWidth: 500,
+    display: 'flex',
+    maxHeight: 193,
   },
   cardDetails: {
-    display: 'flex',
+    minWidth: 0,
+    flex: 1,
   },
   cardMedia: {
     width: 128,
-    height: 193,
-  },
-  actions: {
-    display: 'flex',
-    flex: 1,
-  },
-  cardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  grow: {
-    flexGrow: 1,
-    paddingLeft: 12,
-    paddingRight: 12,
-  },
-  description: {
-    maxHeight: '2.9em',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
 })
 
-function BookPreview({ classes, book }) {
+function BookPreview({ book, classes }) {
   const cover =
     !!book.cover && !!book.cover.childImageSharp
       ? book.cover.childImageSharp
       : false
-  const authors = (book.authors || []).join(', ')
-  const categories = book.categories || []
+  const authors = `by ${(book.authors || []).join(', ')}`
+
   return (
     <Card className={classes.card}>
-      <div className={classes.cardDetails}>
+      <Hidden xsDown>
         {cover && <Img className={classes.cardMedia} alt="" {...cover} />}
+      </Hidden>
+      <div className={classes.cardDetails}>
         <CardContent className={classes.cardContent}>
-          <div className={classes.grow}>
-            <Typography component="span" variant="h6">
-              {book.title}
-            </Typography>
-            {!!authors && (
-              <Typography
-                component="span"
-                variant="body1"
-                color="textSecondary"
-                gutterBottom
-              >
-                by {authors}
-              </Typography>
-            )}
-            <Typography
-              component="p"
-              variant="body2"
-              className={classes.description}
-            >
-              {book.description}
-            </Typography>
-          </div>
-          <CardActions className={classes.actions}>
-            <Button
-              size="small"
-              variant="outlined"
-              color="primary"
-              component="a"
-              href={book.amazonAffiliateUrl}
-              target="_blank"
-            >
-              Buy
-            </Button>
-            {categories.map((c, i) => (
-              <CategoryChip category={c} key={c.id} index={i} />
-            ))}
-          </CardActions>
+          <Typography component="h2" variant="h5">
+            {book.title}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            {authors}
+          </Typography>
+          <Typography
+            variant="body2"
+            component="span"
+            className={classes.description}
+            noWrap
+          >
+            {book.description}
+          </Typography>
         </CardContent>
       </div>
+      <CardActions className={classes.actions}>
+        <Button
+          size="small"
+          variant="outlined"
+          color="primary"
+          component="a"
+          href={book.amazonAffiliateUrl}
+          target="_blank"
+        >
+          Buy
+        </Button>
+      </CardActions>
     </Card>
   )
 }

@@ -1,12 +1,12 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from '@material-ui/core'
+import Hidden from '@material-ui/core/Hidden'
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
 import { withStyles } from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
+import Typography from '@material-ui/core/Typography'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -14,80 +14,57 @@ import CategoryChip from './category-chip'
 
 const styles = theme => ({
   card: {
-    height: 128,
-    maxWidth: 500,
+    display: 'flex',
+    maxHeight: 80,
+    padding: 8,
   },
   cardDetails: {
-    display: 'flex',
+    minWidth: 0,
+    flex: 1,
   },
   cardMedia: {
-    width: 128,
-    height: 128,
-  },
-  actions: {
-    display: 'flex',
-    flex: 1,
+    width: 64,
   },
   cardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-    paddingLeft: 4,
-    paddingRight: 4,
-  },
-  grow: {
-    flexGrow: 1,
-    paddingLeft: 12,
-    paddingRight: 12,
-  },
-  description: {
-    maxHeight: '2.9em',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    padding: 8,
   },
 })
 
-function SoftwarePreview({ classes, software }) {
+function SoftwarePreview({ software, classes }) {
   const logo = !!software.logo ? software.logo : false
-  const categories = software.categories || []
 
   return (
     <Card className={classes.card}>
+      {/* <Hidden xsDown> */}
+      {logo && <Img className={classes.cardMedia} alt="" {...logo} />}
+      {/* </Hidden> */}
       <div className={classes.cardDetails}>
-        {logo && <Img className={classes.cardMedia} alt="" {...logo} />}
         <CardContent className={classes.cardContent}>
-          <div className={classes.grow}>
-            <Typography component="span" variant="body1">
-              {software.name}
-            </Typography>
-            <Typography
-              component="p"
-              variant="caption"
-              className={classes.description}
-            >
-              {software.description.description}
-            </Typography>
-          </div>
-          <CardActions className={classes.actions}>
-            <Button
-              size="small"
-              variant="outlined"
-              color="primary"
-              component="a"
-              href={software.affiliateUrl}
-              target="_blank"
-            >
-              Try
-            </Button>
-            {categories.map((c, i) => (
-              <CategoryChip category={c} key={c.id} index={i} />
-            ))}
-          </CardActions>
+          <Typography component="h2" variant="body1" noWrap>
+            {software.name}
+          </Typography>
+          <Typography
+            className={classes.description}
+            variant="body2"
+            color="textSecondary"
+            noWrap
+          >
+            {software.description.description}
+          </Typography>
         </CardContent>
       </div>
+      <CardActions className={classes.actions}>
+        <Button
+          size="small"
+          variant="outlined"
+          color="primary"
+          component="a"
+          href={software.affiliateUrl}
+          target="_blank"
+        >
+          Try
+        </Button>
+      </CardActions>
     </Card>
   )
 }
@@ -106,11 +83,8 @@ export const softwarePreviewComponentFragment = graphql`
       description
     }
     affiliateUrl
-    categories {
-      ...CategoryChipComponent
-    }
     logo {
-      fixed(width: 128, height: 128) {
+      fixed(width: 64, height: 64) {
         ...GatsbyContentfulFixed
       }
     }

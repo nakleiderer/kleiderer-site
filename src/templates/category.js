@@ -50,7 +50,7 @@ function CategoryTemplate(props) {
             </Typography>
             <Grid container direction="row" justify="flex-start" spacing={24}>
               {softwares.map(a => (
-                <Grid item key={a.id} xs={12} md={6}>
+                <Grid item key={a.id} xs={12} sm={6} md={4}>
                   <SoftwarePreview software={a} key={a.id} />
                 </Grid>
               ))}
