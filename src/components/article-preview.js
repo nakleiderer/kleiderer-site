@@ -13,9 +13,7 @@ import React from 'react'
 import CategoryChip from './category-chip'
 
 const styles = theme => ({
-  card: {
-    maxWidth: 500,
-  },
+  card: {},
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
