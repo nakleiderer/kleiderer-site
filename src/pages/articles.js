@@ -22,7 +22,11 @@ function ArticlesIndex(props) {
   )
 
   return (
-    <Layout location={props.location} title="Recent articles">
+    <Layout
+      location={props.location}
+      title="Recent articles"
+      heroImage={props.data.file.childImageSharp}
+    >
       <Helmet title={siteTitle} />
       <Section title="Articles I Wrote" hideIf={!myArticles}>
         <ArticlePreviewGrid articles={myArticles} />
@@ -45,6 +49,13 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    file(relativePath: { eq: "typewriter.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1180) {
+          ...GatsbyImageSharpFluid
+        }
       }
     }
     allContentfulArticle(sort: { fields: [publishDate], order: DESC }) {

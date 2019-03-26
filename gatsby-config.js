@@ -36,6 +36,12 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/images/`,
+      },
+    },
     'gatsby-plugin-netlify-cache',
     {
       resolve: 'gatsby-source-contentful',

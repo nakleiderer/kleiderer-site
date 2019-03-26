@@ -28,6 +28,7 @@ function BooksIndex(props) {
       location={props.location}
       title="Books"
       description="A collection of my current, future, and recommended reads."
+      heroImage={props.data.file.childImageSharp}
     >
       <Helmet title={siteTitle} />
       <Section
@@ -60,6 +61,13 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    file(relativePath: { eq: "bookshelf.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1180) {
+          ...GatsbyImageSharpFluid
+        }
       }
     }
     currentlyReading: allContentfulBook(
