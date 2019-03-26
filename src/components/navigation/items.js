@@ -6,6 +6,10 @@ const navigationItems = [
     title: 'Articles',
     link: '/articles',
   },
+  {
+    title: 'Books',
+    link: '/books',
+  },
   { title: 'Recommended', link: '/categories/recommended/' },
   // {
   //   title: 'Recommended Software',

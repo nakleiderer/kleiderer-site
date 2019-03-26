@@ -16,7 +16,7 @@ const styles = theme => ({
   card: {},
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: `${(9 / 16) * 100}%`,
   },
   actions: {
     display: 'flex',

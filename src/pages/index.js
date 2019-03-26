@@ -5,9 +5,10 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import ArticlePreview from '../components/article-preview'
+import ArticlePreviewGrid from '../components/article-preview-grid'
 import Layout from '../components/layout'
 import withRoot from '../withRoot'
+import Section from '../components/section'
 
 const styles = theme => ({})
 
@@ -24,7 +25,6 @@ function RootIndex(props) {
   const articles = [...contentfulArticles, ...pocketArticles]
     .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
     .reverse()
-  const books = get(props, 'data.allContentfulBook.edges').map(b => b.node)
 
   return (
     <Layout
@@ -35,16 +35,9 @@ function RootIndex(props) {
       heroImage={author.heroImage}
     >
       <Helmet title={siteTitle} />
-      <Typography variant="h5" gutterBottom>
-        Recent articles
-      </Typography>
-      <Grid container direction="row" justify="flex-start" spacing={24}>
-        {articles.map(a => (
-          <Grid item key={a.id} xs={12} md={6}>
-            <ArticlePreview article={a} key={a.id} />
-          </Grid>
-        ))}
-      </Grid>
+      <Section title="Recent Articles" hideIf={!articles.length}>
+        <ArticlePreviewGrid articles={articles} />
+      </Section>
     </Layout>
   )
 }
@@ -62,26 +55,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    allContentfulBook {
-      edges {
-        node {
-          ...ContentfulBookPreviewComponent
-        }
-      }
-    }
     allContentfulArticle {
-      edges {
-        node {
-          ...ContentfulArticlePreviewComponent
-        }
-      }
+      ...ContentfulArticlePreviewGridComponent
     }
     allPocketArticle {
-      edges {
-        node {
-          ...PocketArticlePreviewComponent
-        }
-      }
+      ...PocketArticlePreviewGridComponent
     }
     allContentfulPerson(
       filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }

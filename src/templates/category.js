@@ -4,18 +4,14 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import ArticlePreview from '../components/article-preview'
+import ArticlePreviewGrid from '../components/article-preview-grid'
+import BookPreviewGrid from '../components/book-preview-grid'
 import Layout from '../components/layout'
+import Section from '../components/section'
+import SoftwarePreviewGrid from '../components/software-preview-grid'
 import withRoot from '../withRoot'
-import BookPreview from '../components/book-preview'
-import { Grid, Typography } from '@material-ui/core'
-import SoftwarePreview from '../components/software-preview'
 
-const styles = theme => ({
-  section: {
-    marginTop: theme.spacing.unit * 6,
-  },
-})
+const styles = theme => ({})
 
 function CategoryTemplate(props) {
   const { classes } = props
@@ -43,48 +39,15 @@ function CategoryTemplate(props) {
     >
       <div>
         <Helmet title={`${category.name} | ${siteTitle}`} />
-        {!!softwares.length && (
-          <div className={classes.section}>
-            <Typography variant="h5" gutterBottom>
-              {category.name} software
-            </Typography>
-            <Grid container direction="row" justify="flex-start" spacing={24}>
-              {softwares.map(a => (
-                <Grid item key={a.id} xs={12} sm={6} md={4}>
-                  <SoftwarePreview software={a} key={a.id} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        )}
-        {!!books.length && (
-          <div className={classes.section}>
-            <Typography variant="h5" gutterBottom>
-              {category.name} books
-            </Typography>
-            <Grid container direction="row" justify="flex-start" spacing={24}>
-              {books.map(a => (
-                <Grid item key={a.id} xs={12} md={6}>
-                  <BookPreview book={a} key={a.id} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        )}
-        {!!articles.length && (
-          <div className={classes.section}>
-            <Typography variant="h5" gutterBottom>
-              {category.name} articles
-            </Typography>
-            <Grid container direction="row" justify="flex-start" spacing={24}>
-              {articles.map(a => (
-                <Grid item key={a.id} xs={12} md={6}>
-                  <ArticlePreview article={a} key={a.id} />
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-        )}
+        <Section title={`${category.name} software`} hideIf={!softwares.length}>
+          <SoftwarePreviewGrid softwares={softwares} />
+        </Section>
+        <Section title={`${category.name} books`} hideIf={!books.length}>
+          <BookPreviewGrid books={books} />
+        </Section>
+        <Section title={`${category.name} articles`} hideIf={!articles.length}>
+          <ArticlePreviewGrid articles={articles} />
+        </Section>
       </div>
     </Layout>
   )
@@ -112,38 +75,22 @@ export const articleTemplateQuery = graphql`
     allContentfulArticle(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
     ) {
-      edges {
-        node {
-          ...ContentfulArticlePreviewComponent
-        }
-      }
+      ...ContentfulArticlePreviewGridComponent
     }
     allPocketArticle(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
     ) {
-      edges {
-        node {
-          ...PocketArticlePreviewComponent
-        }
-      }
+      ...PocketArticlePreviewGridComponent
     }
     allContentfulBook(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
     ) {
-      edges {
-        node {
-          ...ContentfulBookPreviewComponent
-        }
-      }
+      ...ContentfulBookPreviewGridComponent
     }
     allContentfulSoftware(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
     ) {
-      edges {
-        node {
-          ...ContentfulSoftwarePreviewComponent
-        }
-      }
+      ...ContentfulSoftwareGridPreviewComponent
     }
   }
 `

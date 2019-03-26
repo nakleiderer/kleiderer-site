@@ -1,16 +1,14 @@
-import Hidden from '@material-ui/core/Hidden'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CardHeader from '@material-ui/core/CardHeader'
+import Hidden from '@material-ui/core/Hidden'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import React from 'react'
-import CategoryChip from './category-chip'
 
 const styles = theme => ({
   card: {
@@ -32,6 +30,11 @@ function BookPreview({ book, classes }) {
       ? book.cover.childImageSharp
       : false
   const authors = `by ${(book.authors || []).join(', ')}`
+  const categories = book.categories || []
+  const isRecommended = !!categories.filter(c => c.slug === 'recommended')
+    .length
+  const hasLink = !!book.amazonAffiliateUrl
+  const canBuy = isRecommended && hasLink
 
   return (
     <Card className={classes.card}>
@@ -56,18 +59,20 @@ function BookPreview({ book, classes }) {
           </Typography>
         </CardContent>
       </div>
-      <CardActions className={classes.actions}>
-        <Button
-          size="small"
-          variant="outlined"
-          color="primary"
-          component="a"
-          href={book.amazonAffiliateUrl}
-          target="_blank"
-        >
-          Buy
-        </Button>
-      </CardActions>
+      {canBuy && (
+        <CardActions className={classes.actions}>
+          <Button
+            size="small"
+            variant="outlined"
+            color="primary"
+            component="a"
+            href={book.amazonAffiliateUrl}
+            target="_blank"
+          >
+            Buy
+          </Button>
+        </CardActions>
+      )}
     </Card>
   )
 }
