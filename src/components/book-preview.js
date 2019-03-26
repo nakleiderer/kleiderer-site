@@ -34,7 +34,7 @@ function BookPreview({ book, classes }) {
   const isRecommended = !!categories.filter(c => c.slug === 'recommended')
     .length
   const hasLink = !!book.amazonAffiliateUrl
-  const canBuy = isRecommended && hasLink
+  const canBuy = hasLink
 
   return (
     <Card className={classes.card}>
