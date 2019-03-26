@@ -95,7 +95,7 @@ export const bookPreviewComponentFragment = graphql`
     }
     cover {
       childImageSharp {
-        fluid(maxWidth: 128) {
+        fluid(maxHeight: 193) {
           ...GatsbyImageSharpFluid
         }
       }
