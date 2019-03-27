@@ -18,9 +18,17 @@ const styles = theme => ({
   cardDetails: {
     minWidth: 0,
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   cardMedia: {
     width: 128,
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  actions: {
+    display: 'flex',
   },
 })
 
@@ -43,10 +51,10 @@ function BookPreview({ book, classes }) {
       </Hidden>
       <div className={classes.cardDetails}>
         <CardContent className={classes.cardContent}>
-          <Typography component="h2" variant="h5">
+          <Typography component="h2" variant="h5" noWrap>
             {book.title}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" color="textSecondary" nowWrap>
             {authors}
           </Typography>
           <Typography
@@ -58,21 +66,21 @@ function BookPreview({ book, classes }) {
             {book.description}
           </Typography>
         </CardContent>
+        {canBuy && (
+          <CardActions className={classes.actions}>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              component="a"
+              href={book.amazonAffiliateUrl}
+              target="_blank"
+            >
+              Buy
+            </Button>
+          </CardActions>
+        )}
       </div>
-      {canBuy && (
-        <CardActions className={classes.actions}>
-          <Button
-            size="small"
-            variant="outlined"
-            color="primary"
-            component="a"
-            href={book.amazonAffiliateUrl}
-            target="_blank"
-          >
-            Buy
-          </Button>
-        </CardActions>
-      )}
     </Card>
   )
 }
