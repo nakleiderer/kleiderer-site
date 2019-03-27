@@ -53,7 +53,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "typewriter.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1180) {
+        fluid(maxHeight: 593) {
           ...GatsbyImageSharpFluid
         }
       }

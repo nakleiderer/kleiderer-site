@@ -50,13 +50,13 @@ function Template({
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
       />
       <Navigation />
+      <Hero
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        heroImage={heroImage}
+      />
       <div className={classes.layout}>
-        <Hero
-          title={title}
-          subtitle={subtitle}
-          description={description}
-          heroImage={heroImage}
-        />
         <main className={classes.main}>{children}</main>
       </div>
       <Footer />

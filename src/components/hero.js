@@ -16,7 +16,12 @@ const styles = theme => ({
   heroButtons: {
     marginTop: theme.spacing.unit * 4,
   },
+  image: {
+    height: 593,
+  },
 })
+
+const imgStyle = { objectFit: 'cover', height: 593 }
 
 function Hero({ classes, title, subtitle, description, heroImage }) {
   const shouldRender = title || subtitle || description || heroImage
@@ -24,7 +29,14 @@ function Hero({ classes, title, subtitle, description, heroImage }) {
     <div>
       {shouldRender && (
         <div>
-          {heroImage && <Img alt={title} fluid={heroImage.fluid} />}
+          {heroImage && (
+            <Img
+              className={classes.image}
+              alt={title}
+              imgStyle={imgStyle}
+              {...heroImage}
+            />
+          )}
           <div className={classes.heroUnit}>
             <div className={classes.heroContent}>
               <Typography
