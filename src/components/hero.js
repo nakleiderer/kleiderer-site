@@ -34,6 +34,9 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
   },
+  image: {
+    height: 593,
+  },
   heroContent: {
     padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit}px ${theme
       .spacing.unit * 6}px ${theme.spacing.unit}px`,
@@ -65,7 +68,14 @@ function Hero({ classes, title, subtitle, description, heroImage }) {
     <div>
       {shouldRender && (
         <div className={classes.container}>
-          {heroImage && <Img alt={title} imgStyle={imgStyle} {...heroImage} />}
+          {heroImage && (
+            <Img
+              alt={title}
+              className={classes.image}
+              imgStyle={imgStyle}
+              {...heroImage}
+            />
+          )}
           <div className={heroUnitClassName}>
             <div className={classes.heroContent}>
               <Typography
