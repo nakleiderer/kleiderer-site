@@ -1,39 +1,49 @@
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../components/article-preview-grid'
-import BookPreviewGrid from '../components/book-preview-grid'
-import Layout from '../components/layout'
-import Section from '../components/section'
-import SoftwarePreviewGrid from '../components/software-preview-grid'
+import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
+import BookPreviewGrid from '../components/BookPreviewGrid'
+import Layout from '../components/Layout'
+import Section from '../components/Section'
+import SoftwarePreviewGrid from '../components/SoftwarePreviewGrid'
 import withRoot from '../withRoot'
 
-const styles = theme => ({})
+const styles = (theme: Theme) => createStyles({})
 
-function CategoryTemplate(props) {
+interface Props extends WithStyles<typeof styles> {
+  location: string
+}
+
+const CategoryTemplate = (props: Props) => {
   const { classes } = props
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const category = get(props, 'data.contentfulCategory')
   const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
   const articles = [...contentfulArticles, ...pocketArticles]
     .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
     .reverse()
-  const books = get(props, 'data.allContentfulBook.edges').map(b => b.node)
+  const books = get(props, 'data.allContentfulBook.edges').map(
+    (b: any) => b.node
+  )
   const softwares = get(props, 'data.allContentfulSoftware.edges').map(
-    s => s.node
+    (s: any) => s.node
   )
 
   return (
     <Layout
-      location={props.location}
       title={`${category.name} content`}
       description={category.description.description}
     >

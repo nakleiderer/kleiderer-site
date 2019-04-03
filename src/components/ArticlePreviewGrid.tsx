@@ -1,13 +1,23 @@
 import { Grid } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
-import ArticlePreview from '../components/article-preview'
+import ArticlePreview from './ArticlePreview'
 
-const styles = theme => ({})
+const styles = (theme: Theme) => createStyles({})
 
-function ArticlePreviewGrid({ articles, classes }) {
+type Article = any
+
+interface Props extends WithStyles<typeof styles> {
+  articles: Array<Article>
+}
+
+const ArticlePreviewGrid = ({ articles }: Props) => {
   return (
     <Grid container direction="row" justify="flex-start" spacing={24}>
       {articles.map(a => (
@@ -17,10 +27,6 @@ function ArticlePreviewGrid({ articles, classes }) {
       ))}
     </Grid>
   )
-}
-
-ArticlePreviewGrid.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(ArticlePreviewGrid)

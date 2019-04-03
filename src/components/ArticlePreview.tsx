@@ -4,50 +4,60 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
-import PropTypes from 'prop-types'
 import React from 'react'
-import CategoryChip from './category-chip'
+import CategoryChip from './CategoryChip'
 
-const styles = theme => ({
-  card: {},
-  media: {
-    height: 0,
-    paddingTop: `${(9 / 16) * 100}%`,
-  },
-  actions: {
-    display: 'flex',
-  },
-  avatar: {},
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    card: {},
+    media: {
+      height: 0,
+      paddingTop: `${(9 / 16) * 100}%`,
+    },
+    actions: {
+      display: 'flex',
+    },
+    avatar: {},
+  })
 
-function ArticlePreview({ article, classes }) {
-  const isContenfulArticle = article.internal.type === 'ContentfulArticle'
-  const elevation = isContenfulArticle ? 1 : 1
-  const avatar = isContenfulArticle
+type Article = any
+
+interface Props extends WithStyles<typeof styles> {
+  article: Article
+}
+
+const ArticlePreview = ({ article, classes }: Props) => {
+  const isContentfulArticle = article.internal.type === 'ContentfulArticle'
+  const elevation = isContentfulArticle ? 1 : 1
+  const avatar = isContentfulArticle
     ? article.author.image
     : article.domainFaviconImage && article.domainFaviconImage.childImageSharp
     ? article.domainFaviconImage.childImageSharp
     : false
   const title = article.title
-  const subheader = isContenfulArticle
+  const subheader = isContentfulArticle
     ? `by ${article.author.name}, published ${article.humanReadablePublishDate}`
     : `from ${article.articleDomain}, read ${article.humanReadablePublishDate}`
-  const description = isContenfulArticle
+  const description = isContentfulArticle
     ? article.description.description
     : article.excerpt
-  const image = isContenfulArticle
+  const image = isContentfulArticle
     ? article.heroImage
     : article.heroImage && article.heroImage.childImageSharp
     ? article.heroImage.childImageSharp
     : false
-  const readButtonComponent = isContenfulArticle ? Link : 'a'
-  const readButtonComponentParams = isContenfulArticle
-    ? { to: `/articles/${article.slug}` }
-    : { href: article.url, target: '_blank' }
+  const readButtonComponent = isContentfulArticle
+    ? (props: any) => <Link to={`/articles/${article.slug}`} {...props} />
+    : (props: any) => <a href={article.url} target="_blank" {...props} />
 
   return (
     <Card className={classes.card} elevation={elevation}>
@@ -70,20 +80,15 @@ function ArticlePreview({ article, classes }) {
           variant="outlined"
           color="primary"
           component={readButtonComponent}
-          {...readButtonComponentParams}
         >
           Read
         </Button>
-        {article.categories.map((c, i) => (
+        {article.categories.map((c: { id: string }, i: number) => (
           <CategoryChip category={c} key={c.id} index={i} />
         ))}
       </CardActions>
     </Card>
   )
-}
-
-ArticlePreview.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(ArticlePreview)

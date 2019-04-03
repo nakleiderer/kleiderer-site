@@ -4,9 +4,11 @@ import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import getPageContext from './getPageContext'
 
-function withRoot(Component) {
-  class WithRoot extends React.Component {
-    constructor(props) {
+function withRoot(Component: any) {
+  const x = class extends React.Component {
+    muiPageContext: any
+
+    constructor(props: any) {
       super(props)
       this.muiPageContext = getPageContext()
     }
@@ -37,7 +39,7 @@ function withRoot(Component) {
     }
   }
 
-  return WithRoot
+  return x
 }
 
 export default withRoot

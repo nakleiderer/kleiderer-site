@@ -1,32 +1,36 @@
-import { Grid } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../components/article-preview-grid'
-import Layout from '../components/layout'
+import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
+import Layout from '../components/Layout'
+import Section from '../components/Section'
 import withRoot from '../withRoot'
-import Section from '../components/section'
 
-const styles = theme => ({})
+const styles = (theme: Theme) => createStyles({})
 
-function ArticlesIndex(props) {
+interface Props extends WithStyles<typeof styles> {
+  location: string
+  data: any
+}
+
+const ArticlesIndex = (props: Props) => {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const myArticles = get(props, 'data.allContentfulArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
   const recommendedArticles = get(props, 'data.allPocketArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
 
   return (
-    <Layout
-      location={props.location}
-      title="Recent articles"
-      heroImage={props.data.file.childImageSharp}
-    >
+    <Layout title="Recent articles" heroImage={props.data.file.childImageSharp}>
       <Helmet title={siteTitle} />
       <Section title="Articles I Wrote" hideIf={!myArticles}>
         <ArticlePreviewGrid articles={myArticles} />
@@ -36,10 +40,6 @@ function ArticlesIndex(props) {
       </Section>
     </Layout>
   )
-}
-
-ArticlesIndex.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withRoot(withStyles(styles)(ArticlesIndex))

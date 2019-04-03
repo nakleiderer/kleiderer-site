@@ -1,17 +1,24 @@
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-const styles = theme => ({
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing.unit * 8,
-    padding: `${theme.spacing.unit * 6}px 0`,
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    footer: {
+      backgroundColor: theme.palette.background.paper,
+      marginTop: theme.spacing.unit * 8,
+      padding: `${theme.spacing.unit * 6}px 0`,
+    },
+  })
 
-function Footer({ classes }) {
+interface Props extends WithStyles<typeof styles> {}
+
+const Footer = ({ classes }: Props) => {
   return (
     <footer className={classes.footer}>
       <Typography variant="h6" align="center" gutterBottom />
@@ -26,10 +33,6 @@ function Footer({ classes }) {
       </Typography>
     </footer>
   )
-}
-
-Footer.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Footer)

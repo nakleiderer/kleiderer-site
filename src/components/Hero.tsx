@@ -1,65 +1,73 @@
 import {
-  Button,
-  Grid,
+  createMuiTheme,
+  createStyles,
+  Theme,
   Typography,
   withStyles,
-  createMuiTheme,
 } from '@material-ui/core'
+import { WithStyles } from '@material-ui/core/styles'
 import Img from 'gatsby-image'
-import PropTypes from 'prop-types'
 import React from 'react'
 
 const darkTheme = createMuiTheme({ palette: { type: 'dark' } })
 
-const styles = theme => ({
-  heroUnitImage: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'rgba(0, 0, 0, 0.60)',
-    width: '100%',
-    height: '100%',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    position: 'absolute',
-  },
-  heroUnitNoImage: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'rgba(0, 0, 0, 0.60)',
-    width: '100%',
-    height: '100%',
-  },
-  image: {
-    height: 593,
-  },
-  heroContent: {
-    padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit}px ${theme
-      .spacing.unit * 6}px ${theme.spacing.unit}px`,
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
-  },
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: 593,
-  },
-  primaryText: {
-    color: darkTheme.palette.text.primary,
-  },
-  secondaryText: {
-    color: darkTheme.palette.text.secondary,
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    heroUnitImage: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(0, 0, 0, 0.60)',
+      width: '100%',
+      height: '100%',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      position: 'absolute',
+    },
+    heroUnitNoImage: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(0, 0, 0, 0.60)',
+      width: '100%',
+      height: '100%',
+    },
+    image: {
+      height: 593,
+    },
+    heroContent: {
+      padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit}px ${theme
+        .spacing.unit * 6}px ${theme.spacing.unit}px`,
+    },
+    heroButtons: {
+      marginTop: theme.spacing.unit * 4,
+    },
+    container: {
+      position: 'relative',
+      width: '100%',
+      height: 593,
+    },
+    primaryText: {
+      color: darkTheme.palette.text.primary,
+    },
+    secondaryText: {
+      color: darkTheme.palette.text.secondary,
+    },
+  })
 
 const imgStyle = { objectFit: 'cover', height: 593 }
 
-function Hero({ classes, title, subtitle, description, heroImage }) {
+interface Props extends WithStyles<typeof styles> {
+  title?: string
+  subtitle?: string
+  description?: string
+  heroImage?: any
+}
+
+const Hero = ({ classes, title, subtitle, description, heroImage }: Props) => {
   const shouldRender = title || subtitle || description || heroImage
   const heroUnitClassName = heroImage
     ? classes.heroUnitImage
@@ -128,10 +136,6 @@ function Hero({ classes, title, subtitle, description, heroImage }) {
       )}
     </div>
   )
-}
-
-Hero.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Hero)

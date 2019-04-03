@@ -1,51 +1,60 @@
 import {
   AppBar,
   Avatar,
+  createStyles,
   Hidden,
   IconButton,
+  Theme,
   Toolbar,
   Typography,
   withStyles,
+  WithStyles,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { graphql, Link, StaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
 import navigationItems from './items'
 import NavigationDrawer from './NavigationDrawer'
 import NavigationItem from './NavigationItem'
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  toolbarMain: {
-    borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  avatar: {
-    marginRight: 10,
-    width: 36,
-    height: 36,
-  },
-  link: {
-    color: 'inherit',
-    textDecoration: 'none',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    toolbarMain: {
+      borderBottom: `1px solid ${theme.palette.grey[300]}`,
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginLeft: -12,
+      marginRight: 20,
+    },
+    avatar: {
+      marginRight: 10,
+      width: 36,
+      height: 36,
+    },
+    link: {
+      color: 'inherit',
+      textDecoration: 'none',
+    },
+  })
 
-class Navigation extends React.Component {
+interface Props extends WithStyles<typeof styles> {}
+
+interface State {
+  isOpen: boolean
+}
+
+class Navigation extends React.Component<Props, State> {
   state = {
     isOpen: false,
   }
 
-  toggleDrawer = open => () => {
+  toggleDrawer = (open: boolean) => () => {
     this.setState({
       isOpen: open,
     })
@@ -107,10 +116,6 @@ class Navigation extends React.Component {
       </nav>
     )
   }
-}
-
-Navigation.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(Navigation)
