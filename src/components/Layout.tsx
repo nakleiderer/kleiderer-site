@@ -6,7 +6,7 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import React, { ReactNode } from 'react'
-import Footer from './footer'
+import Footer from './Footer'
 import Hero from './hero'
 import Navigation from './navigation/Navigation'
 
