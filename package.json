@@ -43,10 +43,6 @@
     "eslint": "^5.15.3",
     "eslint-plugin-react": "^7.11.1",
     "gatsby": "^2.2.5",
-    "gh-pages": "^2.0.1",
-    "graphql-code-generator": "^0.18.0",
-    "graphql-codegen-typescript-client": "0.18.0",
-    "graphql-codegen-typescript-common": "0.18.0",
     "prettier": "^1.14.3",
     "typescript": "^3.4.1",
     "yargs-parser": "^11.0.0"
@@ -71,8 +67,6 @@
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "type-check": "tsc --noEmit",
     "build": "gatsby build",
-    "clean": "gatsby clean",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix *.js",
-    "generate": "gql-gen --config codegen.yml"
+    "clean": "gatsby clean"
   }
 }
