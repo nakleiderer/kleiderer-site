@@ -1,31 +1,40 @@
-import { Grid } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import BookPreviewGrid from '../components/book-preview-grid'
-import Layout from '../components/layout'
+import BookPreviewGrid from '../components/BookPreviewGrid'
+import Layout from '../components/Layout'
+import Section from '../components/Section'
 import withRoot from '../withRoot'
-import Section from '../components/section'
 
-const styles = theme => ({})
+const styles = (theme: Theme) => createStyles({})
 
-function BooksIndex(props) {
+interface Props extends WithStyles<typeof styles> {
+  location: string
+  data: any
+}
+
+const BooksIndex = (props: Props) => {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const currentBooks = get(props, 'data.currentlyReading.edges').map(
-    b => b.node
+    (b: any) => b.node
   )
   const recommendedBooks = get(props, 'data.recommendedBooks.edges').map(
-    b => b.node
+    (b: any) => b.node
   )
-  const readBooks = get(props, 'data.readBooks.edges').map(b => b.node)
-  const unreadBooks = get(props, 'data.unreadBooks.edges').map(b => b.node)
+  const readBooks = get(props, 'data.readBooks.edges').map((b: any) => b.node)
+  const unreadBooks = get(props, 'data.unreadBooks.edges').map(
+    (b: any) => b.node
+  )
 
   return (
     <Layout
-      location={props.location}
       title="Books"
       description="A collection of my current, future, and recommended reads."
       heroImage={props.data.file.childImageSharp}
@@ -48,10 +57,6 @@ function BooksIndex(props) {
       </Section>
     </Layout>
   )
-}
-
-BooksIndex.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withRoot(withStyles(styles)(BooksIndex))

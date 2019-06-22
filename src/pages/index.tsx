@@ -1,26 +1,33 @@
-import { Grid, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../components/article-preview-grid'
-import Layout from '../components/layout'
+import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
+import Layout from '../components/Layout'
+import Section from '../components/Section'
 import withRoot from '../withRoot'
-import Section from '../components/section'
 
-const styles = theme => ({})
+const styles = (theme: Theme) => createStyles({})
 
-function RootIndex(props) {
+interface Props extends WithStyles<typeof styles> {
+  location: string
+}
+
+const RootIndex = (props: Props) => {
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const [authorEdge] = get(props, 'data.allContentfulPerson.edges')
   const { node: author } = authorEdge
   const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
-    a => a.node
+    (a: any) => a.node
   )
   const articles = [...contentfulArticles, ...pocketArticles]
     .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
@@ -28,7 +35,6 @@ function RootIndex(props) {
 
   return (
     <Layout
-      location={props.location}
       title={author.name}
       subtitle={author.title}
       description={author.shortBio.shortBio}
@@ -40,10 +46,6 @@ function RootIndex(props) {
       </Section>
     </Layout>
   )
-}
-
-RootIndex.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withRoot(withStyles(styles)(RootIndex))

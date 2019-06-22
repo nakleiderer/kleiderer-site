@@ -1,22 +1,29 @@
-import { withStyles } from '@material-ui/core/styles'
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
-import Layout from '../components/layout'
-import RichText from '../components/rich-text'
+import Layout from '../components/Layout'
+import RichText from '../components/RichText'
 import withRoot from '../withRoot'
 
-const styles = theme => {}
+const styles = (theme: Theme) => createStyles({})
 
-function ArticleTemplate(props) {
+interface Props extends WithStyles<typeof styles> {
+  location: string
+}
+
+const ArticleTemplate = (props: Props) => {
   const article = get(props, 'data.contentfulArticle')
   const siteTitle = get(props, 'data.site.siteMetadata.title')
 
   return (
     <Layout
-      location={props.location}
       title={article.title}
       subtitle={`by ${article.author.name} on ${article.publishDate}`}
       description={article.description.description}
@@ -36,10 +43,6 @@ function ArticleTemplate(props) {
       </div>
     </Layout>
   )
-}
-
-ArticleTemplate.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withRoot(withStyles(styles)(ArticleTemplate))

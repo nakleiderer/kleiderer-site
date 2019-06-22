@@ -32,6 +32,14 @@ module.exports = {
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
+    {
+      resolve: `gatsby-plugin-typescript`,
+      // options: {
+      //   isTSX: true,
+      //   jsxPragma: `jsx`,
+      //   allExtensions: true,
+      // },
+    },
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
@@ -63,7 +71,7 @@ module.exports = {
         searchFilter: false,
         searchFilterString: 'These 21 things',
         domainFilter: false,
-        domainFilterString: 'buzzfeed.com',
+        domainFilterString: 'google.com',
       },
     },
     'gatsby-pocket-image',

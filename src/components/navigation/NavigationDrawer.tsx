@@ -1,36 +1,45 @@
 import {
   Avatar,
+  createStyles,
   List,
   SwipeableDrawer,
+  Theme,
   Toolbar,
   Typography,
   withStyles,
+  WithStyles,
 } from '@material-ui/core'
 import { graphql, Link, StaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import navigationItems from './items'
 import NavigationDrawerItem from './NavigationDrawerItem'
 
-const styles = theme => ({
-  toolbarMain: {
-    borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  },
-  list: {
-    width: 300,
-  },
-  avatar: {
-    marginRight: 10,
-    width: 36,
-    height: 36,
-  },
-  link: {
-    color: 'inherit',
-    textDecoration: 'none',
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    toolbarMain: {
+      borderBottom: `1px solid ${theme.palette.grey[300]}`,
+    },
+    list: {
+      width: 300,
+    },
+    avatar: {
+      marginRight: 10,
+      width: 36,
+      height: 36,
+    },
+    link: {
+      color: 'inherit',
+      textDecoration: 'none',
+    },
+  })
 
-function NavigationDrawer({ classes, onClose, onOpen, open }) {
+interface Props extends WithStyles<typeof styles> {
+  onClose: (event: SyntheticEvent<{}, Event>) => void
+  onOpen: (event: SyntheticEvent<{}, Event>) => void
+  open: boolean
+}
+
+const NavigationDrawer = ({ classes, onClose, onOpen, open }: Props) => {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   return (
@@ -46,12 +55,7 @@ function NavigationDrawer({ classes, onClose, onOpen, open }) {
           <Link to="/" className={classes.link}>
             <Avatar className={classes.avatar}>NK</Avatar>
           </Link>
-          <Typography
-            variant="h6"
-            color="inherit"
-            className={classes.grow}
-            noWrap
-          >
+          <Typography variant="h6" color="inherit" noWrap>
             <Link to="/" className={classes.link}>
               <StaticQuery
                 query={graphql`
@@ -78,10 +82,6 @@ function NavigationDrawer({ classes, onClose, onOpen, open }) {
       </div>
     </SwipeableDrawer>
   )
-}
-
-NavigationDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(NavigationDrawer)
