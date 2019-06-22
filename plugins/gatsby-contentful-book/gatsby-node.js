@@ -26,11 +26,14 @@ const addRemoteImageToNode = async ({
 
 function getBookInfo(apiKey, isbn) {
   const GisbnInstance = new Gisbn(isbn, apiKey, 'us')
+  
   return new Promise((resolve, reject) => {
     GisbnInstance.fetch(function(err, book) {
       if (err) {
+        console.error(`Error retrieving book info for isbn ${GisbnInstance.isbn}: ${err}`)
         reject(err)
       } else {
+        console.info(`Successfully retrieved book info for isbn ${GisbnInstance.isbn}: ${err}`)
         resolve(book)
       }
     })
