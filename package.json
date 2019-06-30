@@ -23,7 +23,7 @@
     "gatsby-source-filesystem": "^2.0.28",
     "gatsby-source-pocket": "^2.1.0",
     "gatsby-transformer-remark": "^2.3.8",
-    "gatsby-transformer-sharp": "^2.1.17",
+    "gatsby-transformer-sharp": "^2.2.0",
     "gisbn": "^1.0.6",
     "jss": "^9.8.7",
     "lodash": "^4.17.11",
