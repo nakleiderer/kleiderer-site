@@ -48,7 +48,7 @@ const Template = ({
   heroImage,
 }: Props) => {
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <link
         rel="stylesheet"
@@ -65,7 +65,7 @@ const Template = ({
         <main className={classes.main}>{children}</main>
       </div>
       <Footer />
-    </React.Fragment>
+    </>
   )
 }
 
