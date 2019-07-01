@@ -1,6 +1,14 @@
 const Promise = require('bluebird')
 const path = require('path')
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
+  })
+}
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -27,6 +35,16 @@ exports.createPages = ({ graphql, actions }) => {
                 }
               }
             }
+            allMdx {
+              edges {
+                node {
+                  id
+                  frontmatter {
+                    slug
+                  }
+                }
+              }
+            }
           }
         `
       ).then(result => {
@@ -35,16 +53,14 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const articles = result.data.allContentfulArticle.edges
-        articles.forEach((article, index) => {
+        const articles = result.data.allMdx.edges;
+        articles.forEach(({ node: article }) => {
           createPage({
-            path: `/articles/${article.node.slug}/`,
+            path: `/articles/${article.frontmatter.slug}`,
             component: articleTemplate,
-            context: {
-              slug: article.node.slug,
-            },
-          })
-        })
+            context: { id: article.id}
+          });
+        });
 
         const categories = result.data.allContentfulCategory.edges
         categories.forEach((category, index) => {
