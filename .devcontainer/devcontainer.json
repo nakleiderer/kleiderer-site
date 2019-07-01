@@ -3,7 +3,7 @@
 	"name": "Node.js (latest LTS) & TypeScript",
 	"dockerFile": "Dockerfile",
 	"appPort": [
-		3000
+		8000
 	],
 	// Uncomment the next line if you want to add in default container specific settings.json values
 	// "settings":  { "workbench.colorTheme": "Quiet Light" },
