@@ -4,7 +4,7 @@ title: Hello World
 subtitle: The first step of every project
 author: Nicolas Kleiderer
 published_on: 2019-07-02T22:22:49.245Z
-cover: /media/uploads/intersection.jpg
+cover: /images/uploads/intersection.jpg
 categories: []
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in massa accumsan, varius diam eu, blandit mi. Donec faucibus pretium tellus id sagittis. Morbi sit amet metus ornare, sodales dolor at, molestie ex. Morbi tincidunt massa ac metus iaculis pellentesque. Curabitur quam massa, condimentum quis ornare ut, vestibulum a neque. Nunc id consectetur odio, a fermentum sapien. Aliquam quam magna, accumsan eget fringilla sed, congue sit amet libero. Maecenas in ipsum nec elit viverra eleifend. Vestibulum iaculis id orci ut blandit. Fusce eleifend porttitor metus. Nunc volutpat bibendum maximus.
@@ -48,7 +48,7 @@ console.log('code example')
 
 [Google Search](http://google.com)
 
-![Intersection](/media/uploads/intersection.jpg)
+![Intersection](/images/uploads/intersection.jpg)
 
 * Unordered
 * List
