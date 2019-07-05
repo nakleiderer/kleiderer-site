@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
@@ -25,82 +24,68 @@ interface Props extends WithStyles<typeof styles> {
 const CategoryTemplate = (props: Props) => {
   const { classes } = props
   const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const category = get(props, 'data.contentfulCategory')
-  const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
-    (a: any) => a.node
-  )
-  const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
-    (a: any) => a.node
-  )
-  const articles = [...contentfulArticles, ...pocketArticles]
-    .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
-    .reverse()
-  const books = get(props, 'data.allContentfulBook.edges').map(
+  const category = get(props, 'data.markdownRemark')
+  const allMarkdownArticleEdges = get(props, 'data.allMarkdownArticle.edges') || []
+  const allMarkdownArticle = allMarkdownArticleEdges.map(e => e.node)
+  const allPocketArticleEdges = get(props, 'data.allPocketArticle.edges') || []
+  const allPocketArticle = allPocketArticleEdges.map(e => e.node)
+  const books = get(props, 'data.allMarkdownBook.edges').map(
     (b: any) => b.node
   )
-  const softwares = get(props, 'data.allContentfulSoftware.edges').map(
+  const softwares = get(props, 'data.allMarkdownSoftware.edges').map(
     (s: any) => s.node
   )
 
   return (
     <Layout
-      title={`${category.name} content`}
-      description={category.description.description}
+      title={`${category.frontmatter.name} content`}
+      description={category.frontmatter.description}
     >
       <div>
-        <Helmet title={`${category.name} | ${siteTitle}`} />
-        <Section title={`${category.name} software`} hideIf={!softwares.length}>
+        <Helmet title={`${category.frontmatter.name} | ${siteTitle}`} />
+        <Section title={`${category.frontmatter.name} software`} hideIf={!softwares.length}>
           <SoftwarePreviewGrid softwares={softwares} />
         </Section>
-        <Section title={`${category.name} books`} hideIf={!books.length}>
+        <Section title={`${category.frontmatter.name} books`} hideIf={!books.length}>
           <BookPreviewGrid books={books} />
         </Section>
-        <Section title={`${category.name} articles`} hideIf={!articles.length}>
-          <ArticlePreviewGrid articles={articles} />
+        <Section title={`${category.frontmatter.name} articles`} hideIf={!allMarkdownArticle.length}>
+          <ArticlePreviewGrid articles={allMarkdownArticle} />
+        </Section>
+        <Section title={`Recommended ${category.frontmatter.name === "Recommended" ? "" : category.frontmatter.name.toLowerCase()} articles`} hideIf={!allPocketArticle.length}>
+          <ArticlePreviewGrid articles={allPocketArticle} />
         </Section>
       </div>
     </Layout>
   )
 }
 
-CategoryTemplate.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
-
 export default withRoot(withStyles(styles)(CategoryTemplate))
 
 export const articleTemplateQuery = graphql`
-  query ArticleByCategory($slug: String!) {
+  query ArticleByCategory($id: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulCategory(slug: { eq: $slug }) {
+    markdownRemark(frontmatter: {templateKey: {eq: "category"}}, id: {eq: $id}) {
       ...CategoryChipComponent
-      description {
+      frontmatter {
         description
       }
     }
-    allContentfulArticle(
-      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
-    ) {
-      ...ContentfulArticlePreviewGridComponent
+    allMarkdownArticle: allMarkdownRemark(filter: {fields: {categories: {elemMatch: {id: {eq: $id}}}}, frontmatter: {templateKey: {eq: "article"}}}, sort: {fields: [frontmatter___published_on], order: DESC}) {
+      ...MarkdownArticlePreviewGridComponent
     }
-    allPocketArticle(
-      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
-    ) {
+    allPocketArticle(filter: {fields: {categories: {elemMatch: {id: {eq: $id}}}}},sort: {fields: [fields___publishedAt], order: DESC}) {
       ...PocketArticlePreviewGridComponent
     }
-    allContentfulBook(
-      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
-    ) {
-      ...ContentfulBookPreviewGridComponent
+    allMarkdownSoftware: allMarkdownRemark(filter: {fields: {categories: {elemMatch: {id: {eq: $id}}}}, frontmatter: {templateKey: {eq: "software"}}}) {
+      ...SoftwarePreviewGridComponent
     }
-    allContentfulSoftware(
-      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
-    ) {
-      ...ContentfulSoftwareGridPreviewComponent
+    allMarkdownBook: allMarkdownRemark(filter: {fields: {categories: {elemMatch: {id: {eq: $id}}}}, frontmatter: {templateKey: {eq: "book"}}}) {
+      ...BookPreviewGridComponent
     }
   }
 `

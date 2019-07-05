@@ -37,7 +37,7 @@ const styles = (theme: Theme) =>
     },
   })
 
-type Book = any
+type Book = any;
 
 interface Props extends WithStyles<typeof styles> {
   book: Book
@@ -45,15 +45,12 @@ interface Props extends WithStyles<typeof styles> {
 
 const BookPreview = ({ book, classes }: Props) => {
   const cover =
-    !!book.cover && !!book.cover.childImageSharp
-      ? book.cover.childImageSharp
+    !!book.frontmatter.cover && !!book.frontmatter.cover.childImageSharp
+      ? book.frontmatter.cover.childImageSharp
       : false
-  const authors = `by ${(book.authors || []).join(', ')}`
-  const categories = book.categories || []
-  const isRecommended = !!categories.filter(
-    (c: any) => c.slug === 'recommended'
-  ).length
-  const hasLink = !!book.amazonAffiliateUrl
+  const byline = `by ${book.frontmatter.byLine}`
+  // const categories = book.fields.categories || []
+  const hasLink = !!book.frontmatter.affiliate_link
   const canBuy = hasLink
 
   return (
@@ -64,13 +61,16 @@ const BookPreview = ({ book, classes }: Props) => {
       <div className={classes.cardDetails}>
         <CardContent className={classes.cardContent}>
           <Typography component="h2" variant="h5" noWrap>
-            {book.title}
+            {book.frontmatter.title}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" noWrap>
-            {authors}
+          <Typography component="h3" variant="subtitle1" noWrap>
+            {book.frontmatter.subtitle}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary" noWrap gutterBottom>
+            {byline}
           </Typography>
           <Typography variant="body2" component="span" noWrap>
-            {book.description}
+            {book.frontmatter.description}
           </Typography>
         </CardContent>
         {canBuy && (
@@ -80,7 +80,7 @@ const BookPreview = ({ book, classes }: Props) => {
               variant="outlined"
               color="primary"
               component="a"
-              href={book.amazonAffiliateUrl}
+              href={book.frontmatter.affiliate_link}
               target="_blank"
             >
               Buy
@@ -95,21 +95,27 @@ const BookPreview = ({ book, classes }: Props) => {
 export default withStyles(styles)(BookPreview)
 
 export const bookPreviewComponentFragment = graphql`
-  fragment ContentfulBookPreviewComponent on ContentfulBook {
+  fragment BookPreviewComponent on MarkdownRemark {
     id
-    title
-    authors
-    description
-    amazonAffiliateUrl
-    categories {
-      ...CategoryChipComponent
+    fields {
+      categories {
+        ...CategoryChipComponent
+      }
     }
-    cover {
-      childImageSharp {
-        fluid(maxHeight: 193) {
-          ...GatsbyImageSharpFluid
+    frontmatter {
+      affiliate_link
+      byLine
+      cover {
+        childImageSharp {
+          fluid(maxHeight: 193) {
+            ...GatsbyImageSharpFluid
+          }
         }
       }
+      description
+      isCompleted
+      subtitle
+      title
     }
   }
 `

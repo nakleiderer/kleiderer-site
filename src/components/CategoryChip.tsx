@@ -19,7 +19,19 @@ const styles = (theme: Theme) =>
     },
   })
 
-type Category = any
+interface CategoryFields {
+  slug: string
+}
+
+interface CategoryFrontmatter {
+  name: string
+}
+
+interface Category {
+  id: string,
+  fields: CategoryFields,
+  frontmatter: CategoryFrontmatter,
+}
 
 interface Props extends WithStyles<typeof styles> {
   category: Category
@@ -29,12 +41,12 @@ interface Props extends WithStyles<typeof styles> {
 const CategoryChip = ({ classes, category, index }: Props) => {
   const className = index === 0 ? classes.firstButton : classes.button
   const buttonComponent = (props: any) => (
-    <Link to={`/categories/${category.slug}`} {...props} />
+    <Link to={`/category/${category.fields.slug}`} {...props} />
   )
 
   return (
     <Button size="small" className={className} component={buttonComponent}>
-      {category.name}
+      {category.frontmatter.name}
     </Button>
   )
 }
@@ -42,10 +54,13 @@ const CategoryChip = ({ classes, category, index }: Props) => {
 export default withStyles(styles)(CategoryChip)
 
 export const categoryChipComponentFragment = graphql`
-  fragment CategoryChipComponent on ContentfulCategory {
+  fragment CategoryChipComponent on MarkdownRemark {
     id
-    slug
-    name
-    pocketTags
+    fields {
+      slug
+    }
+    frontmatter {
+      name
+    }
   }
 `

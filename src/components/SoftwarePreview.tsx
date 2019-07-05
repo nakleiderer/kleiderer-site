@@ -39,7 +39,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const SoftwarePreview = ({ software, classes }: Props) => {
-  const logo = !!software.logo ? software.logo : false
+  const logo = software.frontmatter.logo.childImageSharp
 
   return (
     <Card className={classes.card}>
@@ -47,10 +47,10 @@ const SoftwarePreview = ({ software, classes }: Props) => {
       <div className={classes.cardDetails}>
         <CardContent className={classes.cardContent}>
           <Typography component="h2" variant="body1" noWrap>
-            {software.name}
+            {software.frontmatter.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" noWrap>
-            {software.description.description}
+            {software.frontmatter.description}
           </Typography>
         </CardContent>
       </div>
@@ -60,7 +60,7 @@ const SoftwarePreview = ({ software, classes }: Props) => {
           variant="outlined"
           color="primary"
           component="a"
-          href={software.affiliateUrl}
+          href={software.frontmatter.affiliate_link}
           target="_blank"
         >
           Try
@@ -73,17 +73,19 @@ const SoftwarePreview = ({ software, classes }: Props) => {
 export default withStyles(styles)(SoftwarePreview)
 
 export const softwarePreviewComponentFragment = graphql`
-  fragment ContentfulSoftwarePreviewComponent on ContentfulSoftware {
+  fragment SoftwarePreviewComponent on MarkdownRemark {
     id
-    name
-    description {
+    frontmatter {
+      affiliate_link
       description
-    }
-    affiliateUrl
-    logo {
-      fixed(width: 64, height: 64) {
-        ...GatsbyContentfulFixed
+      logo {
+        childImageSharp {
+          fixed(width: 64, height: 64) {
+            ...GatsbyImageSharpFixed
+          }
+        }
       }
+      name
     }
   }
 `

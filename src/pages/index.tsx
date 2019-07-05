@@ -20,29 +20,28 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const RootIndex = (props: Props) => {
-  const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const [authorEdge] = get(props, 'data.allContentfulPerson.edges')
-  const { node: author } = authorEdge
-  const contentfulArticles = get(props, 'data.allContentfulArticle.edges').map(
+  const { title, subtitle, description } = get(props, 'data.site.siteMetadata')
+  const heroImage = get(props, 'data.file.childImageSharp')
+  const markdownArticles = get(props, 'data.allMarkdownArticle.edges').map(
     (a: any) => a.node
   )
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
     (a: any) => a.node
   )
-  const articles = [...contentfulArticles, ...pocketArticles]
-    .sort((a, b) => (a.sortableDate > b.sortableDate ? 1 : -1))
-    .reverse()
 
   return (
     <Layout
-      title={author.name}
-      subtitle={author.title}
-      description={author.shortBio.shortBio}
-      heroImage={author.heroImage}
+      title={title}
+      subtitle={subtitle}
+      description={description}
+      heroImage={heroImage}
     >
-      <Helmet title={siteTitle} />
-      <Section title="Recent Articles" hideIf={!articles.length}>
-        <ArticlePreviewGrid articles={articles} />
+      <Helmet title={title} />
+      <Section title="Recent Articles" hideIf={!markdownArticles.length}>
+        <ArticlePreviewGrid articles={markdownArticles} />
+      </Section>
+      <Section title="Recent Recommended Articles" hideIf={!pocketArticles.length}>
+        <ArticlePreviewGrid articles={pocketArticles} />
       </Section>
     </Layout>
   )
@@ -55,31 +54,22 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        subtitle
+        description
       }
     }
-    allContentfulArticle {
-      ...ContentfulArticlePreviewGridComponent
-    }
-    allPocketArticle {
-      ...PocketArticlePreviewGridComponent
-    }
-    allContentfulPerson(
-      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
-    ) {
-      edges {
-        node {
-          name
-          shortBio {
-            shortBio
-          }
-          title
-          heroImage: image {
-            fluid(maxHeight: 593) {
-              ...GatsbyContentfulFluid
-            }
-          }
+    file(relativePath: { eq: "siteHero.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 593) {
+          ...GatsbyImageSharpFluid
         }
       }
+    }
+    allMarkdownArticle: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "article"}}}, sort: {fields: [frontmatter___published_on], order: DESC}) {
+      ...MarkdownArticlePreviewGridComponent
+    }
+    allPocketArticle(sort: {fields: [fields___publishedAt], order: DESC}) {
+      ...PocketArticlePreviewGridComponent
     }
   }
 `

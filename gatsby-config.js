@@ -1,25 +1,15 @@
 require('dotenv').config()
 
 const config = {
-  contentful: {
-    spaceId: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
-  },
   pocket: {
     consumerKey: process.env.POCKET_CONSUMER_KEY,
     accessToken: process.env.POCKET_ACCESS_TOKEN,
   },
-  googleBooks: {
-    key: process.env.GOOGLE_BOOKS_KEY,
-  },
 }
 
 if (
-  !config.contentful.spaceId ||
-  !config.contentful.accessToken ||
   !config.pocket.consumerKey ||
-  !config.pocket.accessToken ||
-  !config.googleBooks.key
+  !config.pocket.accessToken
 ) {
   throw new Error(
     "A required environment variable is not set. Consult 'gatsby-config.js' for required variables."
@@ -29,9 +19,39 @@ if (
 module.exports = {
   siteMetadata: {
     title: 'Nicolas Kleiderer',
+    subtitle: 'Software Engineer',
+    description: 'Thoughtfully developing the future'
   },
-  pathPrefix: '/gatsby-contentful-starter',
   plugins: [
+    'gatsby-transformer-sharp',
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-normalize-paths",
+            options: {
+              pathFields: ["logo", "cover"],
+            },
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-typescript`,
       // options: {
@@ -41,41 +61,37 @@ module.exports = {
       // },
     },
     {
-      resolve: "gatsby-mdx", options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 1035,
-              sizeByPixelDensity: true
-            }
-          }
-        ]
-      }
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "articles",
-        path: `${__dirname}/content/articles/`
-      }
-    },
-    'gatsby-transformer-remark',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sharp',
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/images/`,
       },
     },
-    'gatsby-plugin-netlify-cache',
     {
-      resolve: 'gatsby-source-contentful',
-      options: config.contentful,
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/category`,
+      },
     },
-    { resolve: 'gatsby-contentful-book', options: config.googleBooks },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/article`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/software`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/book`,
+      },
+    },
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
     {
       resolve: `gatsby-source-pocket`,
       options: {
@@ -94,14 +110,19 @@ module.exports = {
         domainFilterString: 'google.com',
       },
     },
-    'gatsby-pocket-image',
-    'gatsby-pocket-date',
-    'gatsby-pocket-categories',
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
         theme: {},
       },
     },
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.ts`,
+      },
+    },
+    'gatsby-kleiderer-article',
+    'gatsby-plugin-netlify-cache',
   ],
 }
