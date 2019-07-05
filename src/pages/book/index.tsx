@@ -8,10 +8,10 @@ import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import React from 'react'
 import Helmet from 'react-helmet'
-import BookPreviewGrid from '../components/BookPreviewGrid'
-import Layout from '../components/Layout'
-import Section from '../components/Section'
-import withRoot from '../withRoot'
+import BookPreviewGrid from '../../components/BookPreviewGrid'
+import Layout from '../../components/Layout'
+import Section from '../../components/Section'
+import withRoot from '../../withRoot'
 
 const styles = (theme: Theme) => createStyles({})
 
