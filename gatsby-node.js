@@ -1,8 +1,7 @@
 const Promise = require('bluebird')
 const path = require('path')
-const _ = require("lodash");
 
-function templateKeyToPath(templateKey) {
+function templateKeyToComponentPath(templateKey) {
   return path.resolve(`./src/templates/${templateKey}.tsx`)
 }
 
@@ -53,7 +52,7 @@ exports.createPages = ({ graphql, actions }) => {
         const categories = result.data.allMarkdownCategory.edges;
         categories.forEach(({ node }) => {
           const path = `category/${node.fields.slug}`
-          const component = templateKeyToPath("category")
+          const component = templateKeyToComponentPath("category")
           const context = { id: node.id }
           createPage({ path, component, context })
         })
@@ -61,7 +60,7 @@ exports.createPages = ({ graphql, actions }) => {
         const articles = result.data.allMarkdownArticle.edges;
         articles.forEach(({ node }) => {
           const path = `article/${node.fields.slug}`
-          const component = templateKeyToPath("article")
+          const component = templateKeyToComponentPath("article")
           const context = { id: node.id }
           createPage({ path, component, context })
         })
