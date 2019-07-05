@@ -16,6 +16,15 @@ if (
   )
 }
 
+function getPluginConfigForContent(path) {
+  return {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${__dirname}/src/pages/${path}`,
+    },
+  }
+}
+
 module.exports = {
   siteMetadata: {
     title: 'Nicolas Kleiderer',
@@ -66,30 +75,10 @@ module.exports = {
         path: `${__dirname}/images/`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages/category`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages/article`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages/software`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages/book`,
-      },
-    },
+    getPluginConfigForContent("category"),
+    getPluginConfigForContent("article"),
+    getPluginConfigForContent("book"),
+    getPluginConfigForContent("software"),
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     {
