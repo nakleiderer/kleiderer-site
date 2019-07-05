@@ -26,5 +26,3 @@ subtitle: An A-Mazing Way to Deal with Change in Your Work and in Your Life
 templateKey: book
 title: Who Moved My Cheese
 ---
-
-Filler content

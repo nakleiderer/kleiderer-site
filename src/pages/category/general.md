@@ -5,5 +5,3 @@ description: Miscellaneous content that doesn't belong in a more specific catego
 tags:
   - general
 ---
-
-Filler content
