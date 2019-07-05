@@ -5,17 +5,12 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
-import get from 'lodash/get'
 import React from 'react'
 import Helmet from 'react-helmet'
 import Layout from '../components/ArticleLayout'
 import withRoot from '../withRoot'
-import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import Section from '../components/Section'
 import { Typography } from '@material-ui/core'
 import Img from 'gatsby-image'
-import classnames from 'classnames'
-import FullWidth from '../components/layout/FullWidth'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -42,23 +37,21 @@ interface Props extends WithStyles<typeof styles> {
 const ArticleTemplate = (props: Props) => {
   const classes = props.classes
   const siteTitle = props.data.site.siteMetadata.title
-
-  const article = props.data.mdx
-  const {
-    author,
-    cover,
-    excerpt,
-    publishDate,
-    subtitle,
-    title,
-  } = article.frontmatter
-  const byline = `by ${author} on ${publishDate}`
-  const coverImg = cover.childImageSharp
+  
+  const article = props.data.markdownRemark
+  const title = article.frontmatter.title
+  const subtitle = article.frontmatter.subtitle
+  const author = article.frontmatter.author
+  const excerpt = article.excerpt
+  const publishedAt = article.frontmatter.publishedAt
+  const byline = `by ${author} on ${article.frontmatter.publishedAt}`
+  const coverImg = article.frontmatter.cover.childImageSharp
+  const html = article.html
 
   return (
     <>
       <Layout>
-        <Helmet title={`${article.frontmatter.title} | ${siteTitle}`} />
+        <Helmet title={`${title} | ${siteTitle}`} />
         <Helmet
           meta={[
             { name: 'author', content: author },
@@ -69,19 +62,19 @@ const ArticleTemplate = (props: Props) => {
         <div className={classes.headingContainer}>
           <div className={classes.heading}>
             <Typography component="h1" variant="h3" gutterBottom={!subtitle}>
-              {article.frontmatter.title}
+              {title}
             </Typography>
             {subtitle && (
               <Typography
                 component="p"
                 variant="h5"
                 color="textSecondary"
-                gutterBottom={!(author && publishDate)}
+                gutterBottom={!(author && publishedAt)}
               >
                 {subtitle}
               </Typography>
             )}
-            {author && publishDate && (
+            {author && publishedAt && (
               <Typography
                 component="p"
                 variant="subtitle1"
@@ -101,7 +94,7 @@ const ArticleTemplate = (props: Props) => {
           />
         </div>
 
-        <MDXRenderer>{article.code.body}</MDXRenderer>
+        <div dangerouslySetInnerHTML={{__html:html}}/>
       </Layout>
     </>
   )
@@ -116,25 +109,23 @@ export const articleTemplateQuery = graphql`
         title
       }
     }
-    mdx(id: { eq: $id }) {
+    markdownRemark(id: { eq: $id }) {
       id
+      excerpt
       frontmatter {
-        title
-        subtitle
         author
-        excerpt
-        publishDate: published_on(formatString: "MMMM Do, YYYY")
         cover {
           childImageSharp {
-            fluid(maxHeight: 593) {
-              ...GatsbyImageSharpFluid
-            }
+              fluid(maxHeight: 593) {
+                  ...GatsbyImageSharpFluid
+              }
           }
         }
+        publishedAt: published_on(formatString:"MMMM D, YYYY")
+        subtitle
+        title
       }
-      code {
-        body
-      }
+      html
     }
   }
 `

@@ -1,5 +1,10 @@
 const Promise = require('bluebird')
 const path = require('path')
+const _ = require("lodash");
+
+function templateKeyToPath(templateKey) {
+  return path.resolve(`./src/templates/${templateKey}.tsx`)
+}
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -13,39 +18,31 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
-    const articleTemplate = path.resolve('./src/templates/article.tsx')
-    const categoryTemplate = path.resolve('./src/templates/category.tsx')
     resolve(
       graphql(
         `
-          {
-            allContentfulCategory {
-              edges {
-                node {
-                  name
+        {
+          allMarkdownCategory: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "category"}}}) {
+            edges {
+              node {
+                id
+                fields {
                   slug
-                }
-              }
-            }
-            allContentfulArticle {
-              edges {
-                node {
-                  title
-                  slug
-                }
-              }
-            }
-            allMdx {
-              edges {
-                node {
-                  id
-                  frontmatter {
-                    slug
-                  }
                 }
               }
             }
           }
+          allMarkdownArticle: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "article"}}}) {
+            edges {
+              node {
+                id
+                fields {
+                  slug
+                }
+              }
+            }
+          }
+        }
         `
       ).then(result => {
         if (result.errors) {
@@ -53,22 +50,20 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const articles = result.data.allMdx.edges;
-        articles.forEach(({ node: article }) => {
-          createPage({
-            path: `/articles/${article.frontmatter.slug}`,
-            component: articleTemplate,
-            context: { id: article.id}
-          });
-        });
+        const categories = result.data.allMarkdownCategory.edges;
+        categories.forEach(({ node }) => {
+          const path = `category/${node.fields.slug}`
+          const component = templateKeyToPath("category")
+          const context = { id: node.id }
+          createPage({ path, component, context })
+        })
 
-        const categories = result.data.allContentfulCategory.edges
-        categories.forEach((category, index) => {
-          createPage({
-            path: `/categories/${category.node.slug}/`,
-            component: categoryTemplate,
-            context: { slug: category.node.slug, name: category.node.name },
-          })
+        const articles = result.data.allMarkdownArticle.edges;
+        articles.forEach(({ node }) => {
+          const path = `article/${node.fields.slug}`
+          const component = templateKeyToPath("article")
+          const context = { id: node.id }
+          createPage({ path, component, context })
         })
       })
     )

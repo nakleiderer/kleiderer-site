@@ -13,15 +13,15 @@ export type NavigationItem = GatsbyLinkNavigationItem | HTMLLinkNavigationItem
 const navigationItems: Array<NavigationItem> = [
   {
     title: 'Articles',
-    link: '/articles',
+    link: '/article',
   },
   {
     title: 'Books',
-    link: '/books',
+    link: '/book',
   },
   {
     title: 'Recommended',
-    link: '/categories/recommended/',
+    link: '/category/recommended',
   },
 ]
 

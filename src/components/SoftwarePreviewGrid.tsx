@@ -32,10 +32,10 @@ const SoftwarePreviewGrid = ({ softwares }: Props) => {
 export default withStyles(styles)(SoftwarePreviewGrid)
 
 export const softwarePreviewGridComponentFragment = graphql`
-  fragment ContentfulSoftwareGridPreviewComponent on ContentfulSoftwareConnection {
+  fragment SoftwarePreviewGridComponent on MarkdownRemarkConnection {
     edges {
       node {
-        ...ContentfulSoftwarePreviewComponent
+        ...SoftwarePreviewComponent
       }
     }
   }

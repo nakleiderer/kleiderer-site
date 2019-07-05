@@ -32,10 +32,10 @@ const BookPreviewGrid = ({ books }: Props) => {
 export default withStyles(styles)(BookPreviewGrid)
 
 export const bookPreviewGridComponentFragment = graphql`
-  fragment ContentfulBookPreviewGridComponent on ContentfulBookConnection {
+  fragment BookPreviewGridComponent on MarkdownRemarkConnection {
     edges {
       node {
-        ...ContentfulBookPreviewComponent
+        ...BookPreviewComponent
       }
     }
   }
