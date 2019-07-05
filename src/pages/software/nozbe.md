@@ -8,5 +8,3 @@ logo: /images/uploads/1024_appstore.png
 affiliate_link: 'https://nozbe.com/?a=nakleiderer'
 categories: ["Recommended"]
 ---
-
-Filler content
