@@ -46,16 +46,30 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1200,
+              maxWidth: 1100,
             },
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
+              wrapperStyle: `margin-bottom: 1.0725rem;`,
             },
           },
-          'gatsby-remark-prismjs',
+          {
+            resolve: `gatsby-remark-autolink-headers`
+          },
+          {
+            resolve: `gatsby-remark-vscode`,
+            options: {
+              extensions: [{
+                identifier: 'Equinusocio.vsc-material-theme',
+                version: '29.2.0'
+              }],
+              defaultTheme: 'Material Theme Lighter High Contrast',
+              prefersDarkTheme: 'Material Theme Ocean High Contrast',
+              prefersLightTheme: 'Material Theme Lighter High Contrast'
+            }
+          },
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
         ],
@@ -63,11 +77,6 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-typescript`,
-      // options: {
-      //   isTSX: true,
-      //   jsxPragma: `jsx`,
-      //   allExtensions: true,
-      // },
     },
     {
       resolve: `gatsby-source-filesystem`,
