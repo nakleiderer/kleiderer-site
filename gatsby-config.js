@@ -32,6 +32,7 @@ module.exports = {
     description: 'Thoughtfully developing the future'
   },
   plugins: [
+    'gatsby-plugin-top-layout',
     'gatsby-transformer-sharp',
     {
       resolve: `gatsby-transformer-remark`,

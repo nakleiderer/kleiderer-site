@@ -5,19 +5,16 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
 import CategoryChip from './CategoryChip'
-import { arch } from 'os'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {},
     media: {
@@ -28,7 +25,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
     },
     avatar: {},
-  })
+  }))
 
 interface CategoryFields {
   slug: string
@@ -54,11 +51,12 @@ interface Article {
   categories: Category[]
 }
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   article: Article
 }
 
-const ArticlePreview = ({ article, classes }: Props) => {
+const ArticlePreview = ({ article }: Props) => {
+  const classes = useStyles()
   const Header =
     article.avatar && article.avatar.childImageSharp ? (
       <CardHeader
@@ -100,4 +98,4 @@ const ArticlePreview = ({ article, classes }: Props) => {
   )
 }
 
-export default withStyles(styles)(ArticlePreview)
+export default ArticlePreview

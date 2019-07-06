@@ -1,26 +1,25 @@
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import React, { ReactNode } from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     section: {
-      marginTop: theme.spacing.unit * 6,
+      marginTop: theme.spacing(6),
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   title?: string
   children?: ReactNode
   hideIf?: boolean
 }
 
-const Section = ({ title, children, classes, hideIf }: Props) => {
+const Section = ({ title, children, hideIf }: Props) => {
+  const classes = useStyles();
   return (
     <div>
       {!hideIf && (
@@ -35,4 +34,4 @@ const Section = ({ title, children, classes, hideIf }: Props) => {
   )
 }
 
-export default withStyles(styles)(Section)
+export default Section

@@ -1,13 +1,10 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import React, { ReactNode } from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fullWidth: {
       left: '50%',
@@ -18,14 +15,15 @@ const styles = (theme: Theme) =>
       right: '50%',
       width: '100vw',
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   children: ReactNode
 }
 
-const FullWidth = ({ children, classes }: Props) => {
+const FullWidth = ({ children }: Props) => {
+  const classes = useStyles()
   return <div className={classes.fullWidth}>{children}</div>
 }
 
-export default withStyles(styles)(FullWidth)
+export default FullWidth

@@ -18,9 +18,9 @@ const MarkdownArticlePreview = ({ article }: Props) => {
     excerpt: article.excerpt,
     featuredImage: article.frontmatter.cover,
     title: article.frontmatter.title,
-    readButtonComponent: (props: any) => (
-      <Link to={`/article/${article.fields.slug}`} {...props} />
-    ),
+    readButtonComponent: React.forwardRef((props, ref) => (
+      <Link innerRef={ref as any} to={`/article/${article.fields.slug}`} {...props} />
+    ))
   }
   return <ArticlePreview article={newArticle} />
 }

@@ -1,17 +1,12 @@
 import {
-  createMuiTheme,
-  createStyles,
   Theme,
   Typography,
-  withStyles,
 } from '@material-ui/core'
-import { WithStyles } from '@material-ui/core/styles'
 import Img from 'gatsby-image'
 import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const darkTheme = createMuiTheme({ palette: { type: 'dark' } })
-
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     heroUnitImage: {
       display: 'flex',
@@ -39,11 +34,10 @@ const styles = (theme: Theme) =>
       height: 593,
     },
     heroContent: {
-      padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit}px ${theme
-        .spacing.unit * 6}px ${theme.spacing.unit}px`,
+        padding: theme.spacing(6, 1, 6, 1)
     },
     heroButtons: {
-      marginTop: theme.spacing.unit * 4,
+      marginTop: theme.spacing(4),
     },
     container: {
       position: 'relative',
@@ -51,23 +45,24 @@ const styles = (theme: Theme) =>
       height: 593,
     },
     primaryText: {
-      color: darkTheme.palette.text.primary,
+      color: theme.palette.grey[50],
     },
     secondaryText: {
-      color: darkTheme.palette.text.secondary,
+      color: theme.palette.grey[100],
     },
-  })
+  }))
 
 const imgStyle = { objectFit: 'cover', height: 593 }
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   title?: string
   subtitle?: string
   description?: string
   heroImage?: any
 }
 
-const Hero = ({ classes, title, subtitle, description, heroImage }: Props) => {
+const Hero = ({ title, subtitle, description, heroImage }: Props) => {
+  const classes = useStyles()
   const shouldRender = title || subtitle || description || heroImage
   const heroUnitClassName = heroImage
     ? classes.heroUnitImage
@@ -117,7 +112,7 @@ const Hero = ({ classes, title, subtitle, description, heroImage }: Props) => {
                 </Typography>
               )}
               {/* <div className={classes.heroButtons}>
-                <Grid container spacing={16} justify="center">
+                <Grid container spacing={2} justify="center">
                   <Grid item>
                     <Button variant="contained" color="primary">
                       Main call to action
@@ -138,4 +133,4 @@ const Hero = ({ classes, title, subtitle, description, heroImage }: Props) => {
   )
 }
 
-export default withStyles(styles)(Hero)
+export default Hero

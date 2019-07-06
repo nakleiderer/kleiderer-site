@@ -1,8 +1,5 @@
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -11,16 +8,17 @@ import Helmet from 'react-helmet'
 import BookPreviewGrid from '../../components/BookPreviewGrid'
 import Layout from '../../components/Layout'
 import Section from '../../components/Section'
-import withRoot from '../../withRoot'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({})
+const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   location: string
   data: any
 }
 
 const BooksIndex = (props: Props) => {
+  const classes = useStyles();
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const recommendedBooks = get(props, 'data.recommendedBooks.edges').map(
     (b: any) => b.node
@@ -50,7 +48,7 @@ const BooksIndex = (props: Props) => {
   )
 }
 
-export default withRoot(withStyles(styles)(BooksIndex))
+export default BooksIndex
 
 export const pageQuery = graphql`
   query BooksIndexQuery {

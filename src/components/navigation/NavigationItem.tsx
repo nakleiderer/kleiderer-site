@@ -1,25 +1,27 @@
 import {
   Button,
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core'
 import { Link } from 'gatsby'
 import React from 'react'
 import { NavigationItem as NavigationItemType } from './items'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({})
+const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   item: NavigationItemType
 }
 
 const NavigationItem = ({ item }: Props) => {
+  const classes = useStyles()
   if ('link' in item) {
-    const buttonComponent = (props: any) => <Link to={item.link} {...props} />
+    const buttonComponent = React.forwardRef((props, ref) => (
+      <Link to={item.link} innerRef={ref as any}  {...props} />
+    ))
+    
     return (
-      <Button size="small" color="inherit" component={buttonComponent}>
+      <Button size="small" color="inherit" component={buttonComponent as any}>
         {item.title}
       </Button>
     )
@@ -39,4 +41,4 @@ const NavigationItem = ({ item }: Props) => {
   }
 }
 
-export default withStyles(styles)(NavigationItem)
+export default NavigationItem

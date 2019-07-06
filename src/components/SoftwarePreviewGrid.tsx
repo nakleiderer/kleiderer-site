@@ -1,25 +1,24 @@
 import { Grid } from '@material-ui/core'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import React from 'react'
 import SoftwarePreview from './SoftwarePreview'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({})
+const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
 type Software = any
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   softwares: Array<Software>
 }
 
 const SoftwarePreviewGrid = ({ softwares }: Props) => {
+  const classes = useStyles();
   return (
-    <Grid container direction="row" justify="flex-start" spacing={24}>
+    <Grid container direction="row" justify="flex-start" spacing={3}>
       {softwares.map(s => (
         <Grid item key={s.id} xs={12} sm={6} md={4}>
           <SoftwarePreview software={s} key={s.id} />
@@ -29,7 +28,7 @@ const SoftwarePreviewGrid = ({ softwares }: Props) => {
   )
 }
 
-export default withStyles(styles)(SoftwarePreviewGrid)
+export default SoftwarePreviewGrid
 
 export const softwarePreviewGridComponentFragment = graphql`
   fragment SoftwarePreviewGridComponent on MarkdownRemarkConnection {

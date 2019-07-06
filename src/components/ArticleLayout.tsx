@@ -1,19 +1,17 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import React, { ReactNode } from 'react'
 import Footer from './Footer'
 import Navigation from './navigation/Navigation'
 import { Typography } from '@material-ui/core'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     layout: {
-      [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      [theme.breakpoints.up(1100 + theme.spacing(3*2))]: {
         width: 1100,
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -21,17 +19,17 @@ const styles = (theme: Theme) =>
     },
     main: {
       width: 'auto',
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      [theme.breakpoints.up(1100 + theme.spacing(3*2))]: {
         width: 1100,
         marginLeft: 'auto',
         marginRight: 'auto',
       },
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   children: ReactNode
   title?: string
   subtitle?: string
@@ -39,7 +37,8 @@ interface Props extends WithStyles<typeof styles> {
   heroImage?: any
 }
 
-const Template = ({ children, classes }: Props) => {
+const Template = ({ children }: Props) => {
+  const classes = useStyles()
   return (
     <>
       <CssBaseline />
@@ -56,4 +55,4 @@ const Template = ({ children, classes }: Props) => {
   )
 }
 
-export default withStyles(styles)(Template)
+export default Template
