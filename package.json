@@ -38,7 +38,7 @@
     "netlify-cms-app": "^2.9.5",
     "prism-react-renderer": "^0.1.7",
     "prismjs": "^1.16.0",
-    "react": "^16.5.2",
+    "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-jss": "^8.6.1",
