@@ -109,7 +109,8 @@ export const articleTemplateQuery = graphql`
       filter: {
         fields: { categories: { elemMatch: { id: { eq: $id } } } }
         frontmatter: { templateKey: { eq: "software" } }
-      }
+      },
+      sort: {fields: [fields___slug], order: ASC}
     ) {
       ...SoftwarePreviewGridComponent
     }
@@ -117,7 +118,8 @@ export const articleTemplateQuery = graphql`
       filter: {
         fields: { categories: { elemMatch: { id: { eq: $id } } } }
         frontmatter: { templateKey: { eq: "book" } }
-      }
+      },
+      sort: {fields: [fields___slug], order: ASC}
     ) {
       ...BookPreviewGridComponent
     }
