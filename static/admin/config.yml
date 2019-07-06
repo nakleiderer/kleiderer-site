@@ -53,7 +53,6 @@ collections:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "book" }
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Subtitle", name: "subtitle", widget: "string"}
-      - {label: "Description", name: "description", widget: "string"}
       - {label: "Byline", name: "byline", widget: "string"}
       - {label: "Affiliate Link", name: "affiliate_link", widget: "string"}
       - {label: "Cover Image", name: "cover", widget: "image"}

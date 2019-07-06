@@ -73,9 +73,6 @@ const BookPreview = ({ book }: Props) => {
           >
             {byline}
           </Typography>
-          <Typography variant="body1" component="span" noWrap>
-            {book.frontmatter.description}
-          </Typography>
         </CardContent>
         {canBuy && (
           <CardActions className={classes.actions}>
