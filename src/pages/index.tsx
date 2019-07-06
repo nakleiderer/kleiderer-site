@@ -40,7 +40,10 @@ const RootIndex = (props: Props) => {
       <Section title="Recent Articles" hideIf={!markdownArticles.length}>
         <ArticlePreviewGrid articles={markdownArticles} />
       </Section>
-      <Section title="Recent Recommended Articles" hideIf={!pocketArticles.length}>
+      <Section
+        title="Recent Recommended Articles"
+        hideIf={!pocketArticles.length}
+      >
         <ArticlePreviewGrid articles={pocketArticles} />
       </Section>
     </Layout>
@@ -65,10 +68,13 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownArticle: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "article"}}}, sort: {fields: [frontmatter___published_on], order: DESC}) {
+    allMarkdownArticle: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "article" } } }
+      sort: { fields: [frontmatter___published_on], order: DESC }
+    ) {
       ...MarkdownArticlePreviewGridComponent
     }
-    allPocketArticle(sort: {fields: [fields___publishedAt], order: DESC}) {
+    allPocketArticle(sort: { fields: [fields___publishedAt], order: DESC }) {
       ...PocketArticlePreviewGridComponent
     }
   }

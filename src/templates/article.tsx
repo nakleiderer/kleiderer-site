@@ -37,7 +37,7 @@ interface Props extends WithStyles<typeof styles> {
 const ArticleTemplate = (props: Props) => {
   const classes = props.classes
   const siteTitle = props.data.site.siteMetadata.title
-  
+
   const article = props.data.markdownRemark
   const title = article.frontmatter.title
   const subtitle = article.frontmatter.subtitle
@@ -94,7 +94,7 @@ const ArticleTemplate = (props: Props) => {
           />
         </div>
 
-        <div dangerouslySetInnerHTML={{__html:html}}/>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </Layout>
     </>
   )
@@ -116,12 +116,12 @@ export const articleTemplateQuery = graphql`
         author
         cover {
           childImageSharp {
-              fluid(maxHeight: 593) {
-                  ...GatsbyImageSharpFluid
-              }
+            fluid(maxHeight: 593) {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
-        publishedAt: published_on(formatString:"MMMM D, YYYY")
+        publishedAt: published_on(formatString: "MMMM D, YYYY")
         subtitle
         title
       }

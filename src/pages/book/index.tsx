@@ -66,13 +66,30 @@ export const pageQuery = graphql`
         }
       }
     }
-    recommendedBooks: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "book"}, isCompleted: {eq: true}}, fields: {categories: {elemMatch: {frontmatter: {name: {eq: "Recommended"}}}}}}) {
+    recommendedBooks: allMarkdownRemark(
+      filter: {
+        frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: true } }
+        fields: {
+          categories: {
+            elemMatch: { frontmatter: { name: { eq: "Recommended" } } }
+          }
+        }
+      }
+    ) {
       ...BookPreviewGridComponent
     }
-    readBooks: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "book"}, isCompleted: {eq: true}}}) {
+    readBooks: allMarkdownRemark(
+      filter: {
+        frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: true } }
+      }
+    ) {
       ...BookPreviewGridComponent
     }
-    unreadBooks: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "book"}, isCompleted: {eq: false}}}) {
+    unreadBooks: allMarkdownRemark(
+      filter: {
+        frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: false } }
+      }
+    ) {
       ...BookPreviewGridComponent
     }
   }

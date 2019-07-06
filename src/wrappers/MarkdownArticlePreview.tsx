@@ -1,7 +1,6 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
-import ArticlePreview from '../components/ArticlePreview';
-
+import ArticlePreview from '../components/ArticlePreview'
 
 type Article = any
 
@@ -10,16 +9,20 @@ interface Props {
 }
 
 const MarkdownArticlePreview = ({ article }: Props) => {
-    const newArticle = {
-        avatar: null,
-        byline: `by ${article.frontmatter.author} on ${article.frontmatter.publishedAt}`,
-        categories: article.fields.categories || [],
-        excerpt: article.excerpt,
-        featuredImage: article.frontmatter.cover,
-        title: article.frontmatter.title,
-        readButtonComponent: (props: any) => <Link to={`/article/${article.fields.slug}`} {...props} />
-    }
-    return <ArticlePreview article={newArticle}></ArticlePreview>
+  const newArticle = {
+    avatar: null,
+    byline: `by ${article.frontmatter.author} on ${
+      article.frontmatter.publishedAt
+    }`,
+    categories: article.fields.categories || [],
+    excerpt: article.excerpt,
+    featuredImage: article.frontmatter.cover,
+    title: article.frontmatter.title,
+    readButtonComponent: (props: any) => (
+      <Link to={`/article/${article.fields.slug}`} {...props} />
+    ),
+  }
+  return <ArticlePreview article={newArticle} />
 }
 
 export default MarkdownArticlePreview
@@ -29,22 +32,22 @@ export const articlePreviewComponentFragment = graphql`
     id
     excerpt
     fields {
-        slug
-        categories {
-            ...CategoryChipComponent
-        }
+      slug
+      categories {
+        ...CategoryChipComponent
+      }
     }
     frontmatter {
-        author
-        cover {
-            childImageSharp {
-                fluid(maxWidth: 300) {
-                    ...GatsbyImageSharpFluid
-                }
-            }
+      author
+      cover {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
         }
-        publishedAt: published_on(formatString:"MMMM D, YYYY")
-        title
+      }
+      publishedAt: published_on(formatString: "MMMM D, YYYY")
+      title
     }
   }
 `

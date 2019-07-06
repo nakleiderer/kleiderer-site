@@ -8,7 +8,7 @@ import {
 import React, { ReactNode } from 'react'
 import Footer from './Footer'
 import Navigation from './navigation/Navigation'
-import { Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,10 +39,7 @@ interface Props extends WithStyles<typeof styles> {
   heroImage?: any
 }
 
-const Template = ({
-  children,
-  classes,
-}: Props) => {
+const Template = ({ children, classes }: Props) => {
   return (
     <>
       <CssBaseline />
@@ -55,7 +52,7 @@ const Template = ({
         <main className={classes.main}>{children}</main>
       </div>
       <Footer />
-      </>
+    </>
   )
 }
 
