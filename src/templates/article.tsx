@@ -11,6 +11,7 @@ import Layout from '../components/ArticleLayout'
 import withRoot from '../withRoot'
 import { Typography } from '@material-ui/core'
 import Img from 'gatsby-image'
+import Markdown from '../components/Markdown';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -94,7 +95,7 @@ const ArticleTemplate = (props: Props) => {
           />
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div><Markdown ast={article.htmlAst}/></div>
       </Layout>
     </>
   )
@@ -125,7 +126,7 @@ export const articleTemplateQuery = graphql`
         subtitle
         title
       }
-      html
+      htmlAst
     }
   }
 `
