@@ -72,21 +72,24 @@ export const pageQuery = graphql`
             elemMatch: { frontmatter: { name: { eq: "Recommended" } } }
           }
         }
-      }
+      },
+      sort: {fields: [fields___slug], order: ASC}
     ) {
       ...BookPreviewGridComponent
     }
     readBooks: allMarkdownRemark(
       filter: {
         frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: true } }
-      }
+      },
+      sort: {fields: [fields___slug], order: ASC}
     ) {
       ...BookPreviewGridComponent
     }
     unreadBooks: allMarkdownRemark(
       filter: {
         frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: false } }
-      }
+      },
+      sort: {fields: [fields___slug], order: ASC}
     ) {
       ...BookPreviewGridComponent
     }
