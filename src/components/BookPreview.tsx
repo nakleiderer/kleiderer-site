@@ -4,17 +4,15 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Hidden from '@material-ui/core/Hidden'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       display: 'flex',
@@ -35,15 +33,16 @@ const styles = (theme: Theme) =>
     actions: {
       display: 'flex',
     },
-  })
+  }))
 
 type Book = any
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   book: Book
 }
 
-const BookPreview = ({ book, classes }: Props) => {
+const BookPreview = ({ book }: Props) => {
+  const classes = useStyles()
   const cover =
     !!book.frontmatter.cover && !!book.frontmatter.cover.childImageSharp
       ? book.frontmatter.cover.childImageSharp
@@ -74,7 +73,7 @@ const BookPreview = ({ book, classes }: Props) => {
           >
             {byline}
           </Typography>
-          <Typography variant="body2" component="span" noWrap>
+          <Typography variant="body1" component="span" noWrap>
             {book.frontmatter.description}
           </Typography>
         </CardContent>
@@ -97,7 +96,7 @@ const BookPreview = ({ book, classes }: Props) => {
   )
 }
 
-export default withStyles(styles)(BookPreview)
+export default BookPreview
 
 export const bookPreviewComponentFragment = graphql`
   fragment BookPreviewComponent on MarkdownRemark {

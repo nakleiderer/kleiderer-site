@@ -3,17 +3,15 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       display: 'flex',
@@ -30,15 +28,16 @@ const styles = (theme: Theme) =>
     cardContent: {
       padding: 8,
     },
-  })
+  }))
 
 type Software = any
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   software: Software
 }
 
-const SoftwarePreview = ({ software, classes }: Props) => {
+const SoftwarePreview = ({ software }: Props) => {
+  const classes = useStyles();
   const logo = software.frontmatter.logo.childImageSharp
 
   return (
@@ -49,7 +48,7 @@ const SoftwarePreview = ({ software, classes }: Props) => {
           <Typography component="h2" variant="body1" noWrap>
             {software.frontmatter.name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" noWrap>
+          <Typography variant="body1" color="textSecondary" noWrap>
             {software.frontmatter.description}
           </Typography>
         </CardContent>
@@ -70,7 +69,7 @@ const SoftwarePreview = ({ software, classes }: Props) => {
   )
 }
 
-export default withStyles(styles)(SoftwarePreview)
+export default SoftwarePreview
 
 export const softwarePreviewComponentFragment = graphql`
   fragment SoftwarePreviewComponent on MarkdownRemark {

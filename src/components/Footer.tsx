@@ -1,24 +1,23 @@
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     footer: {
       backgroundColor: theme.palette.background.paper,
-      marginTop: theme.spacing.unit * 8,
-      padding: `${theme.spacing.unit * 6}px 0`,
+      marginTop: theme.spacing(8),
+      padding: `${theme.spacing(6, 0)}`,
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props {}
 
-const Footer = ({ classes }: Props) => {
+const Footer = ({  }: Props) => {
+  const classes = useStyles()
   return (
     <footer className={classes.footer}>
       <Typography variant="h6" align="center" gutterBottom />
@@ -35,4 +34,4 @@ const Footer = ({ classes }: Props) => {
   )
 }
 
-export default withStyles(styles)(Footer)
+export default Footer

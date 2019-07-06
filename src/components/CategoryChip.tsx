@@ -1,14 +1,12 @@
 import Button from '@material-ui/core/Button'
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     firstButton: {
       color: theme.palette.text.secondary,
@@ -17,7 +15,7 @@ const styles = (theme: Theme) =>
     button: {
       color: theme.palette.text.secondary,
     },
-  })
+  }))
 
 interface CategoryFields {
   slug: string
@@ -33,25 +31,26 @@ interface Category {
   frontmatter: CategoryFrontmatter
 }
 
-interface Props extends WithStyles<typeof styles> {
+interface Props{
   category: Category
   index: number
 }
 
-const CategoryChip = ({ classes, category, index }: Props) => {
+const CategoryChip = ({ category, index }: Props) => {
+  const classes = useStyles()
   const className = index === 0 ? classes.firstButton : classes.button
-  const buttonComponent = (props: any) => (
-    <Link to={`/category/${category.fields.slug}`} {...props} />
-  )
+  const buttonComponent = React.forwardRef((props, ref) => (
+    <Link innerRef={ref as any} to={`/category/${category.fields.slug}`} {...props} />
+  ))
 
   return (
-    <Button size="small" className={className} component={buttonComponent}>
+    <Button size="small" className={className} component={buttonComponent as any}>
       {category.frontmatter.name}
     </Button>
   )
 }
 
-export default withStyles(styles)(CategoryChip)
+export default CategoryChip
 
 export const categoryChipComponentFragment = graphql`
   fragment CategoryChipComponent on MarkdownRemark {

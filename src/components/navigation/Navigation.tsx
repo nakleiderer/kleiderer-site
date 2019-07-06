@@ -1,14 +1,11 @@
 import {
   AppBar,
   Avatar,
-  createStyles,
   Hidden,
   IconButton,
   Theme,
   Toolbar,
   Typography,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { graphql, Link, StaticQuery } from 'gatsby'
@@ -16,6 +13,7 @@ import React from 'react'
 import navigationItems from './items'
 import NavigationDrawer from './NavigationDrawer'
 import NavigationItem from './NavigationItem'
+import { WithStyles, createStyles, withStyles } from '@material-ui/styles';
 
 const styles = (theme: Theme) =>
   createStyles({

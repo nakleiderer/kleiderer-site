@@ -1,20 +1,18 @@
 import {
   Avatar,
-  createStyles,
   List,
   SwipeableDrawer,
   Theme,
   Toolbar,
   Typography,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core'
 import { graphql, Link, StaticQuery } from 'gatsby'
 import React, { SyntheticEvent } from 'react'
 import navigationItems from './items'
 import NavigationDrawerItem from './NavigationDrawerItem'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbarMain: {
       borderBottom: `1px solid ${theme.palette.grey[300]}`,
@@ -31,15 +29,16 @@ const styles = (theme: Theme) =>
       color: 'inherit',
       textDecoration: 'none',
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   onClose: (event: SyntheticEvent<{}, Event>) => void
   onOpen: (event: SyntheticEvent<{}, Event>) => void
   open: boolean
 }
 
-const NavigationDrawer = ({ classes, onClose, onOpen, open }: Props) => {
+const NavigationDrawer = ({ onClose, onOpen, open }: Props) => {
+  const classes = useStyles()
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
   return (
@@ -84,4 +83,4 @@ const NavigationDrawer = ({ classes, onClose, onOpen, open }: Props) => {
   )
 }
 
-export default withStyles(styles)(NavigationDrawer)
+export default NavigationDrawer

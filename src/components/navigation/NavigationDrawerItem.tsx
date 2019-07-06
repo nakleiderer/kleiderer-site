@@ -1,24 +1,22 @@
 import {
-  createStyles,
   ListItem,
   ListItemText,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core'
 import { Link } from 'gatsby'
 import React from 'react'
 import { NavigationItem } from './items'
+import { makeStyles, createStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     link: {
       color: 'inherit',
       textDecoration: 'none',
     },
-  })
+  }))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   item: NavigationItem
 }
 
@@ -28,7 +26,8 @@ const NavigationDrawerItemText = ({ item }: { item: NavigationItem }) => (
   </ListItem>
 )
 
-function NavigationDrawerItem({ item, classes }: Props) {
+function NavigationDrawerItem({ item }: Props) {
+  const classes = useStyles()
   if ('link' in item) {
     return (
       <Link to={item.link} className={classes.link}>
@@ -45,4 +44,4 @@ function NavigationDrawerItem({ item, classes }: Props) {
   return <NavigationDrawerItemText item={item} />
 }
 
-export default withStyles(styles)(NavigationDrawerItem)
+export default NavigationDrawerItem

@@ -1,42 +1,37 @@
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core/styles'
+import { Theme } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import React from 'react'
 import Helmet from 'react-helmet'
 import Layout from '../components/ArticleLayout'
-import withRoot from '../withRoot'
 import { Typography } from '@material-ui/core'
 import Img from 'gatsby-image'
 import Markdown from '../components/Markdown';
+import { createStyles, makeStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     headingContainer: {
-      padding: `${theme.spacing.unit * 4}px 0`,
+      padding: theme.spacing(4,0),
     },
     heading: {
-      paddingBottom: `${theme.spacing.unit * 4}px`,
+      paddingBottom: theme.spacing(4)
     },
     image: {
       width: '100%',
       height: 593,
       borderRadius: 16,
     },
-  })
+  }))
 
 const imgStyle = { objectFit: 'cover', height: 593 }
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   location: string
   data: any
 }
 
 const ArticleTemplate = (props: Props) => {
-  const classes = props.classes
+  const classes = useStyles();
   const siteTitle = props.data.site.siteMetadata.title
 
   const article = props.data.markdownRemark
@@ -47,7 +42,6 @@ const ArticleTemplate = (props: Props) => {
   const publishedAt = article.frontmatter.publishedAt
   const byline = `by ${author} on ${article.frontmatter.publishedAt}`
   const coverImg = article.frontmatter.cover.childImageSharp
-  const html = article.html
 
   return (
     <>
@@ -101,7 +95,7 @@ const ArticleTemplate = (props: Props) => {
   )
 }
 
-export default withRoot(withStyles(styles)(ArticleTemplate))
+export default ArticleTemplate
 
 export const articleTemplateQuery = graphql`
   query ArticleById($id: String!) {

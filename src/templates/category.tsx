@@ -1,8 +1,5 @@
 import {
-  createStyles,
   Theme,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -13,16 +10,16 @@ import BookPreviewGrid from '../components/BookPreviewGrid'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
 import SoftwarePreviewGrid from '../components/SoftwarePreviewGrid'
-import withRoot from '../withRoot'
+import { createStyles, makeStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({})
+const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   location: string
 }
 
 const CategoryTemplate = (props: Props) => {
-  const { classes } = props
+  const classes = useStyles();
   const siteTitle = get(props, 'data.site.siteMetadata.title')
   const category = get(props, 'data.markdownRemark')
   const allMarkdownArticleEdges =
@@ -75,7 +72,7 @@ const CategoryTemplate = (props: Props) => {
   )
 }
 
-export default withRoot(withStyles(styles)(CategoryTemplate))
+export default CategoryTemplate
 
 export const articleTemplateQuery = graphql`
   query ArticleByCategory($id: String!) {
