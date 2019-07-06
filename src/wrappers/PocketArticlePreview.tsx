@@ -17,7 +17,7 @@ const PocketArticlePreview = ({ article }: Props) => {
     featuredImage: article.fields.featuredImage,
     title: article.title,
     readButtonComponent: React.forwardRef((props, ref) => (
-      <a ref={ref as any} href={article.url} {...props} />
+      <a ref={ref as any} href={article.url} target="_blank" {...props} />
     ))
   }
   return <ArticlePreview article={newArticle} />
