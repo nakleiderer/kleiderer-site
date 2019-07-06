@@ -15,7 +15,7 @@ import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
 import CategoryChip from './CategoryChip'
-import { arch } from 'os';
+import { arch } from 'os'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,18 +39,18 @@ interface CategoryFrontmatter {
 }
 
 interface Category {
-  id: string,
-  fields: CategoryFields,
+  id: string
+  fields: CategoryFields
   frontmatter: CategoryFrontmatter
 }
 
 interface Article {
-  avatar: any,
-  title: string,
-  byline: string,
-  excerpt: string,
-  featuredImage: any,
-  readButtonComponent: any,
+  avatar: any
+  title: string
+  byline: string
+  excerpt: string
+  featuredImage: any
+  readButtonComponent: any
   categories: Category[]
 }
 
@@ -59,21 +59,27 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const ArticlePreview = ({ article, classes }: Props) => {
-  const Header = article.avatar && article.avatar.childImageSharp ? <CardHeader
-    avatar={<Avatar aria-label="Author" className={classes.avatar}>
-      <Img alt="" {...article.avatar.childImageSharp} />
-    </Avatar>}
-    title={article.title}
-    subheader={article.byline}
-  /> : <CardHeader
-      title={article.title}
-      subheader={article.byline}
-    />
+  const Header =
+    article.avatar && article.avatar.childImageSharp ? (
+      <CardHeader
+        avatar={
+          <Avatar aria-label="Author" className={classes.avatar}>
+            <Img alt="" {...article.avatar.childImageSharp} />
+          </Avatar>
+        }
+        title={article.title}
+        subheader={article.byline}
+      />
+    ) : (
+      <CardHeader title={article.title} subheader={article.byline} />
+    )
 
   return (
     <Card className={classes.card} elevation={1}>
       {Header}
-      {article.featuredImage && article.featuredImage.childImageSharp && <Img alt="" {...article.featuredImage.childImageSharp} />}
+      {article.featuredImage && article.featuredImage.childImageSharp && (
+        <Img alt="" {...article.featuredImage.childImageSharp} />
+      )}
       <CardContent>
         <Typography component="p">{article.excerpt}</Typography>
       </CardContent>

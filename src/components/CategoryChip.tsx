@@ -28,9 +28,9 @@ interface CategoryFrontmatter {
 }
 
 interface Category {
-  id: string,
-  fields: CategoryFields,
-  frontmatter: CategoryFrontmatter,
+  id: string
+  fields: CategoryFields
+  frontmatter: CategoryFrontmatter
 }
 
 interface Props extends WithStyles<typeof styles> {

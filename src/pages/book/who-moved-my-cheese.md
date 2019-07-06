@@ -1,9 +1,10 @@
 ---
 affiliate_link: https://amzn.to/2JQVe82
 byLine: Spencer Johnson
-categories: ["Recommended"]
+categories: ['Recommended']
 cover: /images/uploads/whomovedmycheese.jpeg
-description: With over 2.5 million copies sold worldwide, Who Moved My Cheese? is
+description:
+  With over 2.5 million copies sold worldwide, Who Moved My Cheese? is
   a simple parable that reveals profound truths It is the amusing and enlightening
   story of four characters who live in a maze and look for cheese to nourish them
   and make them happy. Cheese is a metaphor for what you want to have in life, for

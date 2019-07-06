@@ -37,7 +37,7 @@ const styles = (theme: Theme) =>
     },
   })
 
-type Book = any;
+type Book = any
 
 interface Props extends WithStyles<typeof styles> {
   book: Book
@@ -66,7 +66,12 @@ const BookPreview = ({ book, classes }: Props) => {
           <Typography component="h3" variant="subtitle1" noWrap>
             {book.frontmatter.subtitle}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary" noWrap gutterBottom>
+          <Typography
+            variant="subtitle1"
+            color="textSecondary"
+            noWrap
+            gutterBottom
+          >
             {byline}
           </Typography>
           <Typography variant="body2" component="span" noWrap>

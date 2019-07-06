@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 import React from 'react'
-import MarkdownArticlePreview from '../wrappers/MarkdownArticlePreview';
-import PocketArticlePreview from '../wrappers/PocketArticlePreview';
+import MarkdownArticlePreview from '../wrappers/MarkdownArticlePreview'
+import PocketArticlePreview from '../wrappers/PocketArticlePreview'
 
 const styles = (theme: Theme) => createStyles({})
 
@@ -23,8 +23,16 @@ const ArticlePreviewGrid = ({ articles }: Props) => {
     <Grid container direction="row" justify="flex-start" spacing={24}>
       {articles.map(a => (
         <Grid item key={a.id} xs={12} md={6}>
-          {a.__typename === "MarkdownRemark" ? <MarkdownArticlePreview article={a} key={a.id} /> : <></>}
-          {a.__typename === "PocketArticle" ? <PocketArticlePreview article={a} key={a.id} /> : <></>}
+          {a.__typename === 'MarkdownRemark' ? (
+            <MarkdownArticlePreview article={a} key={a.id} />
+          ) : (
+            <></>
+          )}
+          {a.__typename === 'PocketArticle' ? (
+            <PocketArticlePreview article={a} key={a.id} />
+          ) : (
+            <></>
+          )}
         </Grid>
       ))}
     </Grid>

@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import ArticlePreview from '../components/ArticlePreview';
+import ArticlePreview from '../components/ArticlePreview'
 
 type Article = any
 
@@ -9,16 +9,16 @@ interface Props {
 }
 
 const PocketArticlePreview = ({ article }: Props) => {
-    const newArticle = {
-        avatar: article.fields.domainFavicon,
-        byline: `from ${article.articleDomain}, read ${article.fields.publishedAt}`,
-        categories: article.fields.categories || [],
-        excerpt: article.excerpt,
-        featuredImage: article.fields.featuredImage,
-        title: article.title,
-        readButtonComponent: (props: any) => <a href={article.url} {...props} />
-    }
-    return <ArticlePreview article={newArticle}></ArticlePreview>
+  const newArticle = {
+    avatar: article.fields.domainFavicon,
+    byline: `from ${article.articleDomain}, read ${article.fields.publishedAt}`,
+    categories: article.fields.categories || [],
+    excerpt: article.excerpt,
+    featuredImage: article.fields.featuredImage,
+    title: article.title,
+    readButtonComponent: (props: any) => <a href={article.url} {...props} />,
+  }
+  return <ArticlePreview article={newArticle} />
 }
 
 export default PocketArticlePreview
@@ -29,24 +29,24 @@ export const articlePreviewComponentFragment = graphql`
     articleDomain
     excerpt
     fields {
-        categories {
-            ...CategoryChipComponent
+      categories {
+        ...CategoryChipComponent
+      }
+      domainFavicon {
+        childImageSharp {
+          fixed(width: 16, height: 16) {
+            ...GatsbyImageSharpFixed
+          }
         }
-        domainFavicon {
-            childImageSharp {
-                fixed(width: 16, height: 16) {
-                    ...GatsbyImageSharpFixed
-                }
-            }
+      }
+      featuredImage {
+        childImageSharp {
+          fluid(maxWidth: 500) {
+            ...GatsbyImageSharpFluid
+          }
         }
-        featuredImage {
-            childImageSharp {
-                fluid(maxWidth: 500) {
-                    ...GatsbyImageSharpFluid
-                }
-            }
-        }
-        publishedAt(fromNow: true)
+      }
+      publishedAt(fromNow: true)
     }
     title
     url

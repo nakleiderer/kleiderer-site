@@ -58,10 +58,13 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownArticle: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "article"}}}, sort: {fields: [frontmatter___published_on], order: DESC}) {
+    allMarkdownArticle: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "article" } } }
+      sort: { fields: [frontmatter___published_on], order: DESC }
+    ) {
       ...MarkdownArticlePreviewGridComponent
     }
-    allPocketArticle(sort: {fields: [fields___publishedAt], order: DESC}) {
+    allPocketArticle(sort: { fields: [fields___publishedAt], order: DESC }) {
       ...PocketArticlePreviewGridComponent
     }
   }
