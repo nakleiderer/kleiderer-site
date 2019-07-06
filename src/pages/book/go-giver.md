@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2TxaqqI
+affiliate_link: https://amzn.to/2TxaqqI
 byLine: Bob Burg, John David Mann
 cover: /images/uploads/go-giver.jpeg
 isCompleted: true

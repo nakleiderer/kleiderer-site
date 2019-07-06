@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2HHU0KI
+affiliate_link: https://amzn.to/2HHU0KI
 byLine: Dave Ramsey
 cover: /images/uploads/total-money-makeover.jpeg
 isCompleted: true

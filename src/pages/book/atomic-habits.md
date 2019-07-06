@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2OrnXPH
+affiliate_link: https://amzn.to/2OrnXPH
 byLine: James Clear
 cover: /images/uploads/atomic-habits.jpeg
 isCompleted: false

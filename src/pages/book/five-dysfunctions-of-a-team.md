@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2HHproi
+affiliate_link: https://amzn.to/2HHproi
 byLine: Patrick Lencioni
 cover: /images/uploads/five-dysfunctions-of-a-team.jpeg
 isCompleted: true

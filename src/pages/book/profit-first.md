@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2CCNFMo
+affiliate_link: https://amzn.to/2CCNFMo
 byLine: Mike Michalowicz
 cover: /images/uploads/profit-first.jpeg
 isCompleted: false

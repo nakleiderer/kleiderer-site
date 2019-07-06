@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2HVj1Ba
+affiliate_link: https://amzn.to/2HVj1Ba
 byLine: Peter Bernard Kyne
 cover: /images/uploads/go-getter.jpeg
 isCompleted: true
