@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2TAJbf1
+affiliate_link: https://amzn.to/2TAJbf1
 byLine: Greg McKeown
 cover: /images/uploads/essentialism.jpeg
 isCompleted: false

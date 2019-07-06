@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2YsDpjd
+affiliate_link: https://amzn.to/2YsDpjd
 byLine: Timothy Ferriss
 cover: /images/uploads/four-hour-workweek.jpeg
 isCompleted: false

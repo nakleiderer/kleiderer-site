@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2U6CDZK
+affiliate_link: https://amzn.to/2U6CDZK
 byLine: Patrick Lencioni
 cover: /images/uploads/ideal-team-player.jpeg
 isCompleted: true

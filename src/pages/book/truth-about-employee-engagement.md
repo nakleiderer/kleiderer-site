@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2UYlcHU
+affiliate_link: https://amzn.to/2UYlcHU
 byLine: Patrick Lencioni
 cover: /images/uploads/truth-about-employee-engagement.jpeg
 isCompleted: true

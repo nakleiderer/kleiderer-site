@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2YhPlnO
+affiliate_link: https://amzn.to/2YhPlnO
 byLine: Dave Ramsey
 cover: /images/uploads/entreleadership.jpeg
 isCompleted: true

@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2HQkkBA
+affiliate_link: https://amzn.to/2HQkkBA
 byLine: Donald Miller
 cover: /images/uploads/building-a-storybrand.jpeg
 isCompleted: false

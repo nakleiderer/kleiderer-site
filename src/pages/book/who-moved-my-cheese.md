@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2JQVe82
+affiliate_link: https://amzn.to/2JQVe82
 byLine: Spencer Johnson
 cover: /images/uploads/who-moved-my-cheese.jpeg
 isCompleted: true

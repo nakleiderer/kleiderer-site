@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2WkSxwU
+affiliate_link: https://amzn.to/2WkSxwU
 byLine: Simon Sinek
 cover: /images/uploads/infinite-game.jpeg
 isCompleted: false

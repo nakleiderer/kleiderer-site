@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/30cbunw
+affiliate_link: https://amzn.to/30cbunw
 byLine: Kent Beck
 cover: /images/uploads/test-driven-development.jpeg
 isCompleted: false

@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2Fwa12R
+affiliate_link: https://amzn.to/2Fwa12R
 byLine: Terry Felber, Dave Ramsey
 cover: /images/uploads/legend-of-the-monk-and-the-merchant.jpeg
 isCompleted: true

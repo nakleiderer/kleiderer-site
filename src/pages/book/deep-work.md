@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2TAtNz5
+affiliate_link: https://amzn.to/2TAtNz5
 byLine: Cal Newport
 cover: /images/uploads/deep-work.jpeg
 isCompleted: false

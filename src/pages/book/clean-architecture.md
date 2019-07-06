@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2Gf1n9m
+affiliate_link: https://amzn.to/2Gf1n9m
 byLine: Robert C. Martin
 cover: /images/uploads/clean-architecture.jpeg
 isCompleted: false

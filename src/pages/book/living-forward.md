@@ -1,5 +1,5 @@
 ---
-affliate_link: https://amzn.to/2XhfZff
+affiliate_link: https://amzn.to/2XhfZff
 byLine: Michael Hyatt, Daniel Harkavy
 cover: /images/uploads/living-forward.jpeg
 isCompleted: false
