@@ -49,7 +49,7 @@ async function hydrateMarkdownSlug(helpers) {
   const { actions, getNode, node } = helpers
   const { createNodeField } = actions
 
-  if (!(isArticleNode(node) || isBookNode(node) || isCategoryNode(node))) return;
+  if (!(isArticleNode(node) || isBookNode(node) || isCategoryNode(node) || isSoftwareNode(node))) return;
 
   const parent = getNode(node.parent)
   const slug = parent && parent.relativePath ? fileNameToSlug(parent.relativePath) : null;
