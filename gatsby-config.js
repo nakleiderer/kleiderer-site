@@ -61,15 +61,6 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-vscode`,
-            options: {
-              extensions: [{
-                identifier: 'equinusocio.vsc-material-theme',
-                version: '29.2.0'
-              }],
-              defaultTheme: 'Material Theme Lighter High Contrast',
-              prefersDarkTheme: 'Material Theme Ocean High Contrast',
-              prefersLightTheme: 'Material Theme Lighter High Contrast'
-            }
           },
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
