@@ -63,7 +63,7 @@ module.exports = {
             resolve: `gatsby-remark-vscode`,
             options: {
               extensions: [{
-                identifier: 'Equinusocio.vsc-material-theme',
+                identifier: 'equinusocio.vsc-material-theme',
                 version: '29.2.0'
               }],
               defaultTheme: 'Material Theme Lighter High Contrast',
