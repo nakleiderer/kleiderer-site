@@ -59,7 +59,7 @@
     "eslint-plugin-react": "^7.14.2",
     "gatsby": "^2.10.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "homepage": "https://www.kleiderer.com",
   "keywords": [
