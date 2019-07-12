@@ -35,7 +35,7 @@
     "immutable": "^3.8.2",
     "jss": "^9.8.7",
     "lodash": "^4.17.12",
-    "netlify-cms": "^2.9.5",
+    "netlify-cms": "^2.9.6",
     "netlify-cms-app": "^2.9.5",
     "prism-react-renderer": "^0.1.7",
     "prismjs": "^1.16.0",
