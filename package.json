@@ -57,7 +57,7 @@
     "babel-eslint": "^10.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.14.2",
-    "gatsby": "^2.10.0",
+    "gatsby": "^2.13.37",
     "prettier": "^1.18.2",
     "typescript": "^3.5.3"
   },
