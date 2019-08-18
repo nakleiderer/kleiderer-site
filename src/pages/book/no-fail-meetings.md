@@ -5,7 +5,7 @@ subtitle: 5 Steps to Orchestrate Productive Meetings (and Avoid all the Rest)
 byLine: Michael Hyatt
 affiliate_link: 'https://nofailmeetings.com/'
 cover: /images/uploads/no-fail-meetings-michael-hyatt.jpg
-isCompleted: false
+isCompleted: true
 categories:
   - Recommended
 ---
