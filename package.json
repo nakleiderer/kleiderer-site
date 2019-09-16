@@ -73,7 +73,7 @@
   "scripts": {
     "dev": "gatsby develop -H 0.0.0.0",
     "dev:clean": "npm run clean && npm run dev",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -H 0.0.0.0",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.jsx' 'src/**/*.ts' 'src/**/*.tsx' 'src/**/*.md'",
