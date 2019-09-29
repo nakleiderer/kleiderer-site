@@ -17,5 +17,10 @@ services:
 
       # This lets you share your SSH key with the container
       - ~/.ssh/id_rsa:/home/developer/.ssh/id_rsa
+
+      # Share wakatime information with the container
+      - ~/.wakatime.cfg:/home/developer/.wakatime.cfg
+      - ~/.wakatime.db:/home/developer/.wakatime.db
+      - ~/.wakatime.log:/home/developer/.wakatime.log
     command: sleep infinity
     user: developer
