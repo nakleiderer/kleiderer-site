@@ -13,8 +13,9 @@ services:
       - ..:/workspace:delegated
 
       # This lets you avoid setting up Git again in the container
-      - ~/.gitconfig:/root/.gitconfig
+      - ~/.gitconfig:/home/developer/.gitconfig
 
       # This lets you share your SSH key with the container
-      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      - ~/.ssh/id_rsa:/home/developer/.ssh/id_rsa
     command: sleep infinity
+    user: developer
