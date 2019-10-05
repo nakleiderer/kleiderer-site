@@ -1,23 +1,16 @@
-import { Grid } from '@material-ui/core'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import React from 'react'
-import MarkdownArticlePreview from '../wrappers/MarkdownArticlePreview'
-import PocketArticlePreview from '../wrappers/PocketArticlePreview'
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { Grid } from '@material-ui/core';
+import { graphql } from 'gatsby';
+import React from 'react';
+import MarkdownArticlePreview from '../wrappers/MarkdownArticlePreview';
+import PocketArticlePreview from '../wrappers/PocketArticlePreview';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
-
-type Article = any
+type Article = any;
 
 interface Props {
-  articles: Array<Article>
+  articles: Array<Article>;
 }
 
-const ArticlePreviewGrid = ({ articles }: Props) => {
-  const classes = useStyles()
+const ArticlePreviewGrid: React.SFC<Props> = ({ articles }) => {
   return (
     <Grid container direction="row" justify="flex-start" spacing={3}>
       {articles.map(a => (
@@ -35,10 +28,10 @@ const ArticlePreviewGrid = ({ articles }: Props) => {
         </Grid>
       ))}
     </Grid>
-  )
-}
+  );
+};
 
-export default ArticlePreviewGrid
+export default ArticlePreviewGrid;
 
 export const articlePreviewGridComponentFragment = graphql`
   fragment MarkdownArticlePreviewGridComponent on MarkdownRemarkConnection {
@@ -57,4 +50,4 @@ export const articlePreviewGridComponentFragment = graphql`
       }
     }
   }
-`
+`;

@@ -1,31 +1,24 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
-import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../../components/ArticlePreviewGrid'
-import Layout from '../../components/Layout'
-import Section from '../../components/Section'
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { graphql } from 'gatsby';
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
+import ArticlePreviewGrid from '../../components/ArticlePreviewGrid';
+import Layout from '../../components/Layout';
+import Section from '../../components/Section';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
-
-interface Props{
-  location: string
-  data: any
+interface Props {
+  location: string;
+  data: any;
 }
 
-const ArticlesIndex = (props: Props) => {
-  const classes = useStyles();
-  const siteTitle = get(props, 'data.site.siteMetadata.title')
+const ArticlesIndex: React.SFC<Props> = props => {
+  const siteTitle = get(props, 'data.site.siteMetadata.title');
   const myArticles = get(props, 'data.allMarkdownArticle.edges').map(
-    (a: any) => a.node
-  )
+    (a: any) => a.node,
+  );
   const recommendedArticles = get(props, 'data.allPocketArticle.edges').map(
-    (a: any) => a.node
-  )
+    (a: any) => a.node,
+  );
 
   return (
     <Layout title="Recent articles" heroImage={props.data.file.childImageSharp}>
@@ -37,10 +30,10 @@ const ArticlesIndex = (props: Props) => {
         <ArticlePreviewGrid articles={recommendedArticles} />
       </Section>
     </Layout>
-  )
-}
+  );
+};
 
-export default ArticlesIndex
+export default ArticlesIndex;
 
 export const pageQuery = graphql`
   query ArticlesIndexQuery {
@@ -66,4 +59,4 @@ export const pageQuery = graphql`
       ...PocketArticlePreviewGridComponent
     }
   }
-`
+`;

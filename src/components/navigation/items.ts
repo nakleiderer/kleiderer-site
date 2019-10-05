@@ -1,14 +1,14 @@
 interface GatsbyLinkNavigationItem {
-  title: string
-  link: string
+  title: string;
+  link: string;
 }
 
 interface HTMLLinkNavigationItem {
-  title: string
-  externalLink: string
+  title: string;
+  externalLink: string;
 }
 
-export type NavigationItem = GatsbyLinkNavigationItem | HTMLLinkNavigationItem
+export type NavigationItem = GatsbyLinkNavigationItem | HTMLLinkNavigationItem;
 
 const navigationItems: Array<NavigationItem> = [
   {
@@ -23,6 +23,6 @@ const navigationItems: Array<NavigationItem> = [
     title: 'Recommended',
     link: '/category/recommended',
   },
-]
+];
 
-export default navigationItems
+export default navigationItems;

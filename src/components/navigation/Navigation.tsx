@@ -6,15 +6,16 @@ import {
   Theme,
   Toolbar,
   Typography,
-} from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
-import { graphql, Link, StaticQuery } from 'gatsby'
-import React from 'react'
-import navigationItems from './items'
-import NavigationDrawer from './NavigationDrawer'
-import NavigationItem from './NavigationItem'
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { graphql, Link, StaticQuery } from 'gatsby';
+import React from 'react';
+import navigationItems from './items';
+import NavigationDrawer from './NavigationDrawer';
+import NavigationItem from './NavigationItem';
 import { WithStyles, createStyles, withStyles } from '@material-ui/styles';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -39,27 +40,29 @@ const styles = (theme: Theme) =>
       color: 'inherit',
       textDecoration: 'none',
     },
-  })
+  });
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props extends WithStyles<typeof styles> {}
 
 interface State {
-  isOpen: boolean
+  isOpen: boolean;
 }
 
 class Navigation extends React.Component<Props, State> {
   state = {
     isOpen: false,
-  }
+  };
 
-  toggleDrawer = (open: boolean) => () => {
+  toggleDrawer = (open: boolean) => (): void => {
     this.setState({
       isOpen: open,
-    })
-  }
+    });
+  };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
 
     return (
       <nav role="navigation" className={classes.root}>
@@ -95,7 +98,7 @@ class Navigation extends React.Component<Props, State> {
                       }
                     }
                   `}
-                  render={data => data.site.siteMetadata.title}
+                  render={(data: any): string => data.site.siteMetadata.title}
                 />
               </Link>
             </Typography>
@@ -112,8 +115,8 @@ class Navigation extends React.Component<Props, State> {
           onClose={this.toggleDrawer(false)}
         />
       </nav>
-    )
+    );
   }
 }
 
-export default withStyles(styles)(Navigation)
+export default withStyles(styles)(Navigation);

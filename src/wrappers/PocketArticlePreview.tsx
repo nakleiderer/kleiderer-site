@@ -1,14 +1,27 @@
-import { graphql } from 'gatsby'
-import React from 'react'
-import ArticlePreview from '../components/ArticlePreview'
+import { graphql } from 'gatsby';
+import React from 'react';
+import ArticlePreview from '../components/ArticlePreview';
 
-type Article = any
-
-interface Props {
-  article: Article
+interface ArticleFields {
+  publishedAt: string;
+  domainFavicon: any;
+  categories: [];
+  featuredImage: any;
 }
 
-const PocketArticlePreview = ({ article }: Props) => {
+interface Article {
+  articleDomain: string;
+  excerpt: string;
+  url: string;
+  fields: ArticleFields;
+  title: string;
+}
+
+interface Props {
+  article: Article;
+}
+
+const PocketArticlePreview: React.SFC<Props> = ({ article }: Props) => {
   const newArticle = {
     avatar: article.fields.domainFavicon,
     byline: `from ${article.articleDomain}, read ${article.fields.publishedAt}`,
@@ -17,13 +30,19 @@ const PocketArticlePreview = ({ article }: Props) => {
     featuredImage: article.fields.featuredImage,
     title: article.title,
     readButtonComponent: React.forwardRef((props, ref) => (
-      <a ref={ref as any} href={article.url} target="_blank" {...props} />
-    ))
-  }
-  return <ArticlePreview article={newArticle} />
-}
+      <a
+        ref={ref as any}
+        href={article.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...props}
+      />
+    )),
+  };
+  return <ArticlePreview article={newArticle} />;
+};
 
-export default PocketArticlePreview
+export default PocketArticlePreview;
 
 export const articlePreviewComponentFragment = graphql`
   fragment PocketArticlePreviewComponent on PocketArticle {
@@ -53,4 +72,4 @@ export const articlePreviewComponentFragment = graphql`
     title
     url
   }
-`
+`;

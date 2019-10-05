@@ -1,10 +1,11 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({})
+const theme = createMuiTheme({});
 
-export default theme
+export default theme;
 
 // A theme for testing that all components use proper themeing
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const hotPinktheme = createMuiTheme({
   palette: {
     common: {
@@ -63,4 +64,4 @@ const hotPinktheme = createMuiTheme({
       disabledBackground: '#ff69b4',
     },
   },
-})
+});

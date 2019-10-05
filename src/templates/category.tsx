@@ -1,36 +1,31 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
-import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
-import BookPreviewGrid from '../components/BookPreviewGrid'
-import Layout from '../components/Layout'
-import Section from '../components/Section'
-import SoftwarePreviewGrid from '../components/SoftwarePreviewGrid'
-import { createStyles, makeStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
+import { graphql } from 'gatsby';
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
+import ArticlePreviewGrid from '../components/ArticlePreviewGrid';
+import BookPreviewGrid from '../components/BookPreviewGrid';
+import Layout from '../components/Layout';
+import Section from '../components/Section';
+import SoftwarePreviewGrid from '../components/SoftwarePreviewGrid';
 
 interface Props {
-  location: string
+  location: string;
 }
 
-const CategoryTemplate = (props: Props) => {
-  const classes = useStyles();
-  const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const category = get(props, 'data.markdownRemark')
+const CategoryTemplate: React.SFC<Props> = props => {
+  const siteTitle = get(props, 'data.site.siteMetadata.title');
+  const category = get(props, 'data.markdownRemark');
   const allMarkdownArticleEdges =
-    get(props, 'data.allMarkdownArticle.edges') || []
-  const allMarkdownArticle = allMarkdownArticleEdges.map(e => e.node)
-  const allPocketArticleEdges = get(props, 'data.allPocketArticle.edges') || []
-  const allPocketArticle = allPocketArticleEdges.map(e => e.node)
-  const books = get(props, 'data.allMarkdownBook.edges').map((b: any) => b.node)
+    get(props, 'data.allMarkdownArticle.edges') || [];
+  const allMarkdownArticle = allMarkdownArticleEdges.map((e: any) => e.node);
+  const allPocketArticleEdges = get(props, 'data.allPocketArticle.edges') || [];
+  const allPocketArticle = allPocketArticleEdges.map((e: any) => e.node);
+  const books = get(props, 'data.allMarkdownBook.edges').map(
+    (b: any) => b.node,
+  );
   const softwares = get(props, 'data.allMarkdownSoftware.edges').map(
-    (s: any) => s.node
-  )
+    (s: any) => s.node,
+  );
 
   return (
     <Layout
@@ -69,10 +64,10 @@ const CategoryTemplate = (props: Props) => {
         </Section>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default CategoryTemplate
+export default CategoryTemplate;
 
 export const articleTemplateQuery = graphql`
   query ArticleByCategory($id: String!) {
@@ -109,8 +104,8 @@ export const articleTemplateQuery = graphql`
       filter: {
         fields: { categories: { elemMatch: { id: { eq: $id } } } }
         frontmatter: { templateKey: { eq: "software" } }
-      },
-      sort: {fields: [fields___slug], order: ASC}
+      }
+      sort: { fields: [fields___slug], order: ASC }
     ) {
       ...SoftwarePreviewGridComponent
     }
@@ -118,10 +113,10 @@ export const articleTemplateQuery = graphql`
       filter: {
         fields: { categories: { elemMatch: { id: { eq: $id } } } }
         frontmatter: { templateKey: { eq: "book" } }
-      },
-      sort: {fields: [fields___slug], order: ASC}
+      }
+      sort: { fields: [fields___slug], order: ASC }
     ) {
       ...BookPreviewGridComponent
     }
   }
-`
+`;

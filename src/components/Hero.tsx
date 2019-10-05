@@ -1,9 +1,6 @@
-import {
-  Theme,
-  Typography,
-} from '@material-ui/core'
-import Img from 'gatsby-image'
-import React from 'react'
+import { Theme, Typography } from '@material-ui/core';
+import Img from 'gatsby-image';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 593,
     },
     heroContent: {
-        padding: theme.spacing(6, 1, 6, 1)
+      padding: theme.spacing(6, 1, 6, 1),
     },
     heroButtons: {
       marginTop: theme.spacing(4),
@@ -50,23 +47,29 @@ const useStyles = makeStyles((theme: Theme) =>
     secondaryText: {
       color: theme.palette.grey[100],
     },
-  }))
+  }),
+);
 
-const imgStyle = { objectFit: 'cover', height: 593 }
+const imgStyle = { objectFit: 'cover', height: 593 };
 
 interface Props {
-  title?: string
-  subtitle?: string
-  description?: string
-  heroImage?: any
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  heroImage?: any;
 }
 
-const Hero = ({ title, subtitle, description, heroImage }: Props) => {
-  const classes = useStyles()
-  const shouldRender = title || subtitle || description || heroImage
+const Hero: React.SFC<Props> = ({
+  title,
+  subtitle,
+  description,
+  heroImage,
+}) => {
+  const classes = useStyles();
+  const shouldRender = title || subtitle || description || heroImage;
   const heroUnitClassName = heroImage
     ? classes.heroUnitImage
-    : classes.heroUnitNoImage
+    : classes.heroUnitNoImage;
   return (
     <div>
       {shouldRender && (
@@ -130,7 +133,7 @@ const Hero = ({ title, subtitle, description, heroImage }: Props) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

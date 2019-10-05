@@ -1,18 +1,15 @@
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Hidden from '@material-ui/core/Hidden'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
-import React from 'react'
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Hidden from '@material-ui/core/Hidden';
+import Typography from '@material-ui/core/Typography';
+import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       display: 'flex',
@@ -33,24 +30,25 @@ const useStyles = makeStyles((theme: Theme) =>
     actions: {
       display: 'flex',
     },
-  }))
+  }),
+);
 
-type Book = any
+type Book = any;
 
 interface Props {
-  book: Book
+  book: Book;
 }
 
-const BookPreview = ({ book }: Props) => {
-  const classes = useStyles()
+const BookPreview: React.SFC<Props> = ({ book }) => {
+  const classes = useStyles();
   const cover =
     !!book.frontmatter.cover && !!book.frontmatter.cover.childImageSharp
       ? book.frontmatter.cover.childImageSharp
-      : false
-  const byline = `by ${book.frontmatter.byLine}`
+      : false;
+  const byline = `by ${book.frontmatter.byLine}`;
   // const categories = book.fields.categories || []
-  const hasLink = !!book.frontmatter.affiliate_link
-  const canBuy = hasLink
+  const hasLink = !!book.frontmatter.affiliate_link;
+  const canBuy = hasLink;
 
   return (
     <Card className={classes.card}>
@@ -90,10 +88,10 @@ const BookPreview = ({ book }: Props) => {
         )}
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default BookPreview
+export default BookPreview;
 
 export const bookPreviewComponentFragment = graphql`
   fragment BookPreviewComponent on MarkdownRemark {
@@ -119,4 +117,4 @@ export const bookPreviewComponentFragment = graphql`
       title
     }
   }
-`
+`;

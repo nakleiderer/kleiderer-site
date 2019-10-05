@@ -1,11 +1,9 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import React, { ReactNode } from 'react'
-import Footer from './Footer'
-import Hero from './Hero'
-import Navigation from './navigation/Navigation'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Theme } from '@material-ui/core/styles';
+import React, { ReactNode } from 'react';
+import Footer from './Footer';
+import Hero from './Hero';
+import Navigation from './navigation/Navigation';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,24 +25,25 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: 'auto',
       },
     },
-  }))
+  }),
+);
 
 interface Props {
-  children: ReactNode
-  title?: string
-  subtitle?: string
-  description?: string
-  heroImage?: any
+  children: ReactNode;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  heroImage?: any;
 }
 
-const Template = ({
+const Template: React.SFC<Props> = ({
   children,
   title,
   subtitle,
   description,
   heroImage,
-}: Props) => {
-  const classes = useStyles()
+}) => {
+  const classes = useStyles();
   return (
     <>
       <CssBaseline />
@@ -64,7 +63,7 @@ const Template = ({
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Template
+export default Template;

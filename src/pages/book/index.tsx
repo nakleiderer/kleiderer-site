@@ -1,32 +1,25 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
-import Helmet from 'react-helmet'
-import BookPreviewGrid from '../../components/BookPreviewGrid'
-import Layout from '../../components/Layout'
-import Section from '../../components/Section'
-import { makeStyles, createStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
+import { graphql } from 'gatsby';
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
+import BookPreviewGrid from '../../components/BookPreviewGrid';
+import Layout from '../../components/Layout';
+import Section from '../../components/Section';
 
 interface Props {
-  location: string
-  data: any
+  location: string;
+  data: any;
 }
 
-const BooksIndex = (props: Props) => {
-  const classes = useStyles();
-  const siteTitle = get(props, 'data.site.siteMetadata.title')
+const BooksIndex: React.SFC<Props> = props => {
+  const siteTitle = get(props, 'data.site.siteMetadata.title');
   const recommendedBooks = get(props, 'data.recommendedBooks.edges').map(
-    (b: any) => b.node
-  )
-  const readBooks = get(props, 'data.readBooks.edges').map((b: any) => b.node)
+    (b: any) => b.node,
+  );
+  const readBooks = get(props, 'data.readBooks.edges').map((b: any) => b.node);
   const unreadBooks = get(props, 'data.unreadBooks.edges').map(
-    (b: any) => b.node
-  )
+    (b: any) => b.node,
+  );
 
   return (
     <Layout
@@ -45,10 +38,10 @@ const BooksIndex = (props: Props) => {
         <BookPreviewGrid books={unreadBooks} />
       </Section>
     </Layout>
-  )
-}
+  );
+};
 
-export default BooksIndex
+export default BooksIndex;
 
 export const pageQuery = graphql`
   query BooksIndexQuery {
@@ -72,26 +65,26 @@ export const pageQuery = graphql`
             elemMatch: { frontmatter: { name: { eq: "Recommended" } } }
           }
         }
-      },
-      sort: {fields: [fields___slug], order: ASC}
+      }
+      sort: { fields: [fields___slug], order: ASC }
     ) {
       ...BookPreviewGridComponent
     }
     readBooks: allMarkdownRemark(
       filter: {
         frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: true } }
-      },
-      sort: {fields: [fields___slug], order: ASC}
+      }
+      sort: { fields: [fields___slug], order: ASC }
     ) {
       ...BookPreviewGridComponent
     }
     unreadBooks: allMarkdownRemark(
       filter: {
         frontmatter: { templateKey: { eq: "book" }, isCompleted: { eq: false } }
-      },
-      sort: {fields: [fields___slug], order: ASC}
+      }
+      sort: { fields: [fields___slug], order: ASC }
     ) {
       ...BookPreviewGridComponent
     }
   }
-`
+`;

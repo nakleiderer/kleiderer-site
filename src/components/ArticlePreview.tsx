@@ -1,20 +1,16 @@
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardHeader from '@material-ui/core/CardHeader'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import { graphql, Link } from 'gatsby'
-import Img from 'gatsby-image'
-import React from 'react'
-import CategoryChip from './CategoryChip'
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Typography from '@material-ui/core/Typography';
+import Img from 'gatsby-image';
+import React from 'react';
+import CategoryChip from './CategoryChip';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {},
     media: {
@@ -25,38 +21,39 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
     },
     avatar: {},
-  }))
+  }),
+);
 
 interface CategoryFields {
-  slug: string
+  slug: string;
 }
 
 interface CategoryFrontmatter {
-  name: string
+  name: string;
 }
 
 interface Category {
-  id: string
-  fields: CategoryFields
-  frontmatter: CategoryFrontmatter
+  id: string;
+  fields: CategoryFields;
+  frontmatter: CategoryFrontmatter;
 }
 
 interface Article {
-  avatar: any
-  title: string
-  byline: string
-  excerpt: string
-  featuredImage: any
-  readButtonComponent: any
-  categories: Category[]
+  avatar: any;
+  title: string;
+  byline: string;
+  excerpt: string;
+  featuredImage: any;
+  readButtonComponent: any;
+  categories: Category[];
 }
 
 interface Props {
-  article: Article
+  article: Article;
 }
 
-const ArticlePreview = ({ article }: Props) => {
-  const classes = useStyles()
+const ArticlePreview: React.SFC<Props> = ({ article }) => {
+  const classes = useStyles();
   const Header =
     article.avatar && article.avatar.childImageSharp ? (
       <CardHeader
@@ -70,7 +67,7 @@ const ArticlePreview = ({ article }: Props) => {
       />
     ) : (
       <CardHeader title={article.title} subheader={article.byline} />
-    )
+    );
 
   return (
     <Card className={classes.card} elevation={1}>
@@ -95,7 +92,7 @@ const ArticlePreview = ({ article }: Props) => {
         ))}
       </CardActions>
     </Card>
-  )
-}
+  );
+};
 
-export default ArticlePreview
+export default ArticlePreview;
