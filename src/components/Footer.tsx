@@ -1,8 +1,6 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import React from 'react'
+import { Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -12,12 +10,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(8),
       padding: `${theme.spacing(6, 0)}`,
     },
-  }))
+  }),
+);
 
-interface Props {}
-
-const Footer = ({  }: Props) => {
-  const classes = useStyles()
+const Footer: React.SFC = () => {
+  const classes = useStyles();
   return (
     <footer className={classes.footer}>
       <Typography variant="h6" align="center" gutterBottom />
@@ -31,7 +28,7 @@ const Footer = ({  }: Props) => {
         reserved.
       </Typography>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,17 +1,14 @@
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
-import React from 'react'
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       display: 'flex',
@@ -28,17 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
     cardContent: {
       padding: 8,
     },
-  }))
+  }),
+);
 
-type Software = any
+type Software = any;
 
 interface Props {
-  software: Software
+  software: Software;
 }
 
-const SoftwarePreview = ({ software }: Props) => {
+const SoftwarePreview: React.SFC<Props> = ({ software }) => {
   const classes = useStyles();
-  const logo = software.frontmatter.logo.childImageSharp
+  const logo = software.frontmatter.logo.childImageSharp;
 
   return (
     <Card className={classes.card}>
@@ -66,10 +64,10 @@ const SoftwarePreview = ({ software }: Props) => {
         </Button>
       </CardActions>
     </Card>
-  )
-}
+  );
+};
 
-export default SoftwarePreview
+export default SoftwarePreview;
 
 export const softwarePreviewComponentFragment = graphql`
   fragment SoftwarePreviewComponent on MarkdownRemark {
@@ -87,4 +85,4 @@ export const softwarePreviewComponentFragment = graphql`
       name
     }
   }
-`
+`;

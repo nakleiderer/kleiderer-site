@@ -1,22 +1,15 @@
-import { Grid } from '@material-ui/core'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import React from 'react'
-import SoftwarePreview from './SoftwarePreview'
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { Grid } from '@material-ui/core';
+import { graphql } from 'gatsby';
+import React from 'react';
+import SoftwarePreview from './SoftwarePreview';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
-
-type Software = any
+type Software = any;
 
 interface Props {
-  softwares: Array<Software>
+  softwares: Array<Software>;
 }
 
-const SoftwarePreviewGrid = ({ softwares }: Props) => {
-  const classes = useStyles();
+const SoftwarePreviewGrid: React.SFC<Props> = ({ softwares }) => {
   return (
     <Grid container direction="row" justify="flex-start" spacing={3}>
       {softwares.map(s => (
@@ -25,10 +18,10 @@ const SoftwarePreviewGrid = ({ softwares }: Props) => {
         </Grid>
       ))}
     </Grid>
-  )
-}
+  );
+};
 
-export default SoftwarePreviewGrid
+export default SoftwarePreviewGrid;
 
 export const softwarePreviewGridComponentFragment = graphql`
   fragment SoftwarePreviewGridComponent on MarkdownRemarkConnection {
@@ -38,4 +31,4 @@ export const softwarePreviewGridComponentFragment = graphql`
       }
     }
   }
-`
+`;

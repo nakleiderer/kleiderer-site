@@ -1,17 +1,14 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import React, { ReactNode } from 'react'
-import Footer from './Footer'
-import Navigation from './navigation/Navigation'
-import { Typography } from '@material-ui/core'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Theme } from '@material-ui/core/styles';
+import React, { ReactNode } from 'react';
+import Footer from './Footer';
+import Navigation from './navigation/Navigation';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     layout: {
-      [theme.breakpoints.up(1100 + theme.spacing(3*2))]: {
+      [theme.breakpoints.up(1100 + theme.spacing(3 * 2))]: {
         width: 1100,
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -21,24 +18,25 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 'auto',
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
-      [theme.breakpoints.up(1100 + theme.spacing(3*2))]: {
+      [theme.breakpoints.up(1100 + theme.spacing(3 * 2))]: {
         width: 1100,
         marginLeft: 'auto',
         marginRight: 'auto',
       },
     },
-  }))
+  }),
+);
 
 interface Props {
-  children: ReactNode
-  title?: string
-  subtitle?: string
-  description?: string
-  heroImage?: any
+  children: ReactNode;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  heroImage?: any;
 }
 
-const Template = ({ children }: Props) => {
-  const classes = useStyles()
+const Template: React.SFC<Props> = ({ children }: Props) => {
+  const classes = useStyles();
   return (
     <>
       <CssBaseline />
@@ -52,7 +50,7 @@ const Template = ({ children }: Props) => {
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Template
+export default Template;

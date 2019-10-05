@@ -1,31 +1,24 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
-import Helmet from 'react-helmet'
-import ArticlePreviewGrid from '../components/ArticlePreviewGrid'
-import Layout from '../components/Layout'
-import Section from '../components/Section'
-import { createStyles, makeStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}))
+import { graphql } from 'gatsby';
+import get from 'lodash/get';
+import React from 'react';
+import Helmet from 'react-helmet';
+import ArticlePreviewGrid from '../components/ArticlePreviewGrid';
+import Layout from '../components/Layout';
+import Section from '../components/Section';
 
 interface Props {
-  location: string
+  location: string;
 }
 
-const RootIndex = (props: Props) => {
-  const classes = useStyles()
-  const { title, subtitle, description } = get(props, 'data.site.siteMetadata')
-  const heroImage = get(props, 'data.file.childImageSharp')
+const RootIndex: React.SFC<Props> = props => {
+  const { title, subtitle, description } = get(props, 'data.site.siteMetadata');
+  const heroImage = get(props, 'data.file.childImageSharp');
   const markdownArticles = get(props, 'data.allMarkdownArticle.edges').map(
-    (a: any) => a.node
-  )
+    (a: any) => a.node,
+  );
   const pocketArticles = get(props, 'data.allPocketArticle.edges').map(
-    (a: any) => a.node
-  )
+    (a: any) => a.node,
+  );
 
   return (
     <Layout
@@ -45,10 +38,10 @@ const RootIndex = (props: Props) => {
         <ArticlePreviewGrid articles={pocketArticles} />
       </Section>
     </Layout>
-  )
-}
+  );
+};
 
-export default RootIndex
+export default RootIndex;
 
 export const pageQuery = graphql`
   query HomeQuery {
@@ -76,4 +69,4 @@ export const pageQuery = graphql`
       ...PocketArticlePreviewGridComponent
     }
   }
-`
+`;

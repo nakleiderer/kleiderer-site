@@ -1,10 +1,7 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     fullWidth: {
       left: '50%',
@@ -15,15 +12,16 @@ const useStyles = makeStyles((theme: Theme) =>
       right: '50%',
       width: '100vw',
     },
-  }))
+  }),
+);
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const FullWidth = ({ children }: Props) => {
-  const classes = useStyles()
-  return <div className={classes.fullWidth}>{children}</div>
-}
+const FullWidth: React.SFC<Props> = ({ children }) => {
+  const classes = useStyles();
+  return <div className={classes.fullWidth}>{children}</div>;
+};
 
-export default FullWidth
+export default FullWidth;

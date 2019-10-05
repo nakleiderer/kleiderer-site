@@ -5,11 +5,11 @@ import {
   Theme,
   Toolbar,
   Typography,
-} from '@material-ui/core'
-import { graphql, Link, StaticQuery } from 'gatsby'
-import React, { SyntheticEvent } from 'react'
-import navigationItems from './items'
-import NavigationDrawerItem from './NavigationDrawerItem'
+} from '@material-ui/core';
+import { graphql, Link, StaticQuery } from 'gatsby';
+import React, { SyntheticEvent } from 'react';
+import navigationItems from './items';
+import NavigationDrawerItem from './NavigationDrawerItem';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,17 +29,18 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'inherit',
       textDecoration: 'none',
     },
-  }))
+  }),
+);
 
 interface Props {
-  onClose: (event: SyntheticEvent<{}, Event>) => void
-  onOpen: (event: SyntheticEvent<{}, Event>) => void
-  open: boolean
+  onClose: (event: SyntheticEvent<{}, Event>) => void;
+  onOpen: (event: SyntheticEvent<{}, Event>) => void;
+  open: boolean;
 }
 
-const NavigationDrawer = ({ onClose, onOpen, open }: Props) => {
-  const classes = useStyles()
-  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
+const NavigationDrawer: React.SFC<Props> = ({ onClose, onOpen, open }) => {
+  const classes = useStyles();
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
     <SwipeableDrawer
@@ -66,7 +67,7 @@ const NavigationDrawer = ({ onClose, onOpen, open }: Props) => {
                     }
                   }
                 `}
-                render={data => data.site.siteMetadata.title}
+                render={(data): string => data.site.siteMetadata.title}
               />
             </Link>
           </Typography>
@@ -80,7 +81,7 @@ const NavigationDrawer = ({ onClose, onOpen, open }: Props) => {
         </div>
       </div>
     </SwipeableDrawer>
-  )
-}
+  );
+};
 
-export default NavigationDrawer
+export default NavigationDrawer;

@@ -1,8 +1,6 @@
-import {
-  Theme,
-} from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import React, { ReactNode } from 'react'
+import { Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React, { ReactNode } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -10,15 +8,16 @@ const useStyles = makeStyles((theme: Theme) =>
     section: {
       marginTop: theme.spacing(6),
     },
-  }))
+  }),
+);
 
 interface Props {
-  title?: string
-  children?: ReactNode
-  hideIf?: boolean
+  title?: string;
+  children?: ReactNode;
+  hideIf?: boolean;
 }
 
-const Section = ({ title, children, hideIf }: Props) => {
+const Section: React.SFC<Props> = ({ title, children, hideIf }) => {
   const classes = useStyles();
   return (
     <div>
@@ -31,7 +30,7 @@ const Section = ({ title, children, hideIf }: Props) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

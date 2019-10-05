@@ -1,47 +1,48 @@
-import { Theme } from '@material-ui/core/styles'
-import { graphql } from 'gatsby'
-import React from 'react'
-import Helmet from 'react-helmet'
-import Layout from '../components/ArticleLayout'
-import { Typography } from '@material-ui/core'
-import Img from 'gatsby-image'
+import { Theme } from '@material-ui/core/styles';
+import { graphql } from 'gatsby';
+import React from 'react';
+import Helmet from 'react-helmet';
+import Layout from '../components/ArticleLayout';
+import { Typography } from '@material-ui/core';
+import Img from 'gatsby-image';
 import Markdown from '../components/Markdown';
 import { createStyles, makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     headingContainer: {
-      padding: theme.spacing(4,0),
+      padding: theme.spacing(4, 0),
     },
     heading: {
-      paddingBottom: theme.spacing(4)
+      paddingBottom: theme.spacing(4),
     },
     image: {
       width: '100%',
       height: 593,
       borderRadius: 16,
     },
-  }))
+  }),
+);
 
-const imgStyle = { objectFit: 'cover', height: 593 }
+const imgStyle = { objectFit: 'cover', height: 593 };
 
 interface Props {
-  location: string
-  data: any
+  location: string;
+  data: any;
 }
 
-const ArticleTemplate = (props: Props) => {
+const ArticleTemplate: React.SFC<Props> = props => {
   const classes = useStyles();
-  const siteTitle = props.data.site.siteMetadata.title
+  const siteTitle = props.data.site.siteMetadata.title;
 
-  const article = props.data.markdownRemark
-  const title = article.frontmatter.title
-  const subtitle = article.frontmatter.subtitle
-  const author = article.frontmatter.author
-  const excerpt = article.excerpt
-  const publishedAt = article.frontmatter.publishedAt
-  const byline = `by ${author} on ${article.frontmatter.publishedAt}`
-  const coverImg = article.frontmatter.cover.childImageSharp
+  const article = props.data.markdownRemark;
+  const title = article.frontmatter.title;
+  const subtitle = article.frontmatter.subtitle;
+  const author = article.frontmatter.author;
+  const excerpt = article.excerpt;
+  const publishedAt = article.frontmatter.publishedAt;
+  const byline = `by ${author} on ${article.frontmatter.publishedAt}`;
+  const coverImg = article.frontmatter.cover.childImageSharp;
 
   return (
     <>
@@ -89,13 +90,15 @@ const ArticleTemplate = (props: Props) => {
           />
         </div>
 
-        <div><Markdown ast={article.htmlAst}/></div>
+        <div>
+          <Markdown ast={article.htmlAst} />
+        </div>
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default ArticleTemplate
+export default ArticleTemplate;
 
 export const articleTemplateQuery = graphql`
   query ArticleById($id: String!) {
@@ -123,4 +126,4 @@ export const articleTemplateQuery = graphql`
       htmlAst
     }
   }
-`
+`;
