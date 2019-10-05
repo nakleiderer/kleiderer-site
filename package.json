@@ -53,8 +53,12 @@
     "@types/react-helmet": "^5.0.10",
     "@types/react-jss": "^8.6.4",
     "@types/rehype-react": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "gatsby": "^2.15.15",
     "prettier": "^1.18.2",
@@ -71,14 +75,16 @@
     "url": "git+https://github.com/nakleiderer/kleiderer-site.git"
   },
   "scripts": {
+    "build": "gatsby build",
+    "clean": "gatsby clean",
     "dev": "gatsby develop -H 0.0.0.0",
     "dev:clean": "npm run clean && npm run dev",
     "serve": "gatsby serve -H 0.0.0.0",
-    "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.jsx' 'src/**/*.ts' 'src/**/*.tsx' 'src/**/*.md'",
-    "type-check": "tsc --noEmit",
-    "build": "gatsby build",
-    "clean": "gatsby clean"
+    "lint": "npm run lint:types && npm run lint:eslint",
+    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:fix": "npm run lint:types && npm run lint:eslint:fix",
+    "lint:types": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

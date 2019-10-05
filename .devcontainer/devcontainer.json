@@ -1,13 +1,36 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"name": "Node.js (latest LTS) & TypeScript",
-	"dockerComposeFile": "docker-compose.devcontainer.yml",
-	"service": "dev",
-	"workspaceFolder": "/workspace",
-	"extensions": [
-		"esbenp.prettier-vscode",
-		"ms-azuretools.vscode-docker",
-		"ms-vscode.vscode-typescript-tslint-plugin",
-		"wakatime.vscode-wakatime"
-	]
+  "name": "Node.js (latest LTS) & TypeScript",
+  "dockerComposeFile": "docker-compose.devcontainer.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "wakatime.vscode-wakatime"
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "[javascript]": {
+      "editor.formatOnSave": false
+    },
+    "[javascriptreact]": {
+      "editor.formatOnSave": false
+    },
+    "[typescript]": {
+      "editor.formatOnSave": false
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": false
+    },
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      { "language": "typescript", "autoFix": true },
+      { "language": "typescriptreact", "autoFix": true }
+    ]
+  }
 }
