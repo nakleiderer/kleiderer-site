@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
-    "@types/lodash": "^4.14.138",
+    "@types/lodash": "^4.14.149",
     "@types/react-helmet": "^5.0.10",
     "@types/react-jss": "^8.6.4",
     "@types/rehype-react": "^3.1.0",
