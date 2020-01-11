@@ -6,5 +6,6 @@ description: >-
   and cross-platform productivity app.
 logo: /images/uploads/1024_appstore.png
 affiliate_link: 'https://nozbe.com/?a=nakleiderer'
-categories: ['Recommended']
+categories: []
 ---
+
