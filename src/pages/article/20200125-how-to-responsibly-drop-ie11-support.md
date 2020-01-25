@@ -5,6 +5,7 @@ subtitle: and stop supporting other legacy browsers too
 author: Nicolas Kleiderer
 published_on: 2020-01-25T17:38:57.066Z
 cover: /images/uploads/sebastian-herrmann-jztqvxcykys-unsplash.jpg
+categories: []
 ---
 Supporting legacy browsers take a significant amount of Engineering resources. With [less than 3%](https://gs.statcounter.com/browser-market-share) of global browser market share attributable to IE11, it hardly makes sense to support it with feature-parity by default. Most web developers desire to completely drop support for legacy browsers, including IE11, but we have to address the business impact of those changes. By understanding your clients and making efforts to minimize the impact of dropping support, both business owners and web developers can breathe a sigh of relief.
 
