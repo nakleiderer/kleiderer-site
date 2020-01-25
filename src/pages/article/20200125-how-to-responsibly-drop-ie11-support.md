@@ -87,7 +87,7 @@ Keep your feature detection code though. When you detect a user is missing featu
 
 Have thoughts on this topic or feedback about this article? [Submit comments here](https://github.com/nakleiderer/kleiderer-site/issues/349). Yes, you'll be required to use a GitHub account, but hopefully this will keep the crazies out and yield a more thoughtful and healthy discussion.
 
-Found a typo? [Open a pull Request](https://github.com/nakleiderer/kleiderer-site).
+Found a bug or a typo? [Open a pull request](https://github.com/nakleiderer/kleiderer-site).
 
 ###### Acknowledgements
 
