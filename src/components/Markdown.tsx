@@ -11,6 +11,11 @@ const roundedCorners: React.CSSProperties = {
   borderRadius: 16,
 };
 
+const borderLeft: React.CSSProperties = {
+  borderLeft: '6px solid #ccc',
+  paddingLeft: '1rem',
+};
+
 const renderAst = new RehypeReact({
   createElement: React.createElement,
   components: {
@@ -50,14 +55,19 @@ const renderAst = new RehypeReact({
       </Typography>
     ),
     ol: (props: any) => (
-      <Typography variant="body1" component="ol" {...props}>
+      <Typography variant="body1" component="ol" gutterBottom={true} {...props}>
         {props.children}
       </Typography>
     ),
     ul: (props: any) => (
-      <Typography variant="body1" component="ul" {...props}>
+      <Typography variant="body1" component="ul" gutterBottom={true} {...props}>
         {props.children}
       </Typography>
+    ),
+    div: (props: any) => (
+      <div {...props} style={{ ...roundedCorners, ...props.style }}>
+        {props.children}
+      </div>
     ),
     span: (props: any) => (
       <span {...props} style={{ ...roundedCorners, ...props.style }}>
@@ -66,6 +76,11 @@ const renderAst = new RehypeReact({
     ),
     img: (props: any) => (
       <img {...props} style={{ ...roundedCorners, ...props.style }} />
+    ),
+    blockquote: (props: any) => (
+      <blockquote {...props} style={{ ...borderLeft, ...props.style }}>
+        {props.children}
+      </blockquote>
     ),
   },
 }).Compiler;
