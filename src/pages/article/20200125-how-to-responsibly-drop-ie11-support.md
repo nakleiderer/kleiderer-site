@@ -9,13 +9,6 @@ categories: []
 ---
 Supporting legacy browsers take a significant amount of Engineering resources. With [less than 3%](https://gs.statcounter.com/browser-market-share) of global browser market share attributable to IE11, it hardly makes sense to support it with feature-parity by default. Most web developers desire to completely drop support for legacy browsers, including IE11, but we have to address the business impact of those changes. By understanding your clients and making efforts to minimize the impact of dropping support, both business owners and web developers can breathe a sigh of relief.
 
-<figure> 
- <div id="all-browser-ww-monthly-201812-201912" width="100%" height="400" style="width:100%; height: 400px;"></div>
- <figcaption>
- Can you even see IE11 market share? Source: <a href="https://gs.statcounter.com/browser-market-share">StatCounter Global Stats - Browser Market Share</a>
- </figcaption>
-</figure>
-
 ## Instrument Pages with Analytics
 
 Before you get started on your journey to supporting _only_ modern browsers, you need to understand your current audience. Make sure you have data-driven answers to the following questions:
@@ -91,7 +84,4 @@ Keep your feature detection code though. When you detect a user is missing featu
 
 ## Acknowledgements
 - Cover photo by [Sebastian Herrmann](https://unsplash.com/@officestock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/frustration?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
-
-
-<script type="text/javascript" src="https://www.statcounter.com/js/fusioncharts.js"></script>
-<script type="text/javascript" src="https://gs.statcounter.com/chart.php?all-browser-ww-monthly-201812-201912&chartWidth=600"></script>
+- Browser usage statistics from [StatCounter Global Stats - Browser Market Share](https://gs.statcounter.com/browser-market-share)
