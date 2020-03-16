@@ -41,7 +41,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
-    "react-jss": "^8.6.1",
+    "react-jss": "^10.1.1",
     "redux": "^3.7.2",
     "rehype-react": "^3.1.0",
     "sharp": "^0.22.1",
