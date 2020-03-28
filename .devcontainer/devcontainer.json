@@ -1,0 +1,11 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+  "name": "Node.js 12 & TypeScript",
+  "dockerComposeFile": "../docker-compose.yml",
+  "extensions": ["esbenp.prettier-vscode"],
+  "settings": {},
+  //   "postCreateCommand": "npm ci",
+  "service": "app",
+  "workspaceFolder": "/app",
+//   "remoteUser": "node"
+}

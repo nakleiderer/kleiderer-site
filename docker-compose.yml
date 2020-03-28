@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/dev/Dockerfile
+    command: bash
+    stdin_open: true
+    tty: true
+    user: node
+    volumes:
+      - .:/app:delegated
+      - "${HOME}/.gitconfig:/root/.gitconfig"
+      - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
+      - site_node_modules:/app/site/node_modules
+    env_file:
+      - ./.env
+      - ./.docker/dev/.env.docker
+    ports:
+      - "3000:3000"
+
+
+volumes:
+  site_node_modules:
