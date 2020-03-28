@@ -7,5 +7,5 @@
   //   "postCreateCommand": "npm ci",
   "service": "app",
   "workspaceFolder": "/app",
-//   "remoteUser": "node"
+  "remoteUser": "node"
 }
