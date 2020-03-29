@@ -198,3 +198,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode,firebase
+
+
+## Eleventy
+site/public
+site/src/css/normalize.css
