@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:normalize": "cp node_modules/normalize.css/normalize.css src/_includes/styles",
+    "build:normalize": "cp node_modules/normalize.css/normalize.css src/_includes/styles/",
     "build:sass": "sass src/styles/:src/_includes/styles/",
     "build:eleventy": "npx @11ty/eleventy",
     "build": "npm-run-all build:normalize build:sass build:eleventy",
