@@ -202,4 +202,4 @@ $RECYCLE.BIN/
 
 ## Eleventy
 site/public
-site/src/css/normalize.css
+site/src/_includes/styles
