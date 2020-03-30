@@ -17,7 +17,7 @@ services:
       - ./.env
       - ./.docker/dev/.env.docker
     ports:
-      - "3000:3000"
+      - "3838:3838"
 
 volumes:
   site_node_modules:
