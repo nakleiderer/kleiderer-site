@@ -1,0 +1,30 @@
+$spacing-ratio: variable($spacing-prefix, ratio);
+
+k-box {
+  display: block;
+}
+
+@each $variant in $spacings {
+  $current: variable($spacing-prefix, $variant);
+  $size-down: calc(#{$current} / #{$spacing-ratio});
+
+  k-box[stack="#{$variant}"] {
+    margin-bottom: $current;
+  }
+
+  k-box[inline="#{$variant}"] {
+    margin-right: $current;
+  }
+
+  k-box[inset="#{$variant}"] {
+    padding: $current;
+  }
+
+  k-box[inset-squish="#{$variant}"] {
+    padding: $size-down $current;
+  }
+
+  k-box[inset-stretch="#{$variant}"] {
+    padding: $current $size-down;
+  }
+}

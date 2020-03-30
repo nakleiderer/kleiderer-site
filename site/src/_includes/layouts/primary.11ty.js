@@ -26,30 +26,37 @@ class PrimaryLayout {
             href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap"
             rel="stylesheet"
           />
-          <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
-          <link rel="stylesheet" type="text/css" href="/css/index.css" />
+          <link rel="stylesheet" type="text/css" href="/styles/normalize.css" />
+          <link rel="stylesheet" type="text/css" href="/styles/index.css" />
         </head>
         <body>
-          <header class="banner" p="3">
-            <img
-              src="https://avatars0.githubusercontent.com/u/4278631?s=460&u=f12f7d1133458d3adb66d5802495c9f819206af1&v=4"
-              width="48px"
-              height="48px"
-              class="u-shape-cricle"
-              mr="2"
-            />
-            <a href="/">Nicolas Kleiderer</a>
+          <header class="banner">
+            <k-box class="banner" inset="l">
+              <k-box inline="m">
+                <img
+                  src="https://avatars0.githubusercontent.com/u/4278631?s=460&u=f12f7d1133458d3adb66d5802495c9f819206af1&v=4"
+                  width="48px"
+                  height="48px"
+                  class="u-shape-cricle"
+                />
+              </k-box>
+              <a class="u-font-size-4 u-color-gray-80" href="/">Nicolas Kleiderer</a>
+            </k-box>
           </header>
 
           <main>
-            ${content}
+            <k-box inset-squish="l">
+              ${content}
+            </k-box>
           </main>
 
-          <footer p="3">
-            <p>
-              &copy; ${new Date().getFullYear()} Nicolas Kleiderer. All rights
-              reserved.
-            </p>
+          <footer>
+            <k-box inset="l">
+              <p class="u-color-gray-60 u-font-size-small">
+                &copy; ${new Date().getFullYear()} Nicolas Kleiderer. All rights
+                reserved.
+              </p>
+            </k-box>
           </footer>
         </body>
       </html>

@@ -1,0 +1,6 @@
+$spacing-prefix: spacing;
+$spacings: "s", "m", "l", "xl", "xxl";
+
+:root {
+  @include scale-variables($spacing-prefix, 1rem, m, 2, $spacings);
+}

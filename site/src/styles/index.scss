@@ -1,0 +1,119 @@
+@import "mixins/scale-variables";
+@import "typography";
+@import "spacing";
+@import "color";
+@import "system";
+
+:root {
+  --typography-rhythm: var(--spacing-m);
+
+  --site-max-width: 1200px;
+  --article-max-width: 35rem;
+}
+
+html {
+  box-sizing: border-box;
+  background-color: var(--color-gray-5);
+  color: var(--color-gray-90);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: var(--typography-rhythm);
+  color: inherit;
+}
+
+ol,
+ul,
+li {
+  margin: 0;
+  margin-bottom: var(--typography-rhythm);
+}
+
+hr {
+  border: 0.5px solid var(--color-gray-40);
+}
+
+a {
+  color: var(--color-gray-60);
+}
+
+a:hover,
+a:focus {
+  color: var(--color-black);
+}
+
+blockquote {
+  border-left: var(--spacing-s) solid var(--color-gray-30);
+  margin: 0;
+  padding-left: var(--spacing-m);
+}
+
+header {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--site-max-width);
+}
+
+main {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--site-max-width);
+  flex-grow: 1;
+}
+
+section {
+  margin: 0 auto;
+}
+
+article {
+  max-width: var(--article-max-width);
+  margin: 0 auto;
+}
+
+footer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--site-max-width);
+}
+
+footer > k-box > p {
+  text-align: center;
+  margin: 0;
+}
+
+.u-listStyleNone {
+  list-style-type: none;
+  padding: 0;
+}
+
+.u-shape-cricle {
+  border-radius: 50%;
+}
+
+.banner {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
