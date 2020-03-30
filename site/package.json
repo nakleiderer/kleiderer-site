@@ -11,7 +11,8 @@
     "build": "npm-run-all build:normalize build:sass build:eleventy",
     "watch:sass": "npm run build:sass -- --watch",
     "watch:eleventy": "npm run build:eleventy -- --serve --port=3838",
-    "start": "npm-run-all build:normalize build:sass --parallel watch:*"
+    "start": "npm-run-all build:normalize build:sass --parallel watch:*",
+    "deploy": "npx firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",
