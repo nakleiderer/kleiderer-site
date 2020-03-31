@@ -26,5 +26,7 @@ jobs:
           name: site-public
           path: site/public
       - name: Deploy to Firebase Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: npm run --prefix ./site deploy -- --token "$FIREBASE_TOKEN"
         # if: github.event_name == 'push' && github.ref == 'master'
