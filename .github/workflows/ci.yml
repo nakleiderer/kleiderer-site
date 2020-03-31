@@ -29,4 +29,4 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: npm run --prefix ./site deploy -- --token "$FIREBASE_TOKEN"
-        # if: github.event_name == 'push' && github.ref == 'master'
+        if: github.event_name == 'push' && github.ref == 'master'
