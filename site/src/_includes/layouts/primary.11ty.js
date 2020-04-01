@@ -26,8 +26,6 @@ class PrimaryLayout {
             href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap"
             rel="stylesheet"
           />
-          <link rel="stylesheet" type="text/css" href="/styles/normalize.css" />
-          <link rel="stylesheet" type="text/css" href="/styles/index.css" />
         </head>
         <body>
           <header class="banner">
@@ -40,7 +38,9 @@ class PrimaryLayout {
                   class="u-shape-cricle"
                 />
               </k-box>
-              <a class="u-font-size-4 u-color-gray-80" href="/">Nicolas Kleiderer</a>
+              <a class="u-font-size-4 u-color-gray-80" href="/"
+                >Nicolas Kleiderer</a
+              >
             </k-box>
           </header>
 

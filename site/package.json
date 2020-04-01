@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf public",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:normalize": "cp node_modules/normalize.css/normalize.css src/_includes/styles/",
-    "build:sass": "sass src/styles/:src/_includes/styles/",
-    "build:eleventy": "npx @11ty/eleventy",
-    "build": "npm-run-all build:normalize build:sass build:eleventy",
-    "watch:sass": "npm run build:sass -- --watch",
-    "watch:eleventy": "npm run build:eleventy -- --serve --port=3838",
-    "start": "npm-run-all build:normalize build:sass --parallel watch:*",
+    "build:webpack": "npx webpack --config=webpack.config.prod.js",
+    "build:eleventy": "ELEVENTY_ENV=production npx @11ty/eleventy",
+    "build": "npm-run-all clean build:eleventy build:webpack",
+    "serve:webpack": "npx webpack-dev-server --config=webpack.config.dev.js",
+    "serve:eleventy": "ELEVENTY_ENV=development npx @11ty/eleventy --serve --port=3838",
+    "serve": "npm-run-all clean --parallel serve:*",
     "deploy": "npx firebase deploy --only hosting"
   },
   "repository": {
@@ -27,8 +27,25 @@
   "homepage": "https://github.com/nakleiderer/kleiderer-site#readme",
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
     "firebase-tools": "^7.16.2",
-    "npm-run-all": "^4.1.5"
+    "glob": "^7.1.6",
+    "html-webpack-plugin": "^4.0.3",
+    "mini-css-extract-plugin": "^0.9.0",
+    "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
