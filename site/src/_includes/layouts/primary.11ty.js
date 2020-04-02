@@ -53,7 +53,7 @@ class PrimaryLayout {
 
           <footer>
             <k-box inset="l">
-              <p class="u-color-gray-60 u-font-size-small">
+              <p class="u-color-gray-70 u-font-size-small">
                 &copy; ${new Date().getFullYear()} Nicolas Kleiderer. All rights
                 reserved.
               </p>
