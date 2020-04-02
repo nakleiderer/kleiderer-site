@@ -33,6 +33,7 @@ class PrimaryLayout {
             <k-box class="banner" inset="l">
               <k-box inline="m">
                 <img
+                  alt="Photo of Nicolas Kleiderer"
                   src="https://avatars0.githubusercontent.com/u/4278631?s=460&u=f12f7d1133458d3adb66d5802495c9f819206af1&v=4"
                   width="48px"
                   height="48px"
