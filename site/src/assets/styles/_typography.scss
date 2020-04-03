@@ -23,9 +23,15 @@ $font-families: (
 
   --line-height: 1.618;
   --text-indent: 0;
+
+  --font-size-base: 0.875em;
+
+  @media (min-width: 600px) {
+    --font-size-base: 1em;
+  }
 }
 
-html {
+body {
   line-height: var(--line-height);
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-regular);
