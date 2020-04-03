@@ -199,6 +199,5 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode,firebase
 
 
-## Eleventy
-site/public
-site/src/_includes/styles
+## Eleventy + Webpack Builds
+site/build

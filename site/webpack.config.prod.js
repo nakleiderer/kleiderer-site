@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const commonConfig = require("./webpack.config.common");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = merge(commonConfig, {
   mode: "production",
@@ -20,6 +21,7 @@ module.exports = merge(commonConfig, {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "assets/[name].[contenthash].css"
     })

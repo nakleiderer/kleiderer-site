@@ -5,7 +5,7 @@ module.exports = merge(commonConfig, {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./build/dist"
   },
   module: {
     rules: [

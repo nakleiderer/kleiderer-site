@@ -9,11 +9,13 @@ class Index {
   }
 
   render({ collections }) {
+    const articles = collections.article || [];
+
     return html`
       <article>
         <h1>Recent Articles</h1>
         <ul>
-          ${collections.article
+          ${articles
             .map(
               article =>
                 html`

@@ -1,11 +1,11 @@
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const glob = require("glob");
 
-const htmlEntryPoints = glob.sync("./public/**/*.html");
+const htmlEntryPoints = glob.sync("./build/11ty/**/*.html");
 const htmlWebpackPlugins = htmlEntryPoints.map(filepath => {
-  const filename = filepath.replace("./public/", "");
+  const filename = filepath.replace("./build/11ty/", "");
   const template = path.resolve(__dirname, filepath);
   const options = {
     filename,
@@ -16,12 +16,15 @@ const htmlWebpackPlugins = htmlEntryPoints.map(filepath => {
 });
 
 module.exports = {
-  entry: "./public/assets/main.js",
+  entry: "./src/assets/pack.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build/dist"),
     filename: "assets/[name].[contenthash].js"
   },
-  plugins: [new CleanWebpackPlugin(), ...htmlWebpackPlugins],
+  plugins: [
+    new CopyPlugin([{ context: "src", from: "images/**" }]),
+    ...htmlWebpackPlugins
+  ],
   module: {
     rules: [
       {

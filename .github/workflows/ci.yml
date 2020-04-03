@@ -23,8 +23,8 @@ jobs:
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: site-public
-          path: site/public
+          name: site-dist
+          path: site/build/dist
       - name: Deploy to Firebase Hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
