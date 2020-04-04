@@ -17,7 +17,9 @@ services:
       - ./.env
       - ./.docker/dev/.env.docker
     ports:
-      - "3838:3838"
+      - "3838:3838" # light-server
+      - "9005":"9005" # firebase login
+      - "5005":"5005" # firebease hosting
 
 volumes:
   site_node_modules:
