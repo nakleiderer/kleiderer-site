@@ -52,6 +52,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "eleventy-plugin-seo": "^0.5.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.26.3"
   }
