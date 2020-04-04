@@ -1,35 +1,11 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-  "name": "Node.js (latest LTS) & TypeScript",
-  "dockerComposeFile": "docker-compose.devcontainer.yml",
-  "service": "dev",
-  "workspaceFolder": "/workspace",
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "ms-azuretools.vscode-docker",
-    "ms-vscode.vscode-typescript-tslint-plugin"
-  ],
-  "settings": {
-    "editor.formatOnSave": true,
-    "[javascript]": {
-      "editor.formatOnSave": false
-    },
-    "[javascriptreact]": {
-      "editor.formatOnSave": false
-    },
-    "[typescript]": {
-      "editor.formatOnSave": false
-    },
-    "[typescriptreact]": {
-      "editor.formatOnSave": false
-    },
-    "eslint.autoFixOnSave": true,
-    "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      { "language": "typescript", "autoFix": true },
-      { "language": "typescriptreact", "autoFix": true }
-    ]
-  }
+  "name": "Node.js 12 & TypeScript",
+  "dockerComposeFile": "../docker-compose.yml",
+  "extensions": ["esbenp.prettier-vscode"],
+  "settings": {},
+  "postCreateCommand": "npm --prefix site ci",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "remoteUser": "node"
 }

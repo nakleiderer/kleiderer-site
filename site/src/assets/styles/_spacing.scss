@@ -1,0 +1,12 @@
+$spacing-prefix: spacing;
+$spacings: "s", "m", "l", "xl", "xxl";
+
+:root {
+  @include scale-variables($spacing-prefix, 1rem, m, 2, $spacings);
+
+  --spacing-base: 0.75rem;
+
+  @media (min-width: 600px) {
+    --spacing-base: 1rem;
+  }
+}

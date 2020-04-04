@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/dev/Dockerfile
+    command: bash
+    stdin_open: true
+    tty: true
+    user: node
+    volumes:
+      - .:/app:delegated
+      - "${HOME}/.gitconfig:/root/.gitconfig"
+      - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
+      - site_node_modules:/app/site/node_modules
+    env_file:
+      - ./.env
+      - ./.docker/dev/.env.docker
+    ports:
+      - "3838:3838" # light-server
+      - "9005":"9005" # firebase login
+      - "5005":"5005" # firebease hosting
+
+volumes:
+  site_node_modules:
