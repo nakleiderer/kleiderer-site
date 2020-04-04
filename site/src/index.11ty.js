@@ -12,7 +12,7 @@ class Index {
     const articles = collections.article || [];
 
     return html`
-      <article>
+      <article class="u-section-copy">
         <h1>Recent Articles</h1>
         <ul>
           ${articles

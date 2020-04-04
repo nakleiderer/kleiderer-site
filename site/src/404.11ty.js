@@ -9,15 +9,16 @@ class NotFound {
     };
   }
 
-  render({ collections }) {
-    const articles = collections.article || [];
-
+  render() {
     return html`
-      <article>
+      <section class="u-section-copy u-center">
         <h1>Not Found</h1>
-        <p>Looks liks you stumbled into a dark corner of the internet.</p>
+        <p>
+          It looks like you stumbled <br />
+          into a dark corner of the internet.
+        </p>
         <a href="/">Go Home</a>
-      </article>
+      </section>
     `;
   }
 }

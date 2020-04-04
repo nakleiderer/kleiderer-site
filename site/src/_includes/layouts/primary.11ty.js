@@ -32,37 +32,29 @@ class PrimaryLayout {
             rel="stylesheet"
           />
         </head>
-        <body>
-          <header class="banner">
-            <k-box class="banner" inset="l">
-              <k-box inline="m">
-                <img
-                  alt="Photo of Nicolas Kleiderer"
-                  src="/images/profile_photo.jpg"
-                  width="48px"
-                  height="48px"
-                  class="u-shape-cricle"
-                />
-              </k-box>
-              <a class="u-font-size-4 u-color-gray-80" href="/"
-                >Nicolas Kleiderer</a
-              >
-            </k-box>
+        <body class="LayoutPrimary">
+          <header class="LayoutPrimary-header">
+            <img
+              alt="Photo of Nicolas Kleiderer"
+              src="/images/profile_photo.jpg"
+              class="LayoutPrimary-logo"
+              width="48px"
+              height="48px"
+            />
+            <a class="u-font-size-4 u-color-gray-80" href="/"
+              >Nicolas Kleiderer</a
+            >
           </header>
 
-          <main>
-            <k-box inset-squish="l">
-              ${content}
-            </k-box>
+          <main class="LayoutPrimary-content">
+            ${content}
           </main>
 
-          <footer>
-            <k-box inset="l">
-              <p class="u-color-gray-70 u-font-size-small">
-                &copy; ${new Date().getFullYear()} Nicolas Kleiderer. All rights
-                reserved.
-              </p>
-            </k-box>
+          <footer class="LayoutPrimary-footer">
+            <p class="LayoutPrimary-copyright">
+              &copy; ${new Date().getFullYear()} Nicolas Kleiderer. All rights
+              reserved.
+            </p>
           </footer>
         </body>
       </html>

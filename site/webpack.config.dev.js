@@ -7,6 +7,9 @@ module.exports = merge(commonConfig, {
   devServer: {
     contentBase: "./build/dist"
   },
+  output: {
+    filename: "assets/[name].js"
+  },
   module: {
     rules: [
       {

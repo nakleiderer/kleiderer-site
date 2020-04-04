@@ -1,30 +1,37 @@
 $spacing-ratio: variable($spacing-prefix, ratio);
+$spacing-styles: "stack", "inline", "inset", "inset-squish", "inset-stretch";
 
 k-box {
   display: block;
 }
 
-@each $variant in $spacings {
-  $current: variable($spacing-prefix, $variant);
+@mixin u-spacing($style, $size) {
+  $current: variable($spacing-prefix, $size);
   $size-down: calc(#{$current} / #{$spacing-ratio});
 
-  k-box[stack="#{$variant}"] {
+  @if $style == "stack" {
     margin-bottom: $current;
-  }
-
-  k-box[inline="#{$variant}"] {
+  } @else if $style == "inline" {
     margin-right: $current;
-  }
-
-  k-box[inset="#{$variant}"] {
+  } @else if $style == "inset" {
     padding: $current;
-  }
-
-  k-box[inset-squish="#{$variant}"] {
+  } @else if $style == "inset-squish" {
     padding: $size-down $current;
-  }
-
-  k-box[inset-stretch="#{$variant}"] {
+  } @else if $style == "inset-stretch" {
     padding: $current $size-down;
+  } @else {
+    @error "Unknown style #{$style}.";
+  }
+}
+
+@each $variant in $spacings {
+  @each $style in $spacing-styles {
+    k-box[#{$style}="#{$variant}"] {
+      @include u-spacing($style, $variant);
+    }
+
+    .u-#{$spacing-prefix}-#{$style}-#{$variant} {
+      @include u-spacing($style, $variant);
+    }
   }
 }

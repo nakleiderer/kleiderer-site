@@ -9,7 +9,7 @@ class PrimaryLayout {
 
   render({ content, title, githubIssue }) {
     return html`
-      <article>
+      <article class="LayoutArticle">
         <h1>${title}</h1>
         ${content}
         <h2>Share Your Thoughts</h2>

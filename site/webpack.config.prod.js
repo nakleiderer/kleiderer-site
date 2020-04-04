@@ -8,6 +8,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = merge(commonConfig, {
   mode: "production",
   devtool: "source-map",
+  output: {
+    filename: "assets/[name].[contenthash].js"
+  },
   module: {
     rules: [
       {

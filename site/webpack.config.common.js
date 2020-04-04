@@ -18,8 +18,7 @@ const htmlWebpackPlugins = htmlEntryPoints.map(filepath => {
 module.exports = {
   entry: "./src/assets/pack.js",
   output: {
-    path: path.resolve(__dirname, "build/dist"),
-    filename: "assets/[name].[contenthash].js"
+    path: path.resolve(__dirname, "build/dist")
   },
   plugins: [
     new CopyPlugin([{ context: "src", from: "images/**" }]),
