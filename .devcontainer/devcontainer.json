@@ -4,7 +4,7 @@
   "dockerComposeFile": "../docker-compose.yml",
   "extensions": ["esbenp.prettier-vscode"],
   "settings": {},
-  //   "postCreateCommand": "npm ci",
+  "postCreateCommand": "npm --prefix site ci",
   "service": "app",
   "workspaceFolder": "/app",
   "remoteUser": "node"
