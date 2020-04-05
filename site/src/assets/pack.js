@@ -3,8 +3,10 @@ import "firebase/analytics";
 import "firebase/performance";
 
 import "./styles/index.scss";
+import { ArticleCard } from "./components/ArticleCard/ArticleCard";
 import { Card } from "./components/Card/Card";
 import { Typography } from "./components/Typography/Typography";
+import { BlockLink } from "./components/BlockLink/BlockLink";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIQFkGkLYaUjxSdx9VJif72Qj0UaukXc4",
@@ -14,12 +16,14 @@ const firebaseConfig = {
   storageBucket: "kleiderer-com.appspot.com",
   messagingSenderId: "545339606583",
   appId: "1:545339606583:web:707984370dbc7ffdd7e1b2",
-  measurementId: "G-3Z8C7FVTH0"
+  measurementId: "G-3Z8C7FVTH0",
 };
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 firebase.performance();
 
+customElements.define("k-article-card", ArticleCard);
+customElements.define("k-block-link", BlockLink);
 customElements.define("k-card", Card);
 customElements.define("k-typography", Typography);

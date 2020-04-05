@@ -1,5 +1,6 @@
 .LayoutArticle {
   @include u-measure("copy");
+  margin: 0 auto;
 
   & > h1 + p:first-letter {
     @include u-font-family(alternate);

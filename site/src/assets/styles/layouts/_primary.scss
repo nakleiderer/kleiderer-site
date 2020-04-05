@@ -24,7 +24,7 @@
   }
 
   &-content {
-    @include u-measure("copy");
+    @include u-measure("full");
     @include u-spacing("inset-squish", "l");
     flex-grow: 1;
     margin: 0 auto;

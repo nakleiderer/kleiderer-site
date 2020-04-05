@@ -78,3 +78,11 @@ a:focus {
     text-align: center;
   }
 }
+
+k-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0, var(--measure-copy)));
+  grid-row-gap: var(--spacing-m);
+  grid-column-gap: var(--spacing-m);
+  justify-content: center;
+}

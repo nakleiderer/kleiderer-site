@@ -6,7 +6,7 @@ const dateFormatOptions = {
   day: "numeric",
 };
 
-export class Card extends LitElement {
+export class ArticleCard extends LitElement {
   static get properties() {
     return {
       title: { type: String },
@@ -20,11 +20,6 @@ export class Card extends LitElement {
     return css`
       :host {
         display: block;
-        background-color: transparent;
-        border-radius: 4px;
-        padding: var(--spacing-m);
-        border: solid 1px var(--color-gray-30);
-        position: relative;
       }
 
       :host([href]:hover) {
@@ -53,20 +48,20 @@ export class Card extends LitElement {
 
   render() {
     const title = this.href
-      ? html`<a href=${this.href}>${this.title}</a>`
+      ? html`<k-block-link href=${this.href}>${this.title}</k-block-link>`
       : this.title;
 
     return html`
-      <k-card>
+      <k-card ?hoverable=${!!this.href}>
         <k-typography slot="header" variant="h5" el="h2">
           ${title}
         </k-typography>
-        
+
         <k-typography slot="header" variant="h6" el="p">
           <time datetime=${this.date}>${this.relativeDateTime()}</time>
         </k-typography>
 
-        <k-typography slot="content">${this.excerpt}</k-typography>
+        <k-typography>${this.excerpt}</k-typography>
       </k-card>
     `;
   }

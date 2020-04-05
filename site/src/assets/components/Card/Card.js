@@ -9,10 +9,8 @@ const dateFormatOptions = {
 export class Card extends LitElement {
   static get properties() {
     return {
-      title: { type: String },
-      excerpt: { type: String },
-      date: { type: String },
-      href: { type: String },
+      hoverable: { type: Boolean },
+      centerContent: { type: Boolean, attribute: "center-content" },
     };
   }
 
@@ -20,59 +18,40 @@ export class Card extends LitElement {
     return css`
       :host {
         display: block;
-        background-color: transparent;
+        position: relative;
+        background-color: inherit;
         border-radius: 4px;
         padding: var(--spacing-m);
         border: solid 1px var(--color-gray-30);
-        position: relative;   
       }
 
-      
-      :host([href]:hover) {
+      :host([hoverable]:hover) {
         background-color: white;
       }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      a::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      :host([center-content]) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
     `;
   }
 
-  relativeDateTime() {
-    return new Date(this.date).toLocaleDateString(undefined, dateFormatOptions);
-  }
-
   render() {
-    const title = this.href
-      ? html`<a href=${this.href}>${this.title}</a>`
-      : this.title;
-
     return html`
       <article>
         <header>
-          <k-typography variant="h5" el="h2">
-            ${title}
-          </k-typography>
-          <k-typography variant="h6" el="p">
-            <time datetime=${this.date}>${this.relativeDateTime()}</time>
-          </k-typography>
+          <slot name="header"></slot>
         </header>
 
         <section>
-          <k-typography>${this.excerpt}</k-typography>
+          <slot></slot>
         </section>
 
-        <footer></footer>
+        <footer>
+          <slot name="footer"></slot>
+        </footer>
       </article>
     `;
   }
