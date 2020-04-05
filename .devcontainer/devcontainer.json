@@ -2,7 +2,12 @@
 {
   "name": "Node.js 12 & TypeScript",
   "dockerComposeFile": "../docker-compose.yml",
-  "extensions": ["esbenp.prettier-vscode"],
+  "extensions": [
+    "bierner.lit-html",
+    "esbenp.prettier-vscode",
+    "jpoissonnier.vscode-styled-components",
+    "runem.lit-plugin"
+  ],
   "settings": {},
   "postCreateCommand": "npm --prefix site ci",
   "service": "app",
