@@ -3,6 +3,8 @@ import "firebase/analytics";
 import "firebase/performance";
 
 import "./styles/index.scss";
+import { Card } from "./components/Card/Card";
+import { Typography } from "./components/Typography/Typography";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIQFkGkLYaUjxSdx9VJif72Qj0UaukXc4",
@@ -18,3 +20,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 firebase.performance();
+
+customElements.define("k-card", Card);
+customElements.define("k-typography", Typography);

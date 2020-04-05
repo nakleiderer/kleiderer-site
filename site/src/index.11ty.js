@@ -4,7 +4,7 @@ class Index {
   data() {
     return {
       title: "Home",
-      layout: "layouts/primary"
+      layout: "layouts/primary",
     };
   }
 
@@ -14,16 +14,20 @@ class Index {
     return html`
       <article class="u-section-copy">
         <h1>Recent Articles</h1>
-        <ul>
-          ${articles
-            .map(
-              article =>
-                html`
-                  <li><a href="${article.url}">${article.data.title}</a></li>
-                `
-            )
-            .join("\n")}
-        </ul>
+        ${articles
+          .map(
+            (article) =>
+              html`
+                <k-card
+                  href="${article.url}"
+                  title="${article.data.title}"
+                  excerpt="${article.data.excerpt}"
+                  date="${new Date(article.data.date).toISOString()}"
+                >
+                </k-card>
+              `
+          )
+          .join("\n")}
       </article>
     `;
   }
