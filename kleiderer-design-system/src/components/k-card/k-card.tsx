@@ -29,7 +29,7 @@ export class KCard implements ComponentInterface {
             </k-typography>
           </k-box>
 
-          <k-box el="footer">footer</k-box>
+          <k-box el="footer"><k-button>View</k-button></k-box>
         </k-box>
       </Host>
     );

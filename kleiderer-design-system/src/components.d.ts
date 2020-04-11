@@ -14,6 +14,9 @@ export namespace Components {
         "insetStretch": "s" | "m" | "l" | "xl" | "xxl";
         "stack": "s" | "m" | "l" | "xl" | "xxl";
     }
+    interface KButton {
+        "color": "primary" | "alternate";
+    }
     interface KCard {
     }
     interface KTypography {
@@ -29,6 +32,12 @@ declare global {
         prototype: HTMLKBoxElement;
         new (): HTMLKBoxElement;
     };
+    interface HTMLKButtonElement extends Components.KButton, HTMLStencilElement {
+    }
+    var HTMLKButtonElement: {
+        prototype: HTMLKButtonElement;
+        new (): HTMLKButtonElement;
+    };
     interface HTMLKCardElement extends Components.KCard, HTMLStencilElement {
     }
     var HTMLKCardElement: {
@@ -43,6 +52,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "k-box": HTMLKBoxElement;
+        "k-button": HTMLKButtonElement;
         "k-card": HTMLKCardElement;
         "k-typography": HTMLKTypographyElement;
     }
@@ -56,6 +66,9 @@ declare namespace LocalJSX {
         "insetStretch"?: "s" | "m" | "l" | "xl" | "xxl";
         "stack"?: "s" | "m" | "l" | "xl" | "xxl";
     }
+    interface KButton {
+        "color"?: "primary" | "alternate";
+    }
     interface KCard {
     }
     interface KTypography {
@@ -65,6 +78,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "k-box": KBox;
+        "k-button": KButton;
         "k-card": KCard;
         "k-typography": KTypography;
     }
@@ -74,6 +88,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "k-box": LocalJSX.KBox & JSXBase.HTMLAttributes<HTMLKBoxElement>;
+            "k-button": LocalJSX.KButton & JSXBase.HTMLAttributes<HTMLKButtonElement>;
             "k-card": LocalJSX.KCard & JSXBase.HTMLAttributes<HTMLKCardElement>;
             "k-typography": LocalJSX.KTypography & JSXBase.HTMLAttributes<HTMLKTypographyElement>;
         }
