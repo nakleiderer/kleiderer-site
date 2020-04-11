@@ -1,0 +1,56 @@
+@use "sass:list";
+
+@function variable($prefix, $variant) {
+  $result: var(--#{$prefix}-#{$variant});
+
+  @return $result;
+}
+
+@mixin variable($prefix, $variant, $value) {
+  --#{$prefix}-#{$variant}: #{$value};
+}
+
+@mixin scale-variables($prefix, $baseValue, $baseKey, $ratio, $sizes) {
+  $size-base-index: list.index($sizes, $baseKey);
+
+  @include variable(#{$prefix}, ratio, $ratio);
+  @include variable(#{$prefix}, base, $baseValue);
+
+  @each $size in $sizes {
+    $index: list.index($sizes, $size);
+
+    $relative: $index - $size-base-index;
+
+    $value: variable(#{$prefix}, base);
+
+    @if $relative < 0 {
+      $next-size: list.nth($sizes, $index + 1);
+      $value: calc(
+        #{variable($prefix, $next-size)} / #{variable($prefix, ratio)}
+      );
+    }
+
+    @if $relative > 0 {
+      $prev-size: list.nth($sizes, $index - 1);
+      $value: calc(
+        #{variable($prefix, $prev-size)} * #{variable($prefix, ratio)}
+      );
+    }
+
+    @include variable(#{$prefix}, $size, $value);
+  }
+}
+
+@mixin utils-for($prefix, $variants, $property) {
+  @each $variant in $variants {
+    .u-#{$prefix}-#{$variant} {
+      #{$property}: variable($prefix, $variant);
+    }
+  }
+}
+
+@mixin map-variables($prefix, $map) {
+  @each $key, $value in $map {
+    @include variable($prefix, $key, $value);
+  }
+}

@@ -13,13 +13,15 @@ services:
       - "${HOME}/.gitconfig:/root/.gitconfig"
       - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
       - site_node_modules:/app/site/node_modules
+      - design_node_modules:/app/kleiderer-design-system/node_modules
     env_file:
       - ./.env
       - ./.docker/dev/.env.docker
     ports:
       - "3838:3838" # light-server
-      - "9005":"9005" # firebase login
-      - "5005":"5005" # firebease hosting
+      - "9005:9005" # firebase login
+      - "5005:5005" # firebease hosting
 
 volumes:
   site_node_modules:
+  design_node_modules:
