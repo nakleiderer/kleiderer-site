@@ -1,0 +1,224 @@
+@mixin text-crop-alternate(
+  $line-height: 1,
+  $top-adjustment: 0px,
+  $bottom-adjustment: 0px
+) {
+  // Configured in Step 1
+  $top-crop: 24;
+  $bottom-crop: 32;
+  $crop-font-size: 128;
+  $crop-line-height: 1;
+
+  // Apply values to calculate em-based margins that work with any font size
+  $dynamic-top-crop: max(
+      ($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)),
+      0
+    ) / $crop-font-size;
+  $dynamic-bottom-crop: max(
+      (
+        $bottom-crop + ($line-height - $crop-line-height) *
+          ($crop-font-size / 2)
+      ),
+      0
+    ) / $crop-font-size;
+
+  // Mixin output
+  line-height: $line-height;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+  }
+
+  &::before {
+    margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+  }
+
+  &::after {
+    margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+  }
+}
+
+@mixin text-crop(
+  $line-height: 1.3,
+  $top-adjustment: 0px,
+  $bottom-adjustment: 0px
+) {
+  // Configured in Step 1
+  $top-crop: 8;
+  $bottom-crop: 8;
+  $crop-font-size: 17;
+  $crop-line-height: 1.618;
+
+  // Apply values to calculate em-based margins that work with any font size
+  $dynamic-top-crop: max(
+      ($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)),
+      0
+    ) / $crop-font-size;
+  $dynamic-bottom-crop: max(
+      (
+        $bottom-crop + ($line-height - $crop-line-height) *
+          ($crop-font-size / 2)
+      ),
+      0
+    ) / $crop-font-size;
+
+  // Mixin output
+  line-height: $line-height;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+  }
+
+  &::before {
+    margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+  }
+
+  &::after {
+    margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+  }
+}
+
+:host {
+  display: inline-block;
+  margin: 0 auto;
+
+  --font-family-primary: "Work Sans", sans-serif;
+  --font-family-alternate: "Rokkitt";
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+
+  --measure-m: 55ch;
+  --measure-l: 70ch;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+}
+
+.h1 {
+  @include text-crop-alternate;
+  font-family: var(--font-family-alternate);
+  font-weight: var(--font-weight-light);
+  font-size: 8.025rem;
+  letter-spacing: -0.09375rem;
+}
+
+.h2 {
+  @include text-crop-alternate;
+  font-family: var(--font-family-alternate);
+  font-weight: var(--font-weight-light);
+  font-size: 5rem;
+  letter-spacing: -0.03125rem;
+}
+
+.h3 {
+  @include text-crop-alternate;
+  font-family: var(--font-family-alternate);
+  font-size: 4rem;
+  letter-spacing: 0;
+}
+
+.h4 {
+  @include text-crop-alternate;
+  font-family: var(--font-family-alternate);
+  font-size: 2.8125rem;
+  letter-spacing: 0.015625rem;
+}
+
+.h5 {
+  @include text-crop-alternate($top-adjustment: 0.2px);
+  font-family: var(--font-family-alternate);
+  font-size: 2rem;
+  letter-spacing: 0;
+}
+
+.h6 {
+  @include text-crop-alternate($top-adjustment: 0.9px);
+  font-family: var(--font-family-alternate);
+  font-size: 1.6875rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.009375rem;
+}
+
+.subtitle1 {
+  @include text-crop-alternate;
+  font-weight: var(--font-weight-light);
+  font-family: var(--font-family-alternate);
+  font-size: 1.3125rem;
+  letter-spacing: 0.009375rem;
+}
+
+.subtitle2 {
+  @include text-crop-alternate;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-alternate);
+  font-size: 1.1875rem;
+  letter-spacing: 0.00625rem;
+}
+
+.body1 {
+  @include text-crop($line-height: 1.618);
+  font-family: var(--font-family-primary);
+  font-size: 1.0625rem;
+  letter-spacing: 0.03125rem;
+}
+
+.body2 {
+  @include text-crop($line-height: 1.618);
+  font-family: var(--font-family-primary);
+  font-size: 0.9375rem;
+  letter-spacing: 0.015625rem;
+}
+
+.button {
+  @include text-crop;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-primary);
+  font-size: 0.9375rem;
+  letter-spacing: 0.078125rem;
+  text-transform: uppercase;
+}
+
+.caption {
+  @include text-crop;
+  font-family: var(--font-family-primary);
+  font-size: 0.8125rem;
+  letter-spacing: 0.025rem;
+}
+
+.overline {
+  @include text-crop;
+  font-family: var(--font-family-primary);
+  font-size: 0.6875rem;
+  letter-spacing: 0.09375rem;
+  text-transform: uppercase;
+}
+
+.measure-m {
+  margin: 0 auto;
+  max-width: var(--measure-m);
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.measure-l {
+  margin: 0 auto;
+  max-width: var(--measure-l);
+  word-wrap: break-word;
+  hyphens: auto;
+}

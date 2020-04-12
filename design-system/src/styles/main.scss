@@ -1,0 +1,13 @@
+@import "./tokens/space";
+@import "./tokens/color";
+@import "./tokens/theme";
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
