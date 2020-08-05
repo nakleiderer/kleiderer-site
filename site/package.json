@@ -35,7 +35,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^4.2.0",
     "eleventy-plugin-seo": "^0.5.1",
-    "firebase-tools": "^8.6.0",
+    "firebase-tools": "^8.7.0",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.3.0",
     "light-server": "^2.8.0",
