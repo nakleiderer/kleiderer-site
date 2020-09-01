@@ -28,7 +28,7 @@
   "homepage": "https://github.com/nakleiderer/kleiderer-site#readme",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
-    "@babel/core": "^7.11.4",
+    "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
