@@ -33,7 +33,7 @@
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.0",
-    "css-loader": "^5.0.0",
+    "css-loader": "^5.0.1",
     "eleventy-plugin-seo": "^0.5.1",
     "firebase-tools": "^8.14.1",
     "glob": "^7.1.6",
