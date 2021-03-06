@@ -1,4 +1,4 @@
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -9,25 +9,25 @@ module.exports = merge(commonConfig, {
   mode: "production",
   devtool: "source-map",
   output: {
-    filename: "assets/[name].[contenthash].js"
+    filename: "assets/[name].[contenthash].js",
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "assets/[name].[contenthash].css"
-    })
+      filename: "assets/[name].[contenthash].css",
+    }),
   ],
   optimization: {
     minimizer: [
@@ -35,9 +35,9 @@ module.exports = merge(commonConfig, {
         cssProcessorOptions: {
           map: {
             inline: false,
-            annotation: true
-          }
-        }
+            annotation: true,
+          },
+        },
       }),
       new TerserPlugin({
         // Use multi-process parallel running to improve the build speed
@@ -45,8 +45,8 @@ module.exports = merge(commonConfig, {
         parallel: true,
         // Enable file caching
         cache: true,
-        sourceMap: true
-      })
-    ]
-  }
+        sourceMap: true,
+      }),
+    ],
+  },
 });
