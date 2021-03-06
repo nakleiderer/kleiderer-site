@@ -7,7 +7,7 @@ class PrimaryLayout {
     };
   }
 
-  render({ content, title, githubIssue }) {
+  render({ content, title, githubDiscussionId }) {
     return html`
       <article class="LayoutArticle">
         <h1>${title}</h1>
@@ -16,8 +16,8 @@ class PrimaryLayout {
         <p>
           Have thoughts on this topic or feedback about this article?
           <a
-            href="https://github.com/nakleiderer/kleiderer-site/issues/${githubIssue}"
-            >Submit comments here</a
+            href="https://github.com/nakleiderer/kleiderer-site/discussions/${githubDiscussionId}"
+            >Submit them here</a
           >. Yes, you'll be required to use a GitHub account, but hopefully this
           will keep the crazies out and yield a more thoughtful and healthy
           discussion.

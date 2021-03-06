@@ -4,7 +4,7 @@ title: Ditch Internet Explorer Without Ditching Customers
 excerpt: Supporting legacy browsers takes a significant amount of Engineering resources, but dropping support incorrectly can incur some risks. By understanding your clients and making efforts to minimize the impact of dropping support, both business owners and web developers can breathe a sigh of relief.
 tags: article
 date: 2020-01-25
-githubIssue: 349
+githubDiscussionId: 718
 permalink: "articles/ditch-ie-without-ditching-customers/"
 ---
 
