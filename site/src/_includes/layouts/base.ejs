@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <title><%= title %></title>
     <meta
       name="description"
@@ -51,16 +51,19 @@
       }
     </script>
     <% } %> <%- include('webpack.ejs') %>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body
     class="flex flex-col justify-between pb-4 antialiased w-full text-black min-h-screen bg-white"
   >
-    <div class="space-y-12 mb-12">
+    <div class="flex flex-col flex-1 space-y-12 mb-12">
       <header class="p-3 flex justify-between items-center border-b-2">
         <div class="flex space-x-3 items-center">
-          <a href="/">
+          <a href="/" class="flex-none">
             <img
               src="/assets/images/profile_photo.jpg"
               alt=""
@@ -68,16 +71,25 @@
             />
           </a>
           <h1 class="font-semibold text-2xl">
-            <a
-              class="text-teal-700 hover:text-black"
-              href="/"
+            <a class="text-teal-700 hover:text-black" href="/"
               ><%= site.title %></a
             >
           </h1>
         </div>
+        <nav>
+          <ul>
+            <li
+              class="border p-2 border-teal-500 rounded hover:bg-teal-100 hover:shadow-sm link"
+            >
+              <a href="/articles" class="uppercase font-semibold">Articles</a>
+            </li>
+          </ul>
+        </nav>
       </header>
 
-      <main class="max-w-screen-md mx-auto px-4"><%- content %></main>
+      <main class="flex flex-col flex-1 max-w-screen-md mx-auto px-4">
+        <%- content %>
+      </main>
     </div>
 
     <footer>

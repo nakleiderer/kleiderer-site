@@ -1,0 +1,48 @@
+---
+layout: layouts/base.ejs
+tags: []
+pagination:
+  data: collections.articles
+  size: 5
+  alias: list
+  reverse: true
+permalink: '<% if (pagination.pageNumber > 0) { %><%= `articles/${pagination.pageNumber + 1}/index.html` %><% } else { %>articles/index.html<% } %>'
+eleventyComputed:
+  title: '<% if (pagination.pageNumber > 0) { %><%= `Articles Page ${pagination.pageNumber + 1} | ${site.title}` %><% } else { %><%= `Articles | ${site.title}` %><% } %>'
+eleventyExcludeFromCollections: true
+---
+<h2 class="text-2xl font-semibold mb-3">Articles</h2>
+<ul class="grid sm:grid-cols-1 grid-rows-auto gap-4 mb-3">
+  <% list.forEach((article) => { %>
+    <figure class="link bg-teal-100 rounded-xl flex flex-col sm:flex-row">
+      <img class="mx-auto rounded-lg h-128 sm:h-64 w-full sm:max-w-xs object-cover" src="/assets/images/articles/frustrated-developer.jpg" alt="" width="384" height="512">
+      <div class="pt-6 p-6 space-y-4 flex-1">
+        <figcaption class="font-medium">
+          <div class="text-teal-500">
+            <%= this.dateFns.format(new Date(article.data.date), 'LLLL d, yyyy') %>
+          </div>
+          <div class="">
+            <a href="<%= article.url %>"><%= article.data.title %></a>
+          </div>
+        </figcaption>
+        <blockquote>
+          <p class="text-md line-clamp-3">
+            <%= article.data.description %>
+          </p>
+        </blockquote>
+      </div>
+    </figure>
+  <% }) %>
+</ul>
+
+<div class="text-sm flex justify-between">
+  <% if (pagination.previous) { %>
+  <div>
+    <a class="uppercase" href="<%= pagination.previous.replace(/index.html$/, "") %>">← Newer</a>
+  </div>
+  <% } %> <% if (pagination.next) { %>
+  <div class="text-right ml-auto">
+    <a class="uppercase" href="<%= pagination.next.replace(/index.html$/, "") %>">Older →</a>
+  </div>
+  <% } %>
+</div>
