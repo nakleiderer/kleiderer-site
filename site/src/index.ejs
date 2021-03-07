@@ -1,43 +1,10 @@
 ---
-pagination:
-  data: collections.articles
-  size: 6
-  alias: list
-  reverse: true
-permalink: '<% if (pagination.pageNumber > 0) { %><%= `page${pagination.pageNumber + 1}/index.html` %><% } else { %>index.html<% } %>'
 eleventyComputed:
-  title: '<% if (pagination.pageNumber > 0) { %><%= `Page ${pagination.pageNumber + 1} | ${site.title}` %><% } else { %><%= site.title %><% } %>'
+  title: '<%= site.title %>'
 ---
-<div class="mb-12 text-center">
-  <h1 class="title text-6xl md:text-9xl font-extrabold">Nicolas Kleiderer</h1>
-  <p class="text-2xl font-semibold">Engineering Culture.</p>
-</div>
-
-<h2 class="text-2xl font-semibold mb-3">Articles</h2>
-<ul class="grid md:grid-cols-2 grid-rows-auto gap-4">
-  <% list.forEach((article) => { %>
-    <li class="flex flex-col rounded-lg border border-teal-400 p-3 link transition-shadow duration-150 hover:shadow-lg">
-      <div class="text-sm"><%= this.dateFns.format(new Date(article.data.date), 'LLLL d, yyyy') %></div>
-      <a class="font-semibold text-md" href="<%= article.url %>"><%= article.data.title %></a>
-      <p class="text-md mt-2 line-clamp-3"><%= article.data.description %></p>
-    </li>
-  <% }) %>
-  <% if ((list.length % 2) === 1) { %>
-    <li class="hidden md:block flex flex-col space-y-2 rounded-lg border border-teal-400 p-3">
-      <p class="text-md font-semibold line-clamp-3">Coming Soon</p>
-      <p>Come back soon for more content.</p>
-    </li>
-  <% } %>
-</ul>
-
-<div class="text-sm flex justify-between">
-  <% if (pagination.previous) { %>
+<div class="flex flex-1 justify-center items-center mb-12 text-center">
   <div>
-    <a href="<%= pagination.previous.replace(/index.html$/, "") %>">← Newer articles</a>
+    <h1 class="title text-6xl md:text-9xl font-extrabold bg-teal-900">Nicolas Kleiderer</h1>
+    <p class="text-2xl font-semibold">Engineering Culture.</p>
   </div>
-  <% } %> <% if (pagination.next) { %>
-  <div class="text-right ml-auto">
-    <a href="<%= pagination.next.replace(/index.html$/, "") %>">Older articles →</a>
-  </div>
-  <% } %>
 </div>
