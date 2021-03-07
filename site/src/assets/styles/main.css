@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.title {
+  background-image: url(/assets/images/articles/ink.jpg);
+  background-size: cover;
+  background-position: center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 .prose img {
   @apply rounded-lg;
 }
