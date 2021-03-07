@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
 <ul class="grid sm:grid-cols-1 grid-rows-auto gap-4 mb-3">
   <% list.forEach((article) => { %>
     <figure class="link bg-teal-100 rounded-xl flex flex-col sm:flex-row">
-      <img class="mx-auto rounded-lg h-128 sm:h-64 w-full sm:max-w-xs object-cover" src="/assets/images/articles/frustrated-developer.jpg" alt="" width="384" height="512">
+      <img class="mx-auto rounded-lg h-128 sm:h-64 w-full sm:max-w-xs object-cover" src="<%= article.data.coverImg %>" alt="<%= article.data.coverImgAlt %>">
       <div class="pt-6 p-6 space-y-4 flex-1">
         <figcaption class="font-medium">
           <div class="text-teal-500">

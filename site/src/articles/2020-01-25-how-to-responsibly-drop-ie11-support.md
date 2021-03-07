@@ -1,12 +1,12 @@
 ---
 title: Ditch Internet Explorer Without Ditching Customers
-description: Supporting legacy browsers takes a significant amount of Engineering resources. Understanding and communicating with your clients are the keys to dropping support.
+description: Supporting legacy browsers is time consuming. Communicating with your clients is the key to dropping support.
 date: 2020-01-25T00:00:00Z
 githubDiscussionId: 718
 permalink: "articles/ditch-ie-without-ditching-customers/"
+coverImg: "/assets/images/articles/frustrated-developer.jpg"
+coverImgAlt: A frustrated developer realizing his code doesn't work in Internet Explorer
 ---
-
-![A frustrated developer realizing his code doesn't work in Internet Explorer](/assets/images/articles/frustrated-developer.jpg)
 
 Supporting legacy browsers takes a significant amount of Engineering resources. With [less than 3%](https://gs.statcounter.com/browser-market-share) of global browser market share attributable to IE11, it hardly makes sense to support it with feature-parity by default. Most web developers desire to completely drop support for legacy browsers, including IE11, but we have to address the business impact of those changes. By understanding your clients and making efforts to minimize the impact of dropping support, both business owners and web developers can breathe a sigh of relief.
 
