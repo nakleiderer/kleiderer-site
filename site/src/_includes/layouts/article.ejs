@@ -16,19 +16,20 @@ const editUrl =
     <h1 class="text-5xl font-bold leading-tight"><%= title %></h1>
   </header>
 
-  <section class="content max-w-prose"><%- content %></section>
+  <!-- <section class="content max-w-prose"><%- content %></section> -->
+  <section class="prose lg:prose-xl"><%- content %></section>
 
   <footer class="flex-auto flex space-x-3">
     <a
       href="<%= commentUrl %>"
       target="_blank"
-      class="p-2 w-1/2 flex items-center justify-center rounded-md bg-black font-semibold text-white hover:no-underline transition-shadow hover:shadow-lg"
+      class="p-2 w-1/2 flex items-center justify-center rounded-md bg-black font-semibold text-white transition-shadow hover:shadow-lg"
       >Leave Comment</a
     >
     <a
       href="<%= editUrl %>"
       target="_blank"
-      class="p-2 w-1/2 flex items-center justify-center rounded-md border font-semibold text-black border-gray-500 transition-shadow hover:no-underline hover:shadow-lg"
+      class="p-2 w-1/2 flex items-center justify-center rounded-md border font-semibold text-black border-gray-500 transition-shadow hover:shadow-lg"
       >Suggest Edit</a
     >
   </footer>

@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <title><%= title %></title>
     <meta
       name="description"
@@ -50,6 +51,7 @@
       }
     </script>
     <% } %> <%- include('webpack.ejs') %>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
   </head>
 
   <body
@@ -67,7 +69,7 @@
           </a>
           <h1 class="font-semibold text-2xl">
             <a
-              class="text-gray-700 hover:text-gray-900 hover:no-underline"
+              class="text-gray-700 hover:text-gray-900"
               href="/"
               ><%= site.title %></a
             >

@@ -14,12 +14,12 @@ eleventyComputed:
     <li class="flex flex-col rounded-lg border border-gray-400 p-3 link transition-shadow duration-150 hover:shadow-lg">
       <div class="text-gray-700 text-sm"><%= this.dateFns.format(new Date(article.data.date), 'LLLL d, yyyy') %></div>
       <a class="font-semibold text-md" href="<%= article.url %>"><%= article.data.title %></a>
-      <p class="text-md mt-2"><%= article.data.description %></p>
+      <p class="text-md mt-2 line-clamp-3"><%= article.data.description %></p>
     </li>
   <% }) %>
   <% if ((list.length % 2) === 1) { %>
     <li class="hidden md:block flex flex-col space-y-2 rounded-lg border border-gray-400 p-3">
-      <p class="text-md font-semibold">Coming Soon</p>
+      <p class="text-md font-semibold line-clamp-3">Coming Soon</p>
       <p>Come back soon for more content.</p>
     </li>
   <% } %>
