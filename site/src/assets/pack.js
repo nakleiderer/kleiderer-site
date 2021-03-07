@@ -2,8 +2,6 @@ import firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/performance";
 
-import "./styles/index.scss";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBIQFkGkLYaUjxSdx9VJif72Qj0UaukXc4",
   authDomain: "kleiderer-com.firebaseapp.com",
@@ -12,7 +10,7 @@ const firebaseConfig = {
   storageBucket: "kleiderer-com.appspot.com",
   messagingSenderId: "545339606583",
   appId: "1:545339606583:web:707984370dbc7ffdd7e1b2",
-  measurementId: "G-3Z8C7FVTH0"
+  measurementId: "G-3Z8C7FVTH0",
 };
 
 firebase.initializeApp(firebaseConfig);

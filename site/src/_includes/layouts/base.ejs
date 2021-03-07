@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <title><%= title %></title>
+    <meta
+      name="description"
+      content="<%= (!!locals.description) ? description : site.description %>"
+    />
+    <meta name="author" content="<%= site.author %>" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta
+      property="og:description"
+      content="<%= (!!locals.description) ? description : site.description %>"
+    />
+    <meta property="og:locale" content="<%= site.locale %>" />
+    <meta property="og:site_name" content="<%= site.site_name %>" />
+    <% if (locals.tags == "articles") { %>
+    <meta property="og:type" content="article" />
+    <meta
+      property="article:published_time"
+      content="<%= date.toISOString() %>"
+    />
+    <script type="application/ld+json">
+      {
+        "description": "<%= (!!locals.description) ? description : site.description %>",
+        "author": { "@type": "Person", "name": "<%= site.author %>" },
+        "@type": "BlogPosting",
+        "url": "<%= `${site.url}${page.url}` %>",
+        "publisher": {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "<%= `${site.url}/assets/images/logo.png` %>"
+          },
+          "name": "<%= site.author %>"
+        },
+        "headline": "<%= title %>",
+        "datePublished": "<%= date.toISOString() %>",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "<%= `${site.url}${page.url}` %>"
+        },
+        "@context": "http://schema.org"
+      }
+    </script>
+    <% } %> <%- include('webpack.ejs') %>
+  </head>
+
+  <body
+    class="flex flex-col justify-between pb-4 antialiased w-full text-gray-700 min-h-screen"
+  >
+    <div class="space-y-12 mb-12">
+      <header class="p-3 flex justify-between items-center border-b-2">
+        <div class="flex space-x-3 items-center">
+          <a href="/">
+            <img
+              src="/assets/images/profile_photo.jpg"
+              alt=""
+              class="w-12 h-12 rounded-full inline hover:shadow-lg"
+            />
+          </a>
+          <h1 class="font-semibold text-2xl">
+            <a
+              class="text-gray-700 hover:text-gray-900 hover:no-underline"
+              href="/"
+              ><%= site.title %></a
+            >
+          </h1>
+        </div>
+      </header>
+
+      <main class="max-w-screen-md mx-auto px-4"><%- content %></main>
+    </div>
+
+    <footer>
+      <p class="text-center">
+        &copy; <%= new Date().getFullYear() %> Nicolas Kleiderer. All rights
+        reserved.
+      </p>
+    </footer>
+  </body>
+</html>
