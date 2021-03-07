@@ -6,7 +6,7 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "public": "build/dist",
+    "public": "_site",
     "redirects": [
       {
         "source": "/article/20200125-how-to-responsibly-drop-ie11-support",
