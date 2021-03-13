@@ -34,18 +34,19 @@ Here's how to create a web component that renders a paragraph containing "Hello 
 
 According to the [WHATWG HTML specification](https://html.spec.whatwg.org/#valid-custom-element-name), a Custom Element name must:
 
-- Start with a lowercase ASCII character; and,
-- Must not contain any uppercase ASCII characters; and,
-- Must contain a hyphen, but not end with a hyphen; and,
-- Must not conflict with existing HTML, SVG, or MathML tag names:
-  - annotation-xml
-  - color-profile
-  - font-face
-  - font-face-src
-  - font-face-uri
-  - font-face-format
-  - font-face-name
-  - missing-glyph
+* Start with a lowercase ASCII character; and,
+* Must not contain any uppercase ASCII characters; and,
+* Must contain a hyphen, but not end with a hyphen; and,
+* Must not conflict with existing HTML, SVG, or MathML tag names:
+
+  * annotation-xml
+  * color-profile
+  * font-face
+  * font-face-src
+  * font-face-uri
+  * font-face-format
+  * font-face-name
+  * missing-glyph
 
 Good: `hello-world`
 Good: `x-helloworld`
@@ -57,31 +58,31 @@ Bad: `x-helloWorld`
 
 ## Extending HTMLElement
 
-- Autonomous components must extend HTMLElement
-- There's also customized built-in components, but browser support is bad
+* Autonomous components must extend HTMLElement
+* There's also customized built-in components, but browser support is bad
 
-```js
+```javascript
 class extends HTMLElement { }
 ```
 
 ## Calling Super
 
-- Always call super first
+* Always call super first
 
-```js
+```javascript
 super();
 ```
 
 ## Attaching Shadow Root
 
-- Open vs. closed
-- Do this in the constructor
+* Open vs. closed
+* Do this in the constructor
 
-```js
+```javascript
 this.attachShadow({ mode: "open" });
 ```
 
 ## Setting Inner HTML
 
-- Not accessible from outside the shadow root
-- Do this in the constructor, along with any other elements it creates
+* Not accessible from outside the shadow root
+* Do this in the constructor, along with any other elements it creates
