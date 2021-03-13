@@ -50,7 +50,20 @@
         "@context": "http://schema.org"
       }
     </script>
-    <% } %> <%- include('webpack.ejs') %>
+    <% } %> <%- include('webpack.ejs') %><% if (page.url == "/") { %>
+      <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+      <script>
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on('init', (user) => {
+            if (!user) {
+              window.netlifyIdentity.on('login', () => {
+                document.location.href = '/admin/';
+              });
+            }
+          });
+        }
+      </script>
+      <% } %>
     <link
       href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"

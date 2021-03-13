@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+  </head>
+
+  <body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      CMS.registerPreviewStyle("/assets/styles/main.css");
+
+      const ArticlePreview = createClass({
+        render: function () {
+          const entry = this.props.entry;
+          const coverImgData = entry.getIn(["data", "image"]);
+          const coverImgSrc = this.props.getAsset(coverImgData);
+
+          const date = entry.getIn(["data", "date"]).toString();
+          const title = entry.getIn(["data", "title"]);
+          const body = this.props.widgetFor("body");
+          const coverImg = coverImgSrc.toString();
+          const coverImgAlt = entry.getIn(["data", "coverImgAlt"]);
+          const githubDiscussionId = entry.getIn([
+            "data",
+            "githubDiscussionId",
+          ]);
+          const commentUrl = `https://github.com/nakleiderer/kleiderer-site/discussions/${githubDiscussionId}#new_comment_field`;
+          const editUrl = `https://github.com/nakleiderer/kleiderer-site/edit/master/site/src/articles`;
+
+          return h(
+            "article",
+            { className: "p-4" },
+            h(
+              "header",
+              { className: "prose prose-sm sm:prose lg:prose-lg mb-6" },
+              h("div", { className: "text-sm" }, date),
+              h("h1", {}, title)
+            ),
+            h(
+              "section",
+              { className: "prose prose-sm sm:prose lg:prose-lg mb-12" },
+              h("img", {
+                className: "rounded-lg",
+                src: coverImg,
+                alt: coverImgAlt,
+              }),
+              body
+            ),
+            h(
+              "footer",
+              { className: "flex-auto flex space-x-3 mb-3" },
+              h(
+                "a",
+                {
+                  href: commentUrl,
+                  target: "_blank",
+                  className:
+                    "p-2 w-1/2 flex items-center justify-center rounded-md bg-black font-semibold text-white hover:no-underline transition-shadow hover:shadow-lg",
+                },
+                "Leave Comment"
+              ),
+              h(
+                "a",
+                {
+                  href: editUrl,
+                  target: "_blank",
+                  className:
+                    "p-2 w-1/2 flex items-center justify-center rounded-md border font-semibold text-black border-gray-500 transition-shadow hover:no-underline hover:shadow-lg",
+                },
+                "Suggest Edit"
+              )
+            )
+          );
+        },
+      });
+
+      CMS.registerPreviewTemplate("article", ArticlePreview);
+    </script>
+  </body>
+</html>

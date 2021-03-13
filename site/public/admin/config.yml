@@ -1,0 +1,43 @@
+backend:
+  name: github
+  repo: nakleiderer/kleiderer-site
+  branch: master
+
+publish_mode: editorial_workflow
+media_folder: "site/src/assets/images/articles" # Media files will be stored in the repo under src/assets/images/posts
+public_folder: "/assets/images/articles" # The src attribute for uploaded media will begin with assets/images/posts
+
+collections:
+  - name: "article" # Used in routes, e.g., /admin/collections/blog
+    label: "Article" # Used in the UI
+    folder: "site/src/articles" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { name: "title", label: "Title" }
+      - { name: "description", label: "Description" }
+      - {
+          name: "githubDiscussionId",
+          label: "GitHub Discussion ID",
+          widget: "number",
+        }
+      - { name: "permalink", label: "Permalink" }
+      - { name: "coverImg", label: "Cover Image", widget: "image" }
+      - { name: "coverImgAlt", label: "Cover Image Alt Text" }
+      - { name: "date", label: "Date", widget: "datetime" }
+      - { name: "body", label: "Body", widget: "markdown" }
+  - name: "config"
+    label: "Configuration"
+    editor:
+      preview: false
+    files:
+      - name: "global"
+        label: "Global"
+        file: "site/src/_data/site.json"
+        fields:
+          - { name: "site_name", label: "Site name" }
+          - { name: "title", label: "Site title" }
+          - { name: "description", label: "Site description" }
+          - { name: "url", label: "Site url" }
+          - { name: "locale", label: "Language" }
+          - { name: "author", label: "Author" }
