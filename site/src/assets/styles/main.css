@@ -2,23 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.title {
-  /* Photo by Bilal O on Unsplash: https://unsplash.com/@lightcircle?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText */
-  background-image: url(/assets/images/articles/ink.jpg);
-  background-size: cover;
-  background-position-y: center;
-  background-position-x: 0;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: movebackground 1000s infinite linear;
-  background-repeat: repeat-x;
-}
-
-@keyframes movebackground {
-  100% {background-position-x: 3456px;}
-}
-
 .prose img {
   @apply rounded-lg;
 }

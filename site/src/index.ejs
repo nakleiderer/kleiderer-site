@@ -3,8 +3,8 @@ eleventyComputed:
   title: '<%= site.title %>'
 ---
 <div class="flex flex-1 justify-center items-center mb-12 text-center">
-  <div>
-    <h1 class="title text-6xl md:text-9xl font-extrabold bg-teal-900">Nicolas Kleiderer</h1>
-    <p class="text-2xl font-semibold">Engineering Culture.</p>
+  <div class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-cyan-900 to-teal-900">
+    <h1 class="text-6xl md:text-9xl font-extrabold "><%= site.title %></h1>
+    <p class="text-2xl font-semibold"><%= site.description %></p>
   </div>
 </div>
