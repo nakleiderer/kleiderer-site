@@ -52,7 +52,7 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "serve": "^11.3.2",
-    "tailwindcss": "^2.0.3",
+    "tailwindcss": "^2.0.4",
     "terser-webpack-plugin": "^5.1.1",
     "webpack": "^5.26.3",
     "webpack-cli": "^4.5.0",
