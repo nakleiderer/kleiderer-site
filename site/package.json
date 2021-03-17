@@ -54,7 +54,7 @@
     "serve": "^11.3.2",
     "tailwindcss": "^2.0.3",
     "terser-webpack-plugin": "^5.1.1",
-    "webpack": "^5.26.2",
+    "webpack": "^5.26.3",
     "webpack-cli": "^4.5.0",
     "webpack-remove-empty-scripts": "^0.7.1"
   },
