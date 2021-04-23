@@ -33,7 +33,7 @@
     "cssnano": "^5.0.1",
     "date-fns": "^2.21.1",
     "eleventy-plugin-lazyimages": "^2.1.0",
-    "eslint": "^7.24.0",
+    "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-import": "^2.22.1",
