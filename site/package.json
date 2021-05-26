@@ -38,7 +38,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.3",
     "file-loader": "^6.2.0",
-    "firebase-tools": "^9.11.0",
+    "firebase-tools": "^9.12.0",
     "glob": "^7.1.7",
     "html-minifier": "^4.0.0",
     "html-webpack-plugin": "^5.3.1",
