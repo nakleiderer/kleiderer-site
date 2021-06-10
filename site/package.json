@@ -71,7 +71,7 @@
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.2.0",
     "@tailwindcss/typography": "^0.4.0",
-    "firebase": "^8.6.6",
+    "firebase": "^8.6.7",
     "first-input-delay": "^0.1.3"
   }
 }
